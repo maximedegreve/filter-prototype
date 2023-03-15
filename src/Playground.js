@@ -1,95 +1,234 @@
-import { Box, Text, Link, StyledOcticon } from '@primer/react'
+import { useState } from 'react'
 import {
-    MarkGithubIcon,
-    CheckIcon,
-    CommentIcon,
-    MortarBoardIcon,
+    Box,
+    Button,
+    StyledOcticon,
+    ActionList,
+    TextInput,
+    FormControl,
+    CheckboxGroup,
+    Checkbox,
+} from '@primer/react'
+import {
+    XIcon,
+    TagIcon,
+    PeopleIcon,
+    SearchIcon,
+    ArrowLeftIcon,
 } from '@primer/octicons-react'
 
-import MonaLoadingImage from './images/mona-loading.gif'
-
 function Playground() {
-    /*
-    WELCOME TO MONA's 😽🐙 PLAYGROUND
-    Delete everything in here or play with the existing Mona playground code to get familiar with Primer React.
-    Documentation: https://primer.style/react
-    Documentation colors: https://primer.style/primitives/colors
-  */
-
+    const [totalResults, setTotalResults] = useState(100)
     return (
         <Box
-            bg="canvas.default"
-            width="100%"
-            minHeight="100vh"
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            p={5}
+            as="main"
+            sx={{ p: 5, button: { border: 'none', background: 'transparent' } }}
         >
-            <MarkGithubIcon size={24} />
-            <Box
-                maxWidth={600}
-                width="100%"
-                height={300}
-                bg="neutral.emphasisPlus"
-                borderRadius={2}
-                p={4}
-                my={6}
-            >
-                <CodeLine icon={CheckIcon} iconColor="success.fg">
-                    Mona's playground successfully initialised...
-                </CodeLine>
-                <CodeLine icon={CommentIcon} iconColor="accent.fg">
-                    Visit <Text color="text.warning">src/Playground.js</Text>{' '}
-                    and start building your own layouts using Primer.
-                </CodeLine>
-                <Box display="inline-block" ml={3} mt={2}>
-                    <img
-                        src={MonaLoadingImage}
-                        alt="mona"
-                        width={48}
-                        height={48}
-                    />
+            <h1>{totalResults} results</h1>
+
+            <Popover id="filter-by">
+                <Header>
+                    <Box display="flex">
+                        <Box
+                            display="flex"
+                            px={2}
+                            py="6px"
+                            flexDirection="column"
+                            flexGrow={1}
+                        >
+                            <Title as="h2">Filter by</Title>
+                        </Box>
+
+                        <CloseButton id="filter-by" />
+                    </Box>
+                </Header>
+
+                <ActionList
+                    sx={{
+                        button: {
+                            textAlign: 'left',
+                            width: '100%',
+                        },
+                    }}
+                >
+                    <button popovertoggletarget="filter-by-label">
+                        <ActionList.Item>
+                            <ActionList.LeadingVisual>
+                                <TagIcon />
+                            </ActionList.LeadingVisual>
+                            Labels
+                        </ActionList.Item>
+                    </button>
+                    <ActionList.Item>
+                        <ActionList.LeadingVisual>
+                            <PeopleIcon />
+                        </ActionList.LeadingVisual>
+                        Authors
+                    </ActionList.Item>
+                </ActionList>
+            </Popover>
+
+            <LabelsPopover id="filter-by-label" parentId="filter-by" />
+
+            <button popovertoggletarget="filter-by">
+                <Button as="div">Filter</Button>
+            </button>
+        </Box>
+    )
+}
+
+function LabelsPopover({ id, parentId }) {
+    const data = ['Bug', 'Feature', 'Backlog']
+    const [search, setSearch] = useState('')
+
+    const filtered = data.filter((label) =>
+        label.toLowerCase().includes(search.toLowerCase())
+    )
+    return (
+        <Popover id={id}>
+            <Header>
+                <Box display="flex">
+                    <BackButton id={id} />
+                    <Box
+                        display="flex"
+                        px={2}
+                        py="6px"
+                        flexDirection="column"
+                        flexGrow={1}
+                    >
+                        <Title as="h3">Filter by labels</Title>
+                    </Box>
+
+                    <CloseButton id={parentId} />
                 </Box>
+
+                <FormControl>
+                    <FormControl.Label visuallyHidden>
+                        Filter Person
+                    </FormControl.Label>
+                    <TextInput
+                        name="search-label"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        block
+                        leadingVisual={SearchIcon}
+                        aria-label="Search labels"
+                        placeholder="Search"
+                    />
+                </FormControl>
+            </Header>
+            <Box sx={{ p: 3 }} role="region" aria-live="polite">
+                <span
+                    id="checkboxes-d57a2367-count"
+                    class="app-c-option-select__count govuk-visually-hidden"
+                    aria-live="polite"
+                    data-single="option found"
+                    data-multiple="options found"
+                    data-selected="selected"
+                ></span>
+
+                <fieldset class="govuk-fieldset">
+                    {filtered.map((f) => {
+                        return (
+                            <li key={f}>
+                                <input
+                                    type="checkbox"
+                                    name="people[]"
+                                    value={f}
+                                />
+                                <label for={f}>{f}</label>
+                            </li>
+                        )
+                    })}
+                </fieldset>
             </Box>
-            <Footer />
+        </Popover>
+    )
+}
+
+function Popover({ id, children, trigger, ...rest }) {
+    return (
+        <Box
+            sx={{
+                '[popover]': {
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    maxHeight: 459,
+                    position: 'fixed',
+                    mt: 120,
+                    ml: 34,
+                    width: 320,
+                    boxShadow: 'shadow.small',
+                    borderColor: 'border.subtle',
+                },
+            }}
+        >
+            <div id={id} popover="auto">
+                <Box {...rest}>{children}</Box>
+            </div>
         </Box>
     )
 }
 
-function CodeLine({ icon, iconColor, children }) {
+const Header = ({ children }) => {
     return (
-        <Box display="flex" color="fg.onEmphasis" mb={2}>
-            <Box display="flex" mt="2px" width={20} minWidth={20}>
-                <StyledOcticon icon={icon} size={16} color={iconColor} />
-            </Box>
-            <Text as="p" flex={1} fontSize={1} fontFamily="mono" ml={2}>
-                {children}
-            </Text>
+        <Box sx={{ boxShadow: 'shadow.small', p: 2, zIndex: 1, flexShrink: 0 }}>
+            {children}
         </Box>
     )
 }
 
-function Footer() {
+const Title = ({ children, as }) => {
     return (
-        <Box textAlign="center">
-            <Box mr={2} display="inline-block">
-                <StyledOcticon
-                    icon={MortarBoardIcon}
-                    size={16}
-                    color="attention.fg"
-                    sx={{ mr: 1 }}
-                />
-                <Text color="attention.fg">Tip</Text>
-            </Box>
-            <Text>
-                Before you get started check out our{' '}
-                <Link href="https://primer.style/react" target="_blank">
-                    Primer React Documentation
-                </Link>
-            </Text>
+        <Box as={as} sx={{ fontSize: 1, fontWeight: 'bold', margin: 0 }}>
+            {children}
         </Box>
+    )
+}
+
+const CloseButton = ({ id }) => {
+    return (
+        <button popoverhidetarget={id} aria-label="Close">
+            <Button
+                as="div"
+                sx={{
+                    borderRadius: 2,
+                    background: 'transparent',
+                    border: 0,
+                    verticalAlign: 'middle',
+                    color: 'fg.muted',
+                    p: 2,
+                    alignSelf: 'flex-start',
+                    lineHeight: 'normal',
+                    boxShadow: 'none',
+                }}
+            >
+                <StyledOcticon icon={XIcon} />
+            </Button>
+        </button>
+    )
+}
+
+const BackButton = ({ id }) => {
+    return (
+        <button popoverhidetarget={id} aria-label="Back">
+            <Button
+                as="div"
+                sx={{
+                    borderRadius: 2,
+                    background: 'transparent',
+                    border: 0,
+                    verticalAlign: 'middle',
+                    color: 'fg.muted',
+                    p: 2,
+                    alignSelf: 'flex-start',
+                    lineHeight: 'normal',
+                    boxShadow: 'none',
+                }}
+            >
+                <StyledOcticon icon={ArrowLeftIcon} />
+            </Button>
+        </button>
     )
 }
 
