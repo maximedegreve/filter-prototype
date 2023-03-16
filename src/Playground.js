@@ -81,9 +81,6 @@ function LabelsPopover({ id, parentId }) {
     const data = ['Bug', 'Feature', 'Backlog']
     const [search, setSearch] = useState('')
 
-    const filtered = data.filter((label) =>
-        label.toLowerCase().includes(search.toLowerCase())
-    )
     return (
         <Popover id={id}>
             <Header>
@@ -118,29 +115,28 @@ function LabelsPopover({ id, parentId }) {
                 </FormControl>
             </Header>
             <Box sx={{ p: 3 }} role="region" aria-live="polite">
-                <span
-                    id="checkboxes-d57a2367-count"
-                    class="app-c-option-select__count govuk-visually-hidden"
-                    aria-live="polite"
-                    data-single="option found"
-                    data-multiple="options found"
-                    data-selected="selected"
-                ></span>
+                <CheckboxGroup>
+                    <CheckboxGroup.Label visuallyHidden>
+                        Checkboxes
+                    </CheckboxGroup.Label>
 
-                <fieldset class="govuk-fieldset">
-                    {filtered.map((f) => {
+                    {data.map((f) => {
                         return (
-                            <li key={f}>
-                                <input
-                                    type="checkbox"
-                                    name="people[]"
-                                    value={f}
-                                />
-                                <label for={f}>{f}</label>
-                            </li>
+                            <FormControl
+                                sx={{
+                                    display: f
+                                        .toLowerCase()
+                                        .includes(search.toLowerCase())
+                                        ? 'flex'
+                                        : 'none',
+                                }}
+                            >
+                                <Checkbox value={f} />
+                                <FormControl.Label>{f}</FormControl.Label>
+                            </FormControl>
                         )
                     })}
-                </fieldset>
+                </CheckboxGroup>
             </Box>
         </Popover>
     )
