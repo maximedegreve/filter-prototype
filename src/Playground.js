@@ -4,7 +4,6 @@ import {
     Button,
     StyledOcticon,
     ActionList,
-    TextInput,
     FormControl,
     CheckboxGroup,
     Checkbox,
@@ -17,14 +16,57 @@ import {
     ArrowLeftIcon,
 } from '@primer/octicons-react'
 
+const labelsData = ['Bug', 'Feature', 'Backlog']
+
+const data = [
+    {
+        title: 'Fix suggestions showing double',
+        labels: ['Bug'],
+        author: 'maximedegreve',
+    },
+    {
+        title: 'Hide footers on the full height search pages',
+        labels: ['Bug'],
+        author: 'maximedegreve',
+    },
+    {
+        title: 'Fix placeholder',
+        labels: ['Bug'],
+        author: 'maximedegreve',
+    },
+    {
+        title: 'Search: New illustration',
+        labels: ['Feature'],
+        author: 'maximedegreve',
+    },
+    {
+        title: 'Search: Fix accessibility issues',
+        labels: ['Bug'],
+        author: 'maximedegreve',
+    },
+]
+
 function Playground() {
-    const [totalResults, setTotalResults] = useState(100)
+    const [selectedLabels, setSelectedLabels] = useState([])
+    //const [selectedAuthors, setSelectedAuthors] = useState([])
+
+    const filteredData = data.filter((item) => {
+        if (selectedLabels.length === 0) {
+            return true
+        }
+        return item.labels.some((r) => selectedLabels.includes(r))
+    })
+
+    console.log('RERENDER')
+
     return (
         <Box
             as="main"
             sx={{ p: 5, button: { border: 'none', background: 'transparent' } }}
         >
-            <h1>{totalResults} results</h1>
+            <Box aria-live="assertive" aria-atomic="true">
+                <h1 tabindex="0">{filteredData.length} results</h1>
+            </Box>
 
             <Popover id="filter-by">
                 <Header>
@@ -67,24 +109,54 @@ function Playground() {
                     </ActionList.Item>
                 </ActionList>
             </Popover>
-
-            <LabelsPopover id="filter-by-label" parentId="filter-by" />
-
+            <LabelsPopover
+                id="filter-by-label"
+                parentId="filter-by"
+                selectedLabels={selectedLabels}
+                onSelectionChange={(e) => {
+                    if (e.target.checked) {
+                        var newLabels = [...selectedLabels]
+                        newLabels.push(e.target.value)
+                        console.log(newLabels)
+                        setSelectedLabels(newLabels)
+                    } else {
+                        const withoutChecked = selectedLabels.filter(
+                            (v) => v !== e.target.value
+                        )
+                        setSelectedLabels(withoutChecked)
+                    }
+                }}
+            />
             <button popovertoggletarget="filter-by">
                 <Button as="div">Filter</Button>
             </button>
+
+            <ul>
+                {filteredData.map((d) => {
+                    return (
+                        <li tabindex="0">
+                            <h2>{d.title}</h2>
+                            <div>by {d.author}</div>
+                            <div>{d.labels.map((l) => l)}</div>
+                        </li>
+                    )
+                })}
+            </ul>
         </Box>
     )
 }
 
-function LabelsPopover({ id, parentId }) {
-    const data = ['Bug', 'Feature', 'Backlog']
+function LabelsPopover({ id, parentId, selectedLabels, onSelectionChange }) {
     const [search, setSearch] = useState('')
+
+    const totalResults = labelsData.filter((label) => {
+        label.toLowerCase().includes(search.toLowerCase())
+    }).length
 
     return (
         <Popover id={id}>
             <Header>
-                <Box display="flex">
+                <Box display="flex" sx={{ mb: 2 }}>
                     <BackButton id={id} />
                     <Box
                         display="flex"
@@ -99,28 +171,50 @@ function LabelsPopover({ id, parentId }) {
                     <CloseButton id={parentId} />
                 </Box>
 
+                <ul class="selected-options" id="combo3-selected"></ul>
                 <FormControl>
                     <FormControl.Label visuallyHidden>
-                        Filter Person
+                        Search labels
                     </FormControl.Label>
-                    <TextInput
+                    <input
                         name="search-label"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        block
+                        autoFocus
+                        role="combobox"
                         leadingVisual={SearchIcon}
-                        aria-label="Search labels"
-                        placeholder="Search"
+                        aria-activedescendant=""
+                        aria-autocomplete="none"
+                        aria-controls="listbox3"
+                        aria-expanded="false"
+                        aria-haspopup="listbox"
+                        placeholder="Search labels"
                     />
                 </FormControl>
             </Header>
-            <Box sx={{ p: 3 }} role="region" aria-live="polite">
+            {search !== '' && (
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        left: -100000,
+                        width: 1,
+                        height: 1,
+                        overflow: 'hidden',
+                    }}
+                    aria-live="assertive"
+                    aria-atomic="true"
+                >
+                    Showing {totalResults} results for "{search}"
+                </Box>
+            )}
+
+            <Box sx={{ p: 3 }} role="listbox" id="listbox3">
                 <CheckboxGroup>
                     <CheckboxGroup.Label visuallyHidden>
                         Checkboxes
                     </CheckboxGroup.Label>
 
-                    {data.map((f) => {
+                    {labelsData.map((f) => {
                         return (
                             <FormControl
                                 sx={{
@@ -131,7 +225,11 @@ function LabelsPopover({ id, parentId }) {
                                         : 'none',
                                 }}
                             >
-                                <Checkbox value={f} />
+                                <Checkbox
+                                    value={f}
+                                    checked={selectedLabels.includes(f)}
+                                    onChange={onSelectionChange}
+                                />
                                 <FormControl.Label>{f}</FormControl.Label>
                             </FormControl>
                         )
