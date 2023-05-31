@@ -119,20 +119,7 @@ const components = [
         ],
     },
     {
-        id: 'dialog',
-        question: 'Dialog',
-        features: [
-            Feature.FormElements,
-            Feature.FocusableContent,
-            Feature.DeepLinking,
-            Feature.Contextual,
-            Feature.Actionable,
-            Feature.TriggerInGlobalNavigation,
-            Feature.NoOuterRightTriggerLimitation,
-        ],
-    },
-    {
-        id: 'Right side panel',
+        id: 'right-side-panel',
         question: 'Right sidepanel',
         features: [
             Feature.FormElements,
@@ -142,7 +129,21 @@ const components = [
             Feature.Actionable,
         ],
     },
+    {
+        id: 'new-page',
+        question: 'New page',
+        features: [
+            Feature.FocusableContent,
+            Feature.Contextual,
+            Feature.TriggerInGlobalNavigation,
+            Feature.FormElements,
+            Feature.DeepLinking,
+            Feature.Actionable,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
+    },
 ]
+
 function Playground() {
     const [selection, setSelection] = useState({
         [Feature.FocusableContent]: true,
@@ -168,9 +169,18 @@ function Playground() {
         )
     })
 
-    const compatibleComponents = components.filter((component) => {
-        const matchesFeatures = component.features.every((id) => selection[id])
-        return matchesFeatures
+    const possibleFeatures = Object.keys(selection).filter((key) => {
+        return !!selection[key]
+    })
+
+    let compatibleComponents = []
+    components.forEach(function (component) {
+        let intersection = component.features.filter((x) =>
+            possibleFeatures.includes(x)
+        )
+        if (intersection.length == possibleFeatures.length) {
+            compatibleComponents.push(component)
+        }
     })
 
     console.log(compatibleComponents)
@@ -178,12 +188,18 @@ function Playground() {
         <main>
             <h1>Validate your component usage</h1>
             <Box>
+                <h2>Requirements checklist</h2>
+
                 <CheckboxGroup>{features}</CheckboxGroup>
             </Box>
 
             <Box>
                 <h2>Compatible components</h2>
-                <Box></Box>
+                <Box>
+                    {compatibleComponents.map((c) => {
+                        return <Box>{c.question}</Box>
+                    })}
+                </Box>
             </Box>
         </main>
     )
