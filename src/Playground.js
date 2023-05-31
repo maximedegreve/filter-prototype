@@ -5,324 +5,204 @@ import {
     StyledOcticon,
     ActionList,
     FormControl,
-    CheckboxGroup,
     Checkbox,
+    CheckboxGroup,
 } from '@primer/react'
-import {
-    XIcon,
-    TagIcon,
-    PeopleIcon,
-    SearchIcon,
-    ArrowLeftIcon,
-} from '@primer/octicons-react'
 
-const labelsData = ['Bug', 'Feature', 'Backlog']
+const Feature = {
+    FocusableContent: 'focusable-content',
+    Contextual: 'contextual',
+    TriggerInGlobalNavigation: 'trigger-in-global-navigation',
+    NoOuterRightTriggerLimitation: 'no-outer-right-trigger-limitation',
+    Actionable: 'actionable',
+    FormElements: 'form-elements',
+    DeepLinking: 'deep-linking',
+}
 
-const data = [
+const featureInfo = {
+    [Feature.FocusableContent]: {
+        question: 'Content is focusable',
+        description: 'Links and menu items are elements that require this.',
+    },
+    [Feature.Contextual]: {
+        question: 'Provide extra context on the main content',
+        description:
+            'For example when providing insights for code you’re currently looking at.',
+    },
+    [Feature.TriggerInGlobalNavigation]: {
+        question: 'Triggered through the global navigation',
+        description:
+            'Often used for the navigation or global tooling like Copilot',
+    },
+    [Feature.NoOuterRightTriggerLimitation]: {
+        question: 'Trigger is not in the far right of the viewport',
+        description:
+            'For example non full width layouts won’t have triggers there',
+    },
+    [Feature.Actionable]: {
+        question: 'User is expected to take action',
+        description: 'This could be making a selection or',
+    },
+    [Feature.FormElements]: {
+        question: 'Form elements',
+        description: 'Includes inputs, checkboxes, radio buttons, sliders...',
+    },
+    [Feature.DeepLinking]: {
+        question: 'Linkable from outside the platform',
+        description:
+            'For example linking from out help documentation, through Slack or through tutorials.',
+    },
+}
+
+const components = [
     {
-        title: 'Fix suggestions showing double',
-        labels: ['Bug'],
-        author: 'maximedegreve',
+        id: 'hover-cards',
+        question: 'Hover cards',
+        features: [
+            Feature.FocusableContent,
+            Feature.Contextual,
+            Feature.TriggerInGlobalNavigation,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
     },
     {
-        title: 'Hide footers on the full height search pages',
-        labels: ['Bug'],
-        author: 'maximedegreve',
+        id: 'tooltip',
+        question: 'Tooltip',
+        features: [
+            Feature.Contextual,
+            Feature.TriggerInGlobalNavigation,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
     },
     {
-        title: 'Fix placeholder',
-        labels: ['Bug'],
-        author: 'maximedegreve',
+        id: 'action-menu',
+        question: 'Action Menu',
+        features: [
+            Feature.FocusableContent,
+            Feature.Contextual,
+            Feature.Actionable,
+            Feature.TriggerInGlobalNavigation,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
     },
     {
-        title: 'Search: New illustration',
-        labels: ['Feature'],
-        author: 'maximedegreve',
+        id: 'select-panel',
+        question: 'Select panel',
+        features: [
+            Feature.FormElements,
+            Feature.FocusableContent,
+            Feature.Contextual,
+            Feature.Actionable,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
     },
     {
-        title: 'Search: Fix accessibility issues',
-        labels: ['Bug'],
-        author: 'maximedegreve',
+        id: 'dialog',
+        question: 'Dialog',
+        features: [
+            Feature.FormElements,
+            Feature.FocusableContent,
+            Feature.Contextual,
+            Feature.Actionable,
+            Feature.TriggerInGlobalNavigation,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
+    },
+    {
+        id: 'Right sidesheet',
+        question: 'Right sidesheet',
+        features: [
+            Feature.FocusableContent,
+            Feature.Contextual,
+            Feature.Actionable,
+            Feature.TriggerInGlobalNavigation,
+        ],
+    },
+    {
+        id: 'dialog',
+        question: 'Dialog',
+        features: [
+            Feature.FormElements,
+            Feature.FocusableContent,
+            Feature.DeepLinking,
+            Feature.Contextual,
+            Feature.Actionable,
+            Feature.TriggerInGlobalNavigation,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
+    },
+    {
+        id: 'Right side panel',
+        question: 'Right sidepanel',
+        features: [
+            Feature.FormElements,
+            Feature.FocusableContent,
+            Feature.DeepLinking,
+            Feature.Contextual,
+            Feature.Actionable,
+        ],
     },
 ]
-
 function Playground() {
-    const [selectedLabels, setSelectedLabels] = useState([])
-    //const [selectedAuthors, setSelectedAuthors] = useState([])
-
-    const filteredData = data.filter((item) => {
-        if (selectedLabels.length === 0) {
-            return true
-        }
-        return item.labels.some((r) => selectedLabels.includes(r))
+    const [selection, setSelection] = useState({
+        [Feature.FocusableContent]: true,
+        [Feature.Contextual]: true,
+        [Feature.TriggerInGlobalNavigation]: true,
+        [Feature.NoOuterRightTriggerLimitation]: true,
+        [Feature.Actionable]: true,
+        [Feature.FormElements]: true,
+        [Feature.DeepLinking]: true,
     })
 
-    console.log('RERENDER')
-
-    return (
-        <Box
-            as="main"
-            sx={{ p: 5, button: { border: 'none', background: 'transparent' } }}
-        >
-            <Box aria-live="assertive" aria-atomic="true">
-                <h1 tabindex="0">{filteredData.length} results</h1>
-            </Box>
-
-            <Popover id="filter-by">
-                <Header>
-                    <Box display="flex">
-                        <Box
-                            display="flex"
-                            px={2}
-                            py="6px"
-                            flexDirection="column"
-                            flexGrow={1}
-                        >
-                            <Title as="h2">Filter by</Title>
-                        </Box>
-
-                        <CloseButton id="filter-by" />
-                    </Box>
-                </Header>
-
-                <ActionList
-                    sx={{
-                        button: {
-                            textAlign: 'left',
-                            width: '100%',
-                        },
-                    }}
-                >
-                    <button popovertoggletarget="filter-by-label">
-                        <ActionList.Item>
-                            <ActionList.LeadingVisual>
-                                <TagIcon />
-                            </ActionList.LeadingVisual>
-                            Labels
-                        </ActionList.Item>
-                    </button>
-                    <ActionList.Item>
-                        <ActionList.LeadingVisual>
-                            <PeopleIcon />
-                        </ActionList.LeadingVisual>
-                        Authors
-                    </ActionList.Item>
-                </ActionList>
-            </Popover>
-            <LabelsPopover
-                id="filter-by-label"
-                parentId="filter-by"
-                selectedLabels={selectedLabels}
-                onSelectionChange={(e) => {
-                    if (e.target.checked) {
-                        var newLabels = [...selectedLabels]
-                        newLabels.push(e.target.value)
-                        console.log(newLabels)
-                        setSelectedLabels(newLabels)
-                    } else {
-                        const withoutChecked = selectedLabels.filter(
-                            (v) => v !== e.target.value
-                        )
-                        setSelectedLabels(withoutChecked)
-                    }
+    const features = Object.keys(selection).map((key) => {
+        const value = selection[key]
+        return (
+            <FeatureToggle
+                key={key}
+                id={key}
+                isOn={value}
+                onChange={(newValue) => {
+                    setSelection({ ...selection, [key]: newValue })
                 }}
             />
-            <button popovertoggletarget="filter-by">
-                <Button as="div">Filter</Button>
-            </button>
+        )
+    })
 
-            <ul>
-                {filteredData.map((d) => {
-                    return (
-                        <li tabindex="0">
-                            <h2>{d.title}</h2>
-                            <div>by {d.author}</div>
-                            <div>{d.labels.map((l) => l)}</div>
-                        </li>
-                    )
-                })}
-            </ul>
-        </Box>
-    )
-}
+    const compatibleComponents = components.filter((component) => {
+        const matchesFeatures = component.features.every((id) => selection[id])
+        return matchesFeatures
+    })
 
-function LabelsPopover({ id, parentId, selectedLabels, onSelectionChange }) {
-    const [search, setSearch] = useState('')
-
-    const totalResults = labelsData.filter((label) => {
-        label.toLowerCase().includes(search.toLowerCase())
-    }).length
-
+    console.log(compatibleComponents)
     return (
-        <Popover id={id}>
-            <Header>
-                <Box display="flex" sx={{ mb: 2 }}>
-                    <BackButton id={id} />
-                    <Box
-                        display="flex"
-                        px={2}
-                        py="6px"
-                        flexDirection="column"
-                        flexGrow={1}
-                    >
-                        <Title as="h3">Filter by labels</Title>
-                    </Box>
-
-                    <CloseButton id={parentId} />
-                </Box>
-
-                <ul class="selected-options" id="combo3-selected"></ul>
-                <FormControl>
-                    <FormControl.Label visuallyHidden>
-                        Search labels
-                    </FormControl.Label>
-                    <input
-                        name="search-label"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        autoFocus
-                        role="combobox"
-                        leadingVisual={SearchIcon}
-                        aria-activedescendant=""
-                        aria-autocomplete="none"
-                        aria-controls="listbox3"
-                        aria-expanded="false"
-                        aria-haspopup="listbox"
-                        placeholder="Search labels"
-                    />
-                </FormControl>
-            </Header>
-            {search !== '' && (
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        left: -100000,
-                        width: 1,
-                        height: 1,
-                        overflow: 'hidden',
-                    }}
-                    aria-live="assertive"
-                    aria-atomic="true"
-                >
-                    Showing {totalResults} results for "{search}"
-                </Box>
-            )}
-
-            <Box sx={{ p: 3 }} role="listbox" id="listbox3">
-                <CheckboxGroup>
-                    <CheckboxGroup.Label visuallyHidden>
-                        Checkboxes
-                    </CheckboxGroup.Label>
-
-                    {labelsData.map((f) => {
-                        return (
-                            <FormControl
-                                sx={{
-                                    display: f
-                                        .toLowerCase()
-                                        .includes(search.toLowerCase())
-                                        ? 'flex'
-                                        : 'none',
-                                }}
-                            >
-                                <Checkbox
-                                    value={f}
-                                    checked={selectedLabels.includes(f)}
-                                    onChange={onSelectionChange}
-                                />
-                                <FormControl.Label>{f}</FormControl.Label>
-                            </FormControl>
-                        )
-                    })}
-                </CheckboxGroup>
+        <main>
+            <h1>Validate your component usage</h1>
+            <Box>
+                <CheckboxGroup>{features}</CheckboxGroup>
             </Box>
-        </Popover>
+
+            <Box>
+                <h2>Compatible components</h2>
+                <Box></Box>
+            </Box>
+        </main>
     )
 }
 
-function Popover({ id, children, trigger, ...rest }) {
+function FeatureToggle({ id, isOn, onChange }) {
+    const info = featureInfo[id]
     return (
-        <Box
-            sx={{
-                '[popover]': {
-                    borderWidth: 1,
-                    borderRadius: 2,
-                    maxHeight: 459,
-                    position: 'fixed',
-                    mt: 120,
-                    ml: 34,
-                    width: 320,
-                    boxShadow: 'shadow.small',
-                    borderColor: 'border.subtle',
-                },
-            }}
-        >
-            <div id={id} popover="auto">
-                <Box {...rest}>{children}</Box>
-            </div>
+        <Box display="flex" maxWidth="300px">
+            <CheckboxGroup.Label>{info.question}</CheckboxGroup.Label>
+            <FormControl>
+                <Checkbox
+                    value="one"
+                    onChange={(e) => onChange(e.target.checked)}
+                    checked={isOn}
+                />
+                <FormControl.Label>{info.question}</FormControl.Label>
+            </FormControl>
         </Box>
-    )
-}
-
-const Header = ({ children }) => {
-    return (
-        <Box sx={{ boxShadow: 'shadow.small', p: 2, zIndex: 1, flexShrink: 0 }}>
-            {children}
-        </Box>
-    )
-}
-
-const Title = ({ children, as }) => {
-    return (
-        <Box as={as} sx={{ fontSize: 1, fontWeight: 'bold', margin: 0 }}>
-            {children}
-        </Box>
-    )
-}
-
-const CloseButton = ({ id }) => {
-    return (
-        <button popoverhidetarget={id} aria-label="Close">
-            <Button
-                as="div"
-                sx={{
-                    borderRadius: 2,
-                    background: 'transparent',
-                    border: 0,
-                    verticalAlign: 'middle',
-                    color: 'fg.muted',
-                    p: 2,
-                    alignSelf: 'flex-start',
-                    lineHeight: 'normal',
-                    boxShadow: 'none',
-                }}
-            >
-                <StyledOcticon icon={XIcon} />
-            </Button>
-        </button>
-    )
-}
-
-const BackButton = ({ id }) => {
-    return (
-        <button popoverhidetarget={id} aria-label="Back">
-            <Button
-                as="div"
-                sx={{
-                    borderRadius: 2,
-                    background: 'transparent',
-                    border: 0,
-                    verticalAlign: 'middle',
-                    color: 'fg.muted',
-                    p: 2,
-                    alignSelf: 'flex-start',
-                    lineHeight: 'normal',
-                    boxShadow: 'none',
-                }}
-            >
-                <StyledOcticon icon={ArrowLeftIcon} />
-            </Button>
-        </button>
     )
 }
 
