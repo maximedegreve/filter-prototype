@@ -10,12 +10,12 @@ const featureInfo = {
     [Feature.FormElements]: {
         question: 'Includes form elements',
         description:
-            'This could be inputs, checkboxes, radio buttons, sliders...',
+            'The content that is about to appear includes various form elements such as inputs, buttons, and checkboxes.',
     },
     [Feature.DeepLinking]: {
         question: 'Should support deeplinking',
         description:
-            'For example linking from out help documentation, through Slack or through tutorials.',
+            'The content needs to be linkable from help documentation, chat apps, social media or through tutorials.',
     },
     [Feature.FocusableContent]: {
         question: 'Elements need keyboard focus',
@@ -27,7 +27,7 @@ const featureInfo = {
             'For example when providing insights for code you’re currently looking at.',
     },
     [Feature.TriggerInGlobalNavigation]: {
-        question: 'Triggered through the global navigation',
+        question: 'Entry point in the global navigation',
         description:
             'Often used for the navigation or global tooling like Copilot',
     },
