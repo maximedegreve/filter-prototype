@@ -3,8 +3,6 @@ import {
     Box,
     Text,
     FormControl,
-    Checkbox,
-    CheckboxGroup,
     Button,
     useColorSchemeVar,
 } from '@primer/react'
@@ -24,7 +22,7 @@ const featureInfo = {
             'For example linking from out help documentation, through Slack or through tutorials.',
     },
     [Feature.FocusableContent]: {
-        question: 'Content is focusable',
+        question: 'Elements need keyboard focus',
         description: 'Links and menu items are elements that require this.',
     },
     [Feature.Contextual]: {
@@ -83,7 +81,7 @@ function Playground() {
         let intersection = component.features.filter((x) =>
             possibleFeatures.includes(x)
         )
-        if (intersection.length == possibleFeatures.length) {
+        if (intersection.length === possibleFeatures.length) {
             compatibleComponents.push(component)
         } else {
             inCompatibleComponents.push(component)
@@ -265,6 +263,7 @@ function ComponentCard({ id, disabled }) {
                         >
                             <img
                                 src={themeAwareImage}
+                                alt="to be added"
                                 srcSet={`${themeAwareImage} 1x, ${themeAwareImage} 2x`}
                             />
                         </Box>
