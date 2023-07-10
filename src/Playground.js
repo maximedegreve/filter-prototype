@@ -6,18 +6,11 @@ import {
     Checkbox,
     CheckboxGroup,
     Button,
+    useColorSchemeVar,
 } from '@primer/react'
-import actionMenuImage from './images/actionmenu.png'
-
-const Feature = {
-    FocusableContent: 'focusable-content',
-    Contextual: 'contextual',
-    TriggerInGlobalNavigation: 'trigger-in-global-navigation',
-    NoOuterRightTriggerLimitation: 'no-outer-right-trigger-limitation',
-    Actionable: 'actionable',
-    FormElements: 'form-elements',
-    DeepLinking: 'deep-linking',
-}
+import components from './data/components'
+import Feature from './data/feature'
+import ColorModeSwitcher from './ColorModeSwitcher'
 
 const featureInfo = {
     [Feature.FormElements]: {
@@ -54,113 +47,6 @@ const featureInfo = {
         description: 'This could be making a selection or',
     },
 }
-
-const components = [
-    {
-        id: 'hover-cards',
-        name: 'Hover cards',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
-        features: [
-            Feature.FocusableContent,
-            Feature.Contextual,
-            Feature.TriggerInGlobalNavigation,
-            Feature.NoOuterRightTriggerLimitation,
-        ],
-        url: 'https://google.com',
-    },
-    {
-        id: 'tooltip',
-        name: 'Tooltip',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
-        features: [
-            Feature.Contextual,
-            Feature.TriggerInGlobalNavigation,
-            Feature.NoOuterRightTriggerLimitation,
-        ],
-        url: 'https://google.com',
-    },
-    {
-        id: 'action-menu',
-        name: 'Action Menu',
-        image: actionMenuImage,
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
-        features: [
-            Feature.FocusableContent,
-            Feature.Contextual,
-            Feature.Actionable,
-            Feature.TriggerInGlobalNavigation,
-            Feature.NoOuterRightTriggerLimitation,
-        ],
-        url: 'https://google.com',
-    },
-    {
-        id: 'select-panel',
-        name: 'Select panel',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
-        features: [
-            Feature.FormElements,
-            Feature.FocusableContent,
-            Feature.Contextual,
-            Feature.Actionable,
-            Feature.NoOuterRightTriggerLimitation,
-        ],
-        url: 'https://google.com',
-    },
-    {
-        id: 'dialog',
-        name: 'Dialog',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
-        features: [
-            Feature.FormElements,
-            Feature.FocusableContent,
-            Feature.Contextual,
-            Feature.Actionable,
-            Feature.TriggerInGlobalNavigation,
-            Feature.NoOuterRightTriggerLimitation,
-        ],
-        url: 'https://google.com',
-    },
-    {
-        id: 'Right sidesheet',
-        name: 'Right sidesheet',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
-        features: [
-            Feature.FocusableContent,
-            Feature.Contextual,
-            Feature.Actionable,
-            Feature.TriggerInGlobalNavigation,
-        ],
-        url: 'https://google.com',
-    },
-    {
-        id: 'right-side-panel',
-        name: 'Right sidepanel',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
-        features: [
-            Feature.FormElements,
-            Feature.FocusableContent,
-            Feature.DeepLinking,
-            Feature.Contextual,
-            Feature.Actionable,
-        ],
-        url: 'https://google.com',
-    },
-    {
-        id: 'new-page',
-        name: 'New page',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
-        features: [
-            Feature.FocusableContent,
-            Feature.Contextual,
-            Feature.TriggerInGlobalNavigation,
-            Feature.FormElements,
-            Feature.DeepLinking,
-            Feature.Actionable,
-            Feature.NoOuterRightTriggerLimitation,
-        ],
-        url: 'https://google.com',
-    },
-]
 
 function Playground() {
     const [selection, setSelection] = useState({
@@ -219,40 +105,44 @@ function Playground() {
                 sx={{
                     marginBottom: 7,
                     display: 'flex',
-                    flexDirection: 'column',
                 }}
             >
-                <Text
-                    sx={{
-                        fontSize: 7,
-                        fontWeight: 'semibold',
-                        pb: 1,
-                    }}
-                >
-                    🪄 Component Whiz
-                </Text>
-                <Text
-                    sx={{
-                        fontSize: 3,
-                        fontWeight: 'light',
-                        letterSpacing: 1.1,
-                    }}
-                >
-                    The secret potion to unlocking design excellence.
-                    <br />
-                    Make informed choices, ensuring that every component you
-                    pick is a stroke of genius.
-                </Text>
+                <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <Text
+                        sx={{
+                            fontSize: 7,
+                            fontWeight: 'semibold',
+                            pb: 1,
+                        }}
+                    >
+                        🪄 Component Whiz
+                    </Text>
+                    <Text
+                        sx={{
+                            fontSize: 3,
+                            fontWeight: 'light',
+                            letterSpacing: 1.1,
+                        }}
+                    >
+                        The secret potion to unlocking design/accessibility
+                        excellence.
+                        <br />
+                        Make informed choices, ensuring that every component you
+                        pick is a stroke of genius.
+                    </Text>
+                </Box>
+                <ColorModeSwitcher />
             </Box>
             <Box
                 sx={{
                     display: 'flex',
                 }}
             >
-                <Box sx={{ pr: 7, width: '30%' }}>
+                <Box sx={{ pr: 7 }}>
                     <Box
                         sx={{
                             display: 'grid',
+                            width: 'max-content',
                             gridTemplateColumns: 'auto',
                             gap: 4,
                         }}
@@ -263,13 +153,11 @@ function Playground() {
                 <Box sx={{ flex: 1 }}>
                     <Box
                         sx={{
-                            display: 'grid',
+                            display: 'inline-grid',
+                            width: '100%',
+                            gridAutoFlow: 'dense',
                             gridTemplateColumns: [
-                                'repeat(1,1fr)',
-                                'repeat(1,1fr)',
-                                'repeat(1,1fr)',
-                                'repeat(2,1fr)',
-                                'repeat(3,1fr)',
+                                'repeat(auto-fill, minmax(440px, 1fr))',
                             ],
                             gap: 5,
                         }}
@@ -289,6 +177,15 @@ function Playground() {
 
 function ComponentCard({ id, disabled }) {
     const component = components.find((c) => c.id === id)
+
+    const themeAwareImage = useColorSchemeVar(
+        {
+            light: component.image?.light2x,
+            dark: component.image?.dark2x,
+        },
+        component.light
+    )
+
     return (
         <Box
             sx={{
@@ -325,13 +222,33 @@ function ComponentCard({ id, disabled }) {
                 {component.image && (
                     <Box
                         sx={{
-                            display: 'flex',
-                            overflow: 'hidden',
-                            justifyContent: 'center',
+                            position: 'relative',
                             flex: 1,
+                            width: '100%',
                         }}
                     >
-                        <img src={component.image} />
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                top: 0,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                img: {
+                                    width: 340,
+                                    height: 220,
+                                    objectFit: 'contain',
+                                },
+                            }}
+                        >
+                            <img
+                                src={themeAwareImage}
+                                srcSet={`${themeAwareImage} 1x, ${themeAwareImage} 2x`}
+                            />
+                        </Box>
                     </Box>
                 )}
 
