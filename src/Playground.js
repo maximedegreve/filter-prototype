@@ -4,6 +4,7 @@ import {
     Text,
     FormControl,
     Button,
+    Checkbox,
     useColorSchemeVar,
 } from '@primer/react'
 import { CheckCircleIcon, CircleSlashIcon } from '@primer/octicons-react'
@@ -315,46 +316,53 @@ function FeatureToggle({ id, isOn, onChange }) {
     const info = featureInfo[id]
     return (
         <Box
-            display="flex"
-            flexDirection="column"
+            as="label"
             sx={{
+                display: 'grid',
                 borderRadius: '12px',
+                gridTemplateColumns: '30px 1fr',
                 borderWidth: 0.5,
                 borderStyle: 'solid',
+                gridGap: 1,
                 borderColor: 'border.subtle',
                 bg: 'canvas.default',
                 boxShadow: 'shadow.small',
                 p: 4,
+                cursor: 'pointer',
+                transition: 'background .2s',
+                ':hover': {
+                    bg: 'canvas.subtle',
+                },
             }}
         >
-            <FormControl>
-                <label>
-                    <input
-                        type="checkbox"
-                        value="one"
-                        onChange={(e) => onChange(e.target.checked)}
-                        checked={isOn}
-                    />
-                    <Text
-                        sx={{
-                            fontSize: 2,
-                            fontWeight: 'semibold',
-                        }}
-                    >
-                        {info.question}
-                    </Text>
-                </label>
+            <Box sx={{ mt: 1 }}>
+                <Checkbox
+                    value="one"
+                    onChange={(e) => onChange(e.target.checked)}
+                    checked={isOn}
+                />
+            </Box>
+            <Box>
+                <Text
+                    sx={{
+                        fontSize: 2,
+                        fontWeight: 'semibold',
+                    }}
+                >
+                    {info.question}
+                </Text>
 
-                <FormControl.Caption
+                <Text
                     sx={{
                         fontSize: 1,
                         color: 'fg.muted',
+                        display: 'block',
                         fontWeight: 'light',
                     }}
                 >
                     {info.description}
-                </FormControl.Caption>
-            </FormControl>
+                </Text>
+            </Box>
         </Box>
     )
 }
