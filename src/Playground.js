@@ -1,12 +1,5 @@
 import { useState } from 'react'
-import {
-    Box,
-    Text,
-    FormControl,
-    Button,
-    Checkbox,
-    useColorSchemeVar,
-} from '@primer/react'
+import { Box, Text, Button, Checkbox, useColorSchemeVar } from '@primer/react'
 import { CheckCircleIcon, CircleSlashIcon } from '@primer/octicons-react'
 
 import components from './data/components'
@@ -153,6 +146,7 @@ function Playground() {
                         sx={{
                             display: 'grid',
                             width: 'max-content',
+                            maxWidth: 420,
                             gridTemplateColumns: 'auto',
                             gap: 4,
                             mt: 3,
@@ -176,9 +170,8 @@ function Playground() {
                             display: 'inline-grid',
                             width: '100%',
                             gridAutoFlow: 'dense',
-                            gridTemplateColumns: [
+                            gridTemplateColumns:
                                 'repeat(auto-fill, minmax(440px, 1fr))',
-                            ],
                             gap: 5,
                             mt: 3,
                         }}
