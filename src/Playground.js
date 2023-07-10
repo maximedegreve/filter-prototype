@@ -6,6 +6,8 @@ import {
     Button,
     useColorSchemeVar,
 } from '@primer/react'
+import { CheckCircleIcon, CircleSlashIcon } from '@primer/octicons-react'
+
 import components from './data/components'
 import Feature from './data/feature'
 import ColorModeSwitcher from './ColorModeSwitcher'
@@ -236,6 +238,22 @@ function ComponentCard({ id, disabled }) {
                     bottom: 0,
                 }}
             >
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        right: 4,
+                        top: 4,
+                        width: 24,
+                        height: 24,
+                        color: disabled ? 'danger.fg' : 'success.fg',
+                    }}
+                >
+                    {disabled ? (
+                        <CircleSlashIcon size={24} />
+                    ) : (
+                        <CheckCircleIcon size={24} />
+                    )}
+                </Box>
                 {component.image && (
                     <Box
                         sx={{
