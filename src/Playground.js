@@ -1,5 +1,12 @@
 import { useState } from 'react'
-import { Box, Text, FormControl, Checkbox, CheckboxGroup } from '@primer/react'
+import {
+    Box,
+    Text,
+    FormControl,
+    Checkbox,
+    CheckboxGroup,
+    Button,
+} from '@primer/react'
 import actionMenuImage from './images/actionmenu.png'
 
 const Feature = {
@@ -13,6 +20,16 @@ const Feature = {
 }
 
 const featureInfo = {
+    [Feature.FormElements]: {
+        question: 'Includes form elements',
+        description:
+            'This could be inputs, checkboxes, radio buttons, sliders...',
+    },
+    [Feature.DeepLinking]: {
+        question: 'Should support deeplinking',
+        description:
+            'For example linking from out help documentation, through Slack or through tutorials.',
+    },
     [Feature.FocusableContent]: {
         question: 'Content is focusable',
         description: 'Links and menu items are elements that require this.',
@@ -36,15 +53,6 @@ const featureInfo = {
         question: 'User is expected to take action',
         description: 'This could be making a selection or',
     },
-    [Feature.FormElements]: {
-        question: 'Form elements',
-        description: 'Includes inputs, checkboxes, radio buttons, sliders...',
-    },
-    [Feature.DeepLinking]: {
-        question: 'Linkable from outside the platform',
-        description:
-            'For example linking from out help documentation, through Slack or through tutorials.',
-    },
 }
 
 const components = [
@@ -58,6 +66,7 @@ const components = [
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
         ],
+        url: 'https://google.com',
     },
     {
         id: 'tooltip',
@@ -68,6 +77,7 @@ const components = [
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
         ],
+        url: 'https://google.com',
     },
     {
         id: 'action-menu',
@@ -81,6 +91,7 @@ const components = [
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
         ],
+        url: 'https://google.com',
     },
     {
         id: 'select-panel',
@@ -93,6 +104,7 @@ const components = [
             Feature.Actionable,
             Feature.NoOuterRightTriggerLimitation,
         ],
+        url: 'https://google.com',
     },
     {
         id: 'dialog',
@@ -106,6 +118,7 @@ const components = [
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
         ],
+        url: 'https://google.com',
     },
     {
         id: 'Right sidesheet',
@@ -117,6 +130,7 @@ const components = [
             Feature.Actionable,
             Feature.TriggerInGlobalNavigation,
         ],
+        url: 'https://google.com',
     },
     {
         id: 'right-side-panel',
@@ -129,6 +143,7 @@ const components = [
             Feature.Contextual,
             Feature.Actionable,
         ],
+        url: 'https://google.com',
     },
     {
         id: 'new-page',
@@ -143,18 +158,19 @@ const components = [
             Feature.Actionable,
             Feature.NoOuterRightTriggerLimitation,
         ],
+        url: 'https://google.com',
     },
 ]
 
 function Playground() {
     const [selection, setSelection] = useState({
+        [Feature.FormElements]: false,
+        [Feature.DeepLinking]: false,
         [Feature.FocusableContent]: false,
         [Feature.Contextual]: false,
         [Feature.TriggerInGlobalNavigation]: false,
         [Feature.NoOuterRightTriggerLimitation]: false,
         [Feature.Actionable]: false,
-        [Feature.FormElements]: false,
-        [Feature.DeepLinking]: false,
     })
 
     const features = Object.keys(selection).map((key) => {
@@ -193,29 +209,55 @@ function Playground() {
             as="main"
             sx={{
                 display: 'flex',
-                p: 5,
+                p: 8,
                 flexDirection: 'column',
-                bg: '#FAFAFC',
+                bg: 'canvas.inset',
                 minHeight: '100vh',
             }}
         >
-            <Text sx={{ fontSize: 7, pb: 4, fontWeight: 'bold' }}>
-                Component picker
-            </Text>
+            <Box
+                sx={{
+                    marginBottom: 7,
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}
+            >
+                <Text
+                    sx={{
+                        fontSize: 7,
+                        fontWeight: 'semibold',
+                        pb: 1,
+                    }}
+                >
+                    🪄 Component Whiz
+                </Text>
+                <Text
+                    sx={{
+                        fontSize: 3,
+                        fontWeight: 'light',
+                        letterSpacing: 1.1,
+                    }}
+                >
+                    The secret potion to unlocking design excellence.
+                    <br />
+                    Make informed choices, ensuring that every component you
+                    pick is a stroke of genius.
+                </Text>
+            </Box>
             <Box
                 sx={{
                     display: 'flex',
                 }}
             >
-                <Box sx={{ pr: 5 }}>
-                    <Box sx={{ bg: '#F5F5F7', borderRadius: '30px', p: 5 }}>
-                        <Text
-                            as="h2"
-                            sx={{ fontSize: 1, pb: 3, color: 'fg.subtle' }}
-                        >
-                            Checklist (requirements)
-                        </Text>
-                        <CheckboxGroup>{features}</CheckboxGroup>
+                <Box sx={{ pr: 7, width: '30%' }}>
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: 'auto',
+                            gap: 4,
+                        }}
+                    >
+                        {features}
                     </Box>
                 </Box>
                 <Box sx={{ flex: 1 }}>
@@ -264,13 +306,17 @@ function ComponentCard({ id, disabled }) {
                 sx={{
                     position: 'absolute',
                     top: 0,
-                    bg: '#F5F5F7',
+                    borderRadius: '12px',
+                    borderWidth: 0.5,
+                    borderStyle: 'solid',
+                    borderColor: 'border.subtle',
+                    bg: 'canvas.default',
+                    boxShadow: 'shadow.small',
                     display: 'flex',
                     flexDirection: 'column',
                     pb: 6,
                     px: 6,
                     justifyContent: 'flex-end',
-                    borderRadius: '30px',
                     right: 0,
                     left: 0,
                     bottom: 0,
@@ -297,10 +343,16 @@ function ComponentCard({ id, disabled }) {
                         fontSize: 1,
                         color: 'fg.muted',
                         fontWeight: 'light',
+                        mb: 3,
                     }}
                 >
                     {component.description}
                 </Text>
+                <Box>
+                    <Button as="a" href={component.url}>
+                        View documentation
+                    </Button>
+                </Box>
             </Box>
         </Box>
     )
@@ -309,7 +361,19 @@ function ComponentCard({ id, disabled }) {
 function FeatureToggle({ id, isOn, onChange }) {
     const info = featureInfo[id]
     return (
-        <Box display="flex" maxWidth="300px">
+        <Box
+            display="flex"
+            flexDirection="column"
+            sx={{
+                borderRadius: '12px',
+                borderWidth: 0.5,
+                borderStyle: 'solid',
+                borderColor: 'border.subtle',
+                bg: 'canvas.default',
+                boxShadow: 'shadow.small',
+                p: 4,
+            }}
+        >
             <CheckboxGroup.Label>{info.question}</CheckboxGroup.Label>
             <FormControl>
                 <Checkbox
@@ -319,6 +383,17 @@ function FeatureToggle({ id, isOn, onChange }) {
                 />
                 <FormControl.Label>{info.question}</FormControl.Label>
             </FormControl>
+            <Box
+                as="p"
+                sx={{
+                    display: 'block',
+                    fontSize: 1,
+                    color: 'fg.muted',
+                    fontWeight: 'light',
+                }}
+            >
+                {info.description}
+            </Box>
         </Box>
     )
 }
