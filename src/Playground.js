@@ -10,16 +10,17 @@ const featureInfo = {
     [Feature.FormElements]: {
         question: 'Includes form elements',
         description:
-            'The content that is about to appear includes various form elements such as inputs, buttons, and checkboxes.',
+            'The triggered content that is about to appear includes various form elements such as inputs, buttons, and checkboxes.',
     },
     [Feature.DeepLinking]: {
         question: 'Should support deeplinking',
         description:
-            'The content needs to be linkable from help documentation, chat apps, social media or through tutorials.',
+            'The triggered content needs to be linkable from help documentation, chat apps, social media or through tutorials.',
     },
     [Feature.FocusableContent]: {
         question: 'Elements need keyboard focus',
-        description: 'Links and menu items are elements that require this.',
+        description:
+            'The triggered content has interactive elements that needs keyboard focus.',
     },
     [Feature.Contextual]: {
         question: 'Provide extra context on the main content',
