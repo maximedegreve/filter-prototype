@@ -35,7 +35,7 @@ function ColorModeSwitcher() {
                     </Box>
                 </ActionMenu.Button>
                 <ActionMenu.Overlay align="right">
-                    <ActionList showDividers>
+                    <ActionList>
                         <ActionList.Group selectionVariant="single">
                             {schemes.map((scheme) => (
                                 <ActionList.Item
