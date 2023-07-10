@@ -139,18 +139,37 @@ function Playground() {
                 }}
             >
                 <Box sx={{ pr: 7 }}>
+                    <Text
+                        sx={{
+                            fontSize: 1,
+                            fontWeight: 'bold',
+                            color: 'fg.muted',
+                        }}
+                    >
+                        Checklist
+                    </Text>
                     <Box
                         sx={{
                             display: 'grid',
                             width: 'max-content',
                             gridTemplateColumns: 'auto',
                             gap: 4,
+                            mt: 3,
                         }}
                     >
                         {features}
                     </Box>
                 </Box>
                 <Box sx={{ flex: 1 }}>
+                    <Text
+                        sx={{
+                            fontSize: 1,
+                            fontWeight: 'bold',
+                            color: 'fg.muted',
+                        }}
+                    >
+                        {compatibleComponents.length} components
+                    </Text>
                     <Box
                         sx={{
                             display: 'inline-grid',
@@ -160,6 +179,7 @@ function Playground() {
                                 'repeat(auto-fill, minmax(440px, 1fr))',
                             ],
                             gap: 5,
+                            mt: 3,
                         }}
                     >
                         {compatibleComponents.map((c) => {
@@ -290,26 +310,34 @@ function FeatureToggle({ id, isOn, onChange }) {
                 p: 4,
             }}
         >
-            <CheckboxGroup.Label>{info.question}</CheckboxGroup.Label>
             <FormControl>
-                <Checkbox
-                    value="one"
-                    onChange={(e) => onChange(e.target.checked)}
-                    checked={isOn}
-                />
-                <FormControl.Label>{info.question}</FormControl.Label>
+                <label>
+                    <input
+                        type="checkbox"
+                        value="one"
+                        onChange={(e) => onChange(e.target.checked)}
+                        checked={isOn}
+                    />
+                    <Text
+                        sx={{
+                            fontSize: 2,
+                            fontWeight: 'semibold',
+                        }}
+                    >
+                        {info.question}
+                    </Text>
+                </label>
+
+                <FormControl.Caption
+                    sx={{
+                        fontSize: 1,
+                        color: 'fg.muted',
+                        fontWeight: 'light',
+                    }}
+                >
+                    {info.description}
+                </FormControl.Caption>
             </FormControl>
-            <Box
-                as="p"
-                sx={{
-                    display: 'block',
-                    fontSize: 1,
-                    color: 'fg.muted',
-                    fontWeight: 'light',
-                }}
-            >
-                {info.description}
-            </Box>
         </Box>
     )
 }
