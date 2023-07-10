@@ -23,17 +23,17 @@ const featureInfo = {
             'The triggered content has interactive elements that needs keyboard focus.',
     },
     [Feature.Contextual]: {
-        question: 'Provide extra context on the main content',
+        question: 'Provides information related to the page content',
         description:
-            'For example when providing insights for code you’re currently looking at.',
+            'The triggered content helps users to understand the page content better.',
     },
     [Feature.TriggerInGlobalNavigation]: {
-        question: 'Entry point in the global navigation',
-        description:
-            'Often used for the navigation or global tooling like Copilot',
+        question: 'Entry point is in the global navigation',
+        description: 'The triggered content is part of the navigation.',
     },
     [Feature.NoOuterRightTriggerLimitation]: {
-        question: 'Trigger is not in the far right of the viewport',
+        question:
+            'Entry point is not positioned in the far right of the viewport',
         description:
             'For example non full width layouts won’t have triggers there',
     },
