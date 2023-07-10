@@ -3,7 +3,6 @@ const Feature = {
     Contextual: 'contextual',
     TriggerInGlobalNavigation: 'trigger-in-global-navigation',
     NoOuterRightTriggerLimitation: 'no-outer-right-trigger-limitation',
-    Actionable: 'actionable',
     FormElements: 'form-elements',
     DeepLinking: 'deep-linking',
 }

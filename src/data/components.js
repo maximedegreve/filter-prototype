@@ -50,7 +50,6 @@ const components = [
         features: [
             Feature.FocusableContent,
             Feature.Contextual,
-            Feature.Actionable,
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
         ],
@@ -68,7 +67,6 @@ const components = [
             Feature.FormElements,
             Feature.FocusableContent,
             Feature.Contextual,
-            Feature.Actionable,
             Feature.NoOuterRightTriggerLimitation,
         ],
         image: {
@@ -85,7 +83,6 @@ const components = [
             Feature.FormElements,
             Feature.FocusableContent,
             Feature.Contextual,
-            Feature.Actionable,
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
         ],
@@ -98,7 +95,6 @@ const components = [
         features: [
             Feature.FocusableContent,
             Feature.Contextual,
-            Feature.Actionable,
             Feature.TriggerInGlobalNavigation,
         ],
         url: primerBaseUrl + 'components/dialog#side-sheets',
@@ -112,7 +108,6 @@ const components = [
             Feature.FocusableContent,
             Feature.DeepLinking,
             Feature.Contextual,
-            Feature.Actionable,
         ],
         url: primerBaseUrl + 'foundations/layout',
     },
@@ -126,7 +121,6 @@ const components = [
             Feature.TriggerInGlobalNavigation,
             Feature.FormElements,
             Feature.DeepLinking,
-            Feature.Actionable,
             Feature.NoOuterRightTriggerLimitation,
         ],
         url: primerBaseUrl + 'foundations/layout',

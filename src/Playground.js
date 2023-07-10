@@ -37,10 +37,6 @@ const featureInfo = {
         description:
             'For example non full width layouts won’t have triggers there',
     },
-    [Feature.Actionable]: {
-        question: 'User is expected to take action',
-        description: 'This could be making a selection or',
-    },
 }
 
 function Playground() {
@@ -51,7 +47,6 @@ function Playground() {
         [Feature.Contextual]: false,
         [Feature.TriggerInGlobalNavigation]: false,
         [Feature.NoOuterRightTriggerLimitation]: false,
-        [Feature.Actionable]: false,
     })
 
     const features = Object.keys(selection).map((key) => {
