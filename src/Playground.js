@@ -193,7 +193,6 @@ function ComponentCard({ id, disabled }) {
                 position: 'relative',
                 opacity: disabled ? 0.5 : 1,
                 transition: 'all .2s ease-in-out',
-                cursor: disabled ? 'default' : 'pointer',
                 ':hover': {
                     transform: !disabled && 'scale(1.05)',
                 },

@@ -15,7 +15,7 @@ const components = [
     {
         id: 'hover-cards',
         name: 'Hover cards',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
+        description: `Appears when hovering over an element, providing rich information often including images, text, or interactive elements.`,
         features: [
             Feature.FocusableContent,
             Feature.Contextual,
@@ -31,7 +31,7 @@ const components = [
     {
         id: 'tooltip',
         name: 'Tooltip',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
+        description: `Appears when hovering over an element, providing brief contextual information or a description of the element's purpose.`,
         features: [
             Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
@@ -46,7 +46,7 @@ const components = [
     {
         id: 'action-menu',
         name: 'Action Menu',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
+        description: `Provides a list of selectable actions or selections in response to a trigger.`,
         features: [
             Feature.FocusableContent,
             Feature.Contextual,
@@ -63,7 +63,7 @@ const components = [
     {
         id: 'select-panel',
         name: 'Select panel',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
+        description: `Allows the selection of one or multiple items from a list, and it can be enhanced with additional controls like a search input.`,
         features: [
             Feature.FormElements,
             Feature.FocusableContent,
@@ -80,7 +80,7 @@ const components = [
     {
         id: 'dialog',
         name: 'Dialog',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
+        description: `Interactive overlay that prompts the user for input or displays important information.`,
         features: [
             Feature.FormElements,
             Feature.FocusableContent,
@@ -94,7 +94,7 @@ const components = [
     {
         id: 'Right sidesheet',
         name: 'Right sidesheet',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
+        description: `Dialog that slides in from the side of the viewport to provide supplementary content or functionality.`,
         features: [
             Feature.FocusableContent,
             Feature.Contextual,
@@ -106,7 +106,7 @@ const components = [
     {
         id: 'right-side-panel',
         name: 'Right sidepanel',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
+        description: `Collapsible panel that slides in from the side of the viewport to provide supplementary content or functionality without obstructing the page content.`,
         features: [
             Feature.FormElements,
             Feature.FocusableContent,
@@ -119,7 +119,7 @@ const components = [
     {
         id: 'new-page',
         name: 'New page',
-        description: `Vertical list of interactive actions or options. It's composed of items presented in a consistent.`,
+        description: `Self-contained and navigable unit within a website or web application, accessible through deep linking with a unique URL, typically occupying a larger viewport than a dialog component.`,
         features: [
             Feature.FocusableContent,
             Feature.Contextual,
