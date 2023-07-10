@@ -1,328 +1,344 @@
 import { useState } from 'react'
 import {
     Box,
-    Button,
-    StyledOcticon,
-    ActionList,
+    Text,
     FormControl,
-    CheckboxGroup,
     Checkbox,
+    CheckboxGroup,
+    Button,
+    useColorSchemeVar,
 } from '@primer/react'
-import {
-    XIcon,
-    TagIcon,
-    PeopleIcon,
-    SearchIcon,
-    ArrowLeftIcon,
-} from '@primer/octicons-react'
+import components from './data/components'
+import Feature from './data/feature'
+import ColorModeSwitcher from './ColorModeSwitcher'
 
-const labelsData = ['Bug', 'Feature', 'Backlog']
-
-const data = [
-    {
-        title: 'Fix suggestions showing double',
-        labels: ['Bug'],
-        author: 'maximedegreve',
+const featureInfo = {
+    [Feature.FormElements]: {
+        question: 'Includes form elements',
+        description:
+            'This could be inputs, checkboxes, radio buttons, sliders...',
     },
-    {
-        title: 'Hide footers on the full height search pages',
-        labels: ['Bug'],
-        author: 'maximedegreve',
+    [Feature.DeepLinking]: {
+        question: 'Should support deeplinking',
+        description:
+            'For example linking from out help documentation, through Slack or through tutorials.',
     },
-    {
-        title: 'Fix placeholder',
-        labels: ['Bug'],
-        author: 'maximedegreve',
+    [Feature.FocusableContent]: {
+        question: 'Content is focusable',
+        description: 'Links and menu items are elements that require this.',
     },
-    {
-        title: 'Search: New illustration',
-        labels: ['Feature'],
-        author: 'maximedegreve',
+    [Feature.Contextual]: {
+        question: 'Provide extra context on the main content',
+        description:
+            'For example when providing insights for code you’re currently looking at.',
     },
-    {
-        title: 'Search: Fix accessibility issues',
-        labels: ['Bug'],
-        author: 'maximedegreve',
+    [Feature.TriggerInGlobalNavigation]: {
+        question: 'Triggered through the global navigation',
+        description:
+            'Often used for the navigation or global tooling like Copilot',
     },
-]
+    [Feature.NoOuterRightTriggerLimitation]: {
+        question: 'Trigger is not in the far right of the viewport',
+        description:
+            'For example non full width layouts won’t have triggers there',
+    },
+    [Feature.Actionable]: {
+        question: 'User is expected to take action',
+        description: 'This could be making a selection or',
+    },
+}
 
 function Playground() {
-    const [selectedLabels, setSelectedLabels] = useState([])
-    //const [selectedAuthors, setSelectedAuthors] = useState([])
-
-    const filteredData = data.filter((item) => {
-        if (selectedLabels.length === 0) {
-            return true
-        }
-        return item.labels.some((r) => selectedLabels.includes(r))
+    const [selection, setSelection] = useState({
+        [Feature.FormElements]: false,
+        [Feature.DeepLinking]: false,
+        [Feature.FocusableContent]: false,
+        [Feature.Contextual]: false,
+        [Feature.TriggerInGlobalNavigation]: false,
+        [Feature.NoOuterRightTriggerLimitation]: false,
+        [Feature.Actionable]: false,
     })
 
-    console.log('RERENDER')
+    const features = Object.keys(selection).map((key) => {
+        const value = selection[key]
+        return (
+            <FeatureToggle
+                key={key}
+                id={key}
+                isOn={value}
+                onChange={(newValue) => {
+                    setSelection({ ...selection, [key]: newValue })
+                }}
+            />
+        )
+    })
+
+    const possibleFeatures = Object.keys(selection).filter((key) => {
+        return !!selection[key]
+    })
+
+    let compatibleComponents = []
+    let inCompatibleComponents = []
+    components.forEach(function (component) {
+        let intersection = component.features.filter((x) =>
+            possibleFeatures.includes(x)
+        )
+        if (intersection.length == possibleFeatures.length) {
+            compatibleComponents.push(component)
+        } else {
+            inCompatibleComponents.push(component)
+        }
+    })
 
     return (
         <Box
             as="main"
-            sx={{ p: 5, button: { border: 'none', background: 'transparent' } }}
+            sx={{
+                display: 'flex',
+                p: 8,
+                flexDirection: 'column',
+                bg: 'canvas.inset',
+                minHeight: '100vh',
+            }}
         >
-            <Box aria-live="assertive" aria-atomic="true">
-                <h1 tabindex="0">{filteredData.length} results</h1>
-            </Box>
-
-            <Popover id="filter-by">
-                <Header>
-                    <Box display="flex">
-                        <Box
-                            display="flex"
-                            px={2}
-                            py="6px"
-                            flexDirection="column"
-                            flexGrow={1}
-                        >
-                            <Title as="h2">Filter by</Title>
-                        </Box>
-
-                        <CloseButton id="filter-by" />
-                    </Box>
-                </Header>
-
-                <ActionList
-                    sx={{
-                        button: {
-                            textAlign: 'left',
-                            width: '100%',
-                        },
-                    }}
-                >
-                    <button popovertoggletarget="filter-by-label">
-                        <ActionList.Item>
-                            <ActionList.LeadingVisual>
-                                <TagIcon />
-                            </ActionList.LeadingVisual>
-                            Labels
-                        </ActionList.Item>
-                    </button>
-                    <ActionList.Item>
-                        <ActionList.LeadingVisual>
-                            <PeopleIcon />
-                        </ActionList.LeadingVisual>
-                        Authors
-                    </ActionList.Item>
-                </ActionList>
-            </Popover>
-            <LabelsPopover
-                id="filter-by-label"
-                parentId="filter-by"
-                selectedLabels={selectedLabels}
-                onSelectionChange={(e) => {
-                    if (e.target.checked) {
-                        var newLabels = [...selectedLabels]
-                        newLabels.push(e.target.value)
-                        console.log(newLabels)
-                        setSelectedLabels(newLabels)
-                    } else {
-                        const withoutChecked = selectedLabels.filter(
-                            (v) => v !== e.target.value
-                        )
-                        setSelectedLabels(withoutChecked)
-                    }
+            <Box
+                sx={{
+                    marginBottom: 7,
+                    display: 'flex',
                 }}
-            />
-            <button popovertoggletarget="filter-by">
-                <Button as="div">Filter</Button>
-            </button>
-
-            <ul>
-                {filteredData.map((d) => {
-                    return (
-                        <li tabindex="0">
-                            <h2>{d.title}</h2>
-                            <div>by {d.author}</div>
-                            <div>{d.labels.map((l) => l)}</div>
-                        </li>
-                    )
-                })}
-            </ul>
+            >
+                <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <Text
+                        sx={{
+                            fontSize: 7,
+                            fontWeight: 'semibold',
+                            pb: 1,
+                        }}
+                    >
+                        🪄 Component Whiz
+                    </Text>
+                    <Text
+                        sx={{
+                            fontSize: 3,
+                            fontWeight: 'light',
+                            letterSpacing: 1.1,
+                        }}
+                    >
+                        The secret potion to unlocking design/accessibility
+                        excellence.
+                        <br />
+                        Make informed choices, ensuring that every component you
+                        pick is a stroke of genius.
+                    </Text>
+                </Box>
+                <ColorModeSwitcher />
+            </Box>
+            <Box
+                sx={{
+                    display: 'flex',
+                }}
+            >
+                <Box sx={{ pr: 7 }}>
+                    <Text
+                        sx={{
+                            fontSize: 1,
+                            fontWeight: 'bold',
+                            color: 'fg.muted',
+                        }}
+                    >
+                        Checklist
+                    </Text>
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            width: 'max-content',
+                            gridTemplateColumns: 'auto',
+                            gap: 4,
+                            mt: 3,
+                        }}
+                    >
+                        {features}
+                    </Box>
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                    <Text
+                        sx={{
+                            fontSize: 1,
+                            fontWeight: 'bold',
+                            color: 'fg.muted',
+                        }}
+                    >
+                        {compatibleComponents.length} components
+                    </Text>
+                    <Box
+                        sx={{
+                            display: 'inline-grid',
+                            width: '100%',
+                            gridAutoFlow: 'dense',
+                            gridTemplateColumns: [
+                                'repeat(auto-fill, minmax(440px, 1fr))',
+                            ],
+                            gap: 5,
+                            mt: 3,
+                        }}
+                    >
+                        {compatibleComponents.map((c) => {
+                            return <ComponentCard id={c.id} disabled={false} />
+                        })}
+                        {inCompatibleComponents.map((c) => {
+                            return <ComponentCard id={c.id} disabled={true} />
+                        })}
+                    </Box>
+                </Box>
+            </Box>
         </Box>
     )
 }
 
-function LabelsPopover({ id, parentId, selectedLabels, onSelectionChange }) {
-    const [search, setSearch] = useState('')
+function ComponentCard({ id, disabled }) {
+    const component = components.find((c) => c.id === id)
 
-    const totalResults = labelsData.filter((label) => {
-        label.toLowerCase().includes(search.toLowerCase())
-    }).length
-
-    return (
-        <Popover id={id}>
-            <Header>
-                <Box display="flex" sx={{ mb: 2 }}>
-                    <BackButton id={id} />
-                    <Box
-                        display="flex"
-                        px={2}
-                        py="6px"
-                        flexDirection="column"
-                        flexGrow={1}
-                    >
-                        <Title as="h3">Filter by labels</Title>
-                    </Box>
-
-                    <CloseButton id={parentId} />
-                </Box>
-
-                <ul class="selected-options" id="combo3-selected"></ul>
-                <FormControl>
-                    <FormControl.Label visuallyHidden>
-                        Search labels
-                    </FormControl.Label>
-                    <input
-                        name="search-label"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        autoFocus
-                        role="combobox"
-                        leadingVisual={SearchIcon}
-                        aria-activedescendant=""
-                        aria-autocomplete="none"
-                        aria-controls="listbox3"
-                        aria-expanded="false"
-                        aria-haspopup="listbox"
-                        placeholder="Search labels"
-                    />
-                </FormControl>
-            </Header>
-            {search !== '' && (
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        left: -100000,
-                        width: 1,
-                        height: 1,
-                        overflow: 'hidden',
-                    }}
-                    aria-live="assertive"
-                    aria-atomic="true"
-                >
-                    Showing {totalResults} results for "{search}"
-                </Box>
-            )}
-
-            <Box sx={{ p: 3 }} role="listbox" id="listbox3">
-                <CheckboxGroup>
-                    <CheckboxGroup.Label visuallyHidden>
-                        Checkboxes
-                    </CheckboxGroup.Label>
-
-                    {labelsData.map((f) => {
-                        return (
-                            <FormControl
-                                sx={{
-                                    display: f
-                                        .toLowerCase()
-                                        .includes(search.toLowerCase())
-                                        ? 'flex'
-                                        : 'none',
-                                }}
-                            >
-                                <Checkbox
-                                    value={f}
-                                    checked={selectedLabels.includes(f)}
-                                    onChange={onSelectionChange}
-                                />
-                                <FormControl.Label>{f}</FormControl.Label>
-                            </FormControl>
-                        )
-                    })}
-                </CheckboxGroup>
-            </Box>
-        </Popover>
+    const themeAwareImage = useColorSchemeVar(
+        {
+            light: component.image?.light2x,
+            dark: component.image?.dark2x,
+        },
+        component.light
     )
-}
 
-function Popover({ id, children, trigger, ...rest }) {
     return (
         <Box
             sx={{
-                '[popover]': {
-                    borderWidth: 1,
-                    borderRadius: 2,
-                    maxHeight: 459,
-                    position: 'fixed',
-                    mt: 120,
-                    ml: 34,
-                    width: 320,
-                    boxShadow: 'shadow.small',
-                    borderColor: 'border.subtle',
+                pb: '100%',
+                position: 'relative',
+                opacity: disabled ? 0.5 : 1,
+                transition: 'all .2s ease-in-out',
+                ':hover': {
+                    transform: !disabled && 'scale(1.05)',
                 },
             }}
         >
-            <div id={id} popover="auto">
-                <Box {...rest}>{children}</Box>
-            </div>
-        </Box>
-    )
-}
-
-const Header = ({ children }) => {
-    return (
-        <Box sx={{ boxShadow: 'shadow.small', p: 2, zIndex: 1, flexShrink: 0 }}>
-            {children}
-        </Box>
-    )
-}
-
-const Title = ({ children, as }) => {
-    return (
-        <Box as={as} sx={{ fontSize: 1, fontWeight: 'bold', margin: 0 }}>
-            {children}
-        </Box>
-    )
-}
-
-const CloseButton = ({ id }) => {
-    return (
-        <button popoverhidetarget={id} aria-label="Close">
-            <Button
-                as="div"
+            <Box
                 sx={{
-                    borderRadius: 2,
-                    background: 'transparent',
-                    border: 0,
-                    verticalAlign: 'middle',
-                    color: 'fg.muted',
-                    p: 2,
-                    alignSelf: 'flex-start',
-                    lineHeight: 'normal',
-                    boxShadow: 'none',
+                    position: 'absolute',
+                    top: 0,
+                    borderRadius: '12px',
+                    borderWidth: 0.5,
+                    borderStyle: 'solid',
+                    borderColor: 'border.subtle',
+                    bg: 'canvas.default',
+                    boxShadow: 'shadow.small',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    pb: 6,
+                    px: 6,
+                    justifyContent: 'flex-end',
+                    right: 0,
+                    left: 0,
+                    bottom: 0,
                 }}
             >
-                <StyledOcticon icon={XIcon} />
-            </Button>
-        </button>
+                {component.image && (
+                    <Box
+                        sx={{
+                            position: 'relative',
+                            flex: 1,
+                            width: '100%',
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                top: 0,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                img: {
+                                    width: 340,
+                                    height: 220,
+                                    objectFit: 'contain',
+                                },
+                            }}
+                        >
+                            <img
+                                src={themeAwareImage}
+                                srcSet={`${themeAwareImage} 1x, ${themeAwareImage} 2x`}
+                            />
+                        </Box>
+                    </Box>
+                )}
+
+                <Text sx={{ fontSize: 2, pb: 2, fontWeight: 'semibold' }}>
+                    {component.name}
+                </Text>
+                <Text
+                    sx={{
+                        fontSize: 1,
+                        color: 'fg.muted',
+                        fontWeight: 'light',
+                        mb: 3,
+                    }}
+                >
+                    {component.description}
+                </Text>
+                <Box>
+                    <Button as="a" href={component.url}>
+                        View documentation
+                    </Button>
+                </Box>
+            </Box>
+        </Box>
     )
 }
 
-const BackButton = ({ id }) => {
+function FeatureToggle({ id, isOn, onChange }) {
+    const info = featureInfo[id]
     return (
-        <button popoverhidetarget={id} aria-label="Back">
-            <Button
-                as="div"
-                sx={{
-                    borderRadius: 2,
-                    background: 'transparent',
-                    border: 0,
-                    verticalAlign: 'middle',
-                    color: 'fg.muted',
-                    p: 2,
-                    alignSelf: 'flex-start',
-                    lineHeight: 'normal',
-                    boxShadow: 'none',
-                }}
-            >
-                <StyledOcticon icon={ArrowLeftIcon} />
-            </Button>
-        </button>
+        <Box
+            display="flex"
+            flexDirection="column"
+            sx={{
+                borderRadius: '12px',
+                borderWidth: 0.5,
+                borderStyle: 'solid',
+                borderColor: 'border.subtle',
+                bg: 'canvas.default',
+                boxShadow: 'shadow.small',
+                p: 4,
+            }}
+        >
+            <FormControl>
+                <label>
+                    <input
+                        type="checkbox"
+                        value="one"
+                        onChange={(e) => onChange(e.target.checked)}
+                        checked={isOn}
+                    />
+                    <Text
+                        sx={{
+                            fontSize: 2,
+                            fontWeight: 'semibold',
+                        }}
+                    >
+                        {info.question}
+                    </Text>
+                </label>
+
+                <FormControl.Caption
+                    sx={{
+                        fontSize: 1,
+                        color: 'fg.muted',
+                        fontWeight: 'light',
+                    }}
+                >
+                    {info.description}
+                </FormControl.Caption>
+            </FormControl>
+        </Box>
     )
 }
 
