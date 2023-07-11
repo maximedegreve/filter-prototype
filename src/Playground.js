@@ -169,7 +169,7 @@ function Playground() {
                         {features}
                     </Box>
                 </Box>
-                <Box sx={{ flex: 1 }}>
+                <Box sx={{ flex: 1, pt: [6, 6, 6, 0] }}>
                     <Text
                         sx={{
                             fontSize: 1,
