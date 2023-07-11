@@ -187,6 +187,8 @@ function Fail({ data, onContinue }) {
 function Step({ data, onPass, onFail, current, total }) {
     const [isFailed, setIsFailed] = useState(false)
 
+    console.log(data)
+
     const themeAwareImage = useColorSchemeVar(
         {
             light: data.useCorrect
