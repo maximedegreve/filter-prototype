@@ -4,6 +4,7 @@ import {
     useColorSchemeVar,
     Button,
     ProgressBar,
+    Text,
     IconButton,
     Label,
     SegmentedControl,
@@ -82,7 +83,7 @@ function Grade({ exam, onClickRestart }) {
             }}
         >
             <Box sx={{ fontWeight: 'semibold' }}>
-                You're grade is{' '}
+                <Text sx={{ mr: 2 }}>You're grade is</Text>
                 <Label size="large" variant={grade.color}>
                     {grade.grade}
                 </Label>
