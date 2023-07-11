@@ -7,11 +7,18 @@ import {
     Link,
     useColorSchemeVar,
 } from '@primer/react'
-import { CheckCircleIcon, CircleSlashIcon } from '@primer/octicons-react'
+import { Dialog } from '@primer/react/drafts'
+
+import {
+    CheckCircleIcon,
+    CircleSlashIcon,
+    MortarBoardIcon,
+} from '@primer/octicons-react'
 
 import components from './data/components'
 import Feature from './data/feature'
 import ColorModeSwitcher from './ColorModeSwitcher'
+import Exam from './Exam'
 
 const featureInfo = {
     [Feature.FormElements]: {
@@ -62,6 +69,7 @@ const defaultSelection = {
 
 function Playground() {
     const [selection, setSelection] = useState(defaultSelection)
+    const [examIsOpen, setExamOpen] = useState(false)
 
     const features = Object.keys(selection).map((key) => {
         const value = selection[key]
@@ -95,161 +103,212 @@ function Playground() {
     })
 
     return (
-        <Box
-            as="main"
-            sx={{
-                display: 'flex',
-                p: [4, 6, 7, 8],
-                flexDirection: 'column',
-                bg: 'canvas.inset',
-                minHeight: '100vh',
-            }}
-        >
+        <>
             <Box
-                sx={{
-                    marginBottom: 7,
-                    display: 'flex',
-                    flexDirection: [
-                        'column-reverse',
-                        'column-reverse',
-                        'column-reverse',
-                        'row',
-                    ],
-                }}
-            >
-                <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    <Text
-                        sx={{
-                            fontSize: [4, 6, 6, 7],
-                            fontWeight: 'semibold',
-                            pb: 1,
-                            mt: [5, 5, 5, 0],
-                        }}
-                    >
-                        🪄 Component Whiz
-                    </Text>
-                    <Text
-                        sx={{
-                            fontSize: [1, 2, 2, 3],
-                            fontWeight: 'light',
-                            letterSpacing: 1.1,
-                        }}
-                    >
-                        The secret potion to unlocking design/accessibility
-                        excellence.{' '}
-                        <Box
-                            sx={{
-                                display: [
-                                    'inline',
-                                    'inline',
-                                    'inline',
-                                    'block',
-                                ],
-                            }}
-                        >
-                            Make informed choices, ensuring that every component
-                            you pick is a stroke of genius.
-                        </Box>
-                    </Text>
-                </Box>
-                <ColorModeSwitcher />
-            </Box>
-            <Box
+                as="main"
                 sx={{
                     display: 'flex',
-                    flexDirection: ['column', 'column', 'column', 'row'],
+                    p: [4, 6, 7, 8],
+                    flexDirection: 'column',
+                    bg: 'canvas.inset',
+                    minHeight: '100vh',
                 }}
             >
-                <Box sx={{ pr: [0, 0, 0, 7] }}>
-                    <Box sx={{ display: 'flex' }}>
+                <Box
+                    sx={{
+                        marginBottom: 7,
+                        display: 'flex',
+                        flexDirection: [
+                            'column-reverse',
+                            'column-reverse',
+                            'column-reverse',
+                            'row',
+                        ],
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            flex: 1,
+                        }}
+                    >
                         <Text
                             sx={{
-                                flex: 1,
+                                fontSize: [4, 6, 6, 7],
+                                fontWeight: 'semibold',
+                                pb: 1,
+                                mt: [5, 5, 5, 0],
+                            }}
+                        >
+                            🪄 Component Whiz
+                        </Text>
+                        <Text
+                            sx={{
+                                fontSize: [1, 2, 2, 3],
+                                fontWeight: 'light',
+                                letterSpacing: 1.1,
+                            }}
+                        >
+                            The secret potion to unlocking design/accessibility
+                            excellence.{' '}
+                            <Box
+                                sx={{
+                                    display: [
+                                        'inline',
+                                        'inline',
+                                        'inline',
+                                        'block',
+                                    ],
+                                }}
+                            >
+                                Make informed choices, ensuring that every
+                                component you pick is a stroke of genius.
+                            </Box>
+                        </Text>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: 'auto auto',
+                            gridGap: 3,
+                        }}
+                    >
+                        <Button
+                            leadingIcon={MortarBoardIcon}
+                            onClick={() => setExamOpen(true)}
+                        >
+                            Mini exam
+                        </Button>
+                        <ColorModeSwitcher />
+                    </Box>
+                </Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: ['column', 'column', 'column', 'row'],
+                    }}
+                >
+                    <Box sx={{ pr: [0, 0, 0, 7] }}>
+                        <Box sx={{ display: 'flex' }}>
+                            <Text
+                                sx={{
+                                    flex: 1,
+                                    fontSize: 1,
+                                    fontWeight: 'bold',
+                                    color: 'fg.muted',
+                                }}
+                            >
+                                Checklist{' '}
+                                {possibleFeatures.length > 0 &&
+                                    `(${possibleFeatures.length})`}
+                            </Text>
+                            <Link
+                                href="#"
+                                onClick={() => setSelection(defaultSelection)}
+                                sx={{
+                                    fontSize: 1,
+                                    display:
+                                        possibleFeatures.length > 0
+                                            ? 'block'
+                                            : 'none',
+                                }}
+                            >
+                                Clear
+                            </Link>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                width: 'max-content',
+                                maxWidth: ['100%', '100%', '100%', 420],
+                                gridTemplateColumns: 'auto',
+                                borderRadius: '12px',
+                                borderWidth: 1,
+                                borderStyle: 'solid',
+                                borderColor: 'border.subtle',
+                                bg: 'canvas.default',
+                                mt: 3,
+                                label: {
+                                    borderBottomWidth: 1,
+                                    borderBottomStyle: 'solid',
+                                    borderBottomColor: 'border.subtle',
+                                },
+                                'label:last-child': {
+                                    borderBottomLeftRadius: '12px',
+                                    borderBottomRightRadius: '12px',
+                                    borderBottomWidth: 0,
+                                },
+                                'label:first-child': {
+                                    borderTopLeftRadius: '12px',
+                                    borderTopRightRadius: '12px',
+                                },
+                            }}
+                        >
+                            {features}
+                        </Box>
+                    </Box>
+                    <Box sx={{ flex: 1, pt: [6, 6, 6, 0] }}>
+                        <Text
+                            sx={{
                                 fontSize: 1,
                                 fontWeight: 'bold',
                                 color: 'fg.muted',
                             }}
                         >
-                            Checklist{' '}
-                            {possibleFeatures.length > 0 &&
-                                `(${possibleFeatures.length})`}
+                            {compatibleComponents.length} components
                         </Text>
-                        <Link
-                            href="#"
-                            onClick={() => setSelection(defaultSelection)}
+                        <Box
                             sx={{
-                                fontSize: 1,
-                                display:
-                                    possibleFeatures.length > 0
-                                        ? 'block'
-                                        : 'none',
+                                display: 'inline-grid',
+                                width: '100%',
+                                gridAutoFlow: 'dense',
+                                gridTemplateColumns:
+                                    'repeat(auto-fill, minmax(440px, 1fr))',
+                                gap: 5,
+                                mt: 3,
                             }}
                         >
-                            Clear
-                        </Link>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: 'grid',
-                            width: 'max-content',
-                            maxWidth: ['100%', '100%', '100%', 420],
-                            gridTemplateColumns: 'auto',
-                            borderRadius: '12px',
-                            borderWidth: 1,
-                            borderStyle: 'solid',
-                            borderColor: 'border.subtle',
-                            bg: 'canvas.default',
-                            mt: 3,
-                            label: {
-                                borderBottomWidth: 1,
-                                borderBottomStyle: 'solid',
-                                borderBottomColor: 'border.subtle',
-                            },
-                            'label:last-child': {
-                                borderBottomLeftRadius: '12px',
-                                borderBottomRightRadius: '12px',
-                                borderBottomWidth: 0,
-                            },
-                            'label:first-child': {
-                                borderTopLeftRadius: '12px',
-                                borderTopRightRadius: '12px',
-                            },
-                        }}
-                    >
-                        {features}
-                    </Box>
-                </Box>
-                <Box sx={{ flex: 1, pt: [6, 6, 6, 0] }}>
-                    <Text
-                        sx={{
-                            fontSize: 1,
-                            fontWeight: 'bold',
-                            color: 'fg.muted',
-                        }}
-                    >
-                        {compatibleComponents.length} components
-                    </Text>
-                    <Box
-                        sx={{
-                            display: 'inline-grid',
-                            width: '100%',
-                            gridAutoFlow: 'dense',
-                            gridTemplateColumns:
-                                'repeat(auto-fill, minmax(440px, 1fr))',
-                            gap: 5,
-                            mt: 3,
-                        }}
-                    >
-                        {compatibleComponents.map((c) => {
-                            return <ComponentCard id={c.id} disabled={false} />
-                        })}
-                        {inCompatibleComponents.map((c) => {
-                            return <ComponentCard id={c.id} disabled={true} />
-                        })}
+                            {compatibleComponents.map((c) => {
+                                return (
+                                    <ComponentCard
+                                        id={c.id}
+                                        key={c.id}
+                                        disabled={false}
+                                    />
+                                )
+                            })}
+                            {inCompatibleComponents.map((c) => {
+                                return (
+                                    <ComponentCard
+                                        id={c.id}
+                                        key={c.id}
+                                        disabled={true}
+                                    />
+                                )
+                            })}
+                        </Box>
                     </Box>
                 </Box>
             </Box>
-        </Box>
+            {examIsOpen && (
+                <Dialog
+                    title="Mini exam"
+                    subtitle={
+                        <Text sx={{ fontWeight: 'normal' }}>
+                            Every slide is a correct or mind-bogglingly
+                            incorrect example, rack up points, and emerge
+                            victorious from this twisted academic adventure!
+                        </Text>
+                    }
+                    width="xlarge"
+                    height="auto"
+                    onClose={() => setExamOpen(false)}
+                >
+                    <Exam />
+                </Dialog>
+            )}
+        </>
     )
 }
 
