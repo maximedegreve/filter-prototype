@@ -40,34 +40,22 @@ const components = [
         url: primerBaseUrl + 'foundations/layout',
     },
     {
-        id: 'hover-cards',
-        name: 'Hover cards',
-        description: `Appears when hovering over an element, providing rich information often including images, text, or interactive elements.`,
+        id: 'dialog',
+        name: 'Dialog',
+        description: `Interactive overlay that prompts the user for input or displays important information.`,
         features: [
+            Feature.FormElements,
             Feature.FocusableContent,
-            Feature.TriggerInGlobalNavigation,
-            Feature.NoOuterRightTriggerLimitation,
-        ],
-        image: {
-            dark2x: imageCardDark2x,
-            light2x: imageCardLight2x,
-        },
-        url: 'https://google.com',
-    },
-    {
-        id: 'tooltip',
-        name: 'Tooltip',
-        description: `Appears when hovering over an element, providing brief contextual information or a description of the element's purpose.`,
-        features: [
             Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
+            Feature.Searching,
         ],
         image: {
-            dark2x: imageTooltipDark2x,
-            light2x: imageTooltipLight2x,
+            dark2x: imageDialogDark2x,
+            light2x: imageDialogLight2x,
         },
-        url: primerBaseUrl + 'components/tooltip',
+        url: primerBaseUrl + 'components/dialog',
     },
     {
         id: 'action-menu',
@@ -99,24 +87,6 @@ const components = [
             light2x: imageSelectPanelLight2x,
         },
         url: primerBaseUrl + 'components/selectpanel',
-    },
-    {
-        id: 'dialog',
-        name: 'Dialog',
-        description: `Interactive overlay that prompts the user for input or displays important information.`,
-        features: [
-            Feature.FormElements,
-            Feature.FocusableContent,
-            Feature.Contextual,
-            Feature.TriggerInGlobalNavigation,
-            Feature.NoOuterRightTriggerLimitation,
-            Feature.Searching,
-        ],
-        image: {
-            dark2x: imageDialogDark2x,
-            light2x: imageDialogLight2x,
-        },
-        url: primerBaseUrl + 'components/dialog',
     },
     {
         id: 'Right sidesheet',
@@ -151,6 +121,36 @@ const components = [
             light2x: imageSidePanelLight2x,
         },
         url: primerBaseUrl + 'foundations/layout',
+    },
+    {
+        id: 'hover-cards',
+        name: 'Hover cards',
+        description: `Appears when hovering over an element, providing rich information often including images, text, or interactive elements.`,
+        features: [
+            Feature.FocusableContent,
+            Feature.TriggerInGlobalNavigation,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
+        image: {
+            dark2x: imageCardDark2x,
+            light2x: imageCardLight2x,
+        },
+        url: 'https://google.com',
+    },
+    {
+        id: 'tooltip',
+        name: 'Tooltip',
+        description: `Appears when hovering over an element, providing brief contextual information or a description of the element's purpose.`,
+        features: [
+            Feature.Contextual,
+            Feature.TriggerInGlobalNavigation,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
+        image: {
+            dark2x: imageTooltipDark2x,
+            light2x: imageTooltipLight2x,
+        },
+        url: primerBaseUrl + 'components/tooltip',
     },
 ]
 
