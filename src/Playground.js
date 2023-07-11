@@ -85,7 +85,7 @@ function Playground() {
             as="main"
             sx={{
                 display: 'flex',
-                p: 8,
+                p: [4, 6, 7, 8],
                 flexDirection: 'column',
                 bg: 'canvas.inset',
                 minHeight: '100vh',
@@ -95,30 +95,47 @@ function Playground() {
                 sx={{
                     marginBottom: 7,
                     display: 'flex',
+                    flexDirection: [
+                        'column-reverse',
+                        'column-reverse',
+                        'column-reverse',
+                        'row',
+                    ],
                 }}
             >
                 <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
                     <Text
                         sx={{
-                            fontSize: 7,
+                            fontSize: [4, 6, 6, 7],
                             fontWeight: 'semibold',
                             pb: 1,
+                            mt: [5, 5, 5, 0],
                         }}
                     >
                         🪄 Component Whiz
                     </Text>
                     <Text
                         sx={{
-                            fontSize: 3,
+                            fontSize: [1, 2, 2, 3],
                             fontWeight: 'light',
                             letterSpacing: 1.1,
                         }}
                     >
                         The secret potion to unlocking design/accessibility
-                        excellence.
-                        <br />
-                        Make informed choices, ensuring that every component you
-                        pick is a stroke of genius.
+                        excellence.{' '}
+                        <Box
+                            sx={{
+                                display: [
+                                    'inline',
+                                    'inline',
+                                    'inline',
+                                    'block',
+                                ],
+                            }}
+                        >
+                            Make informed choices, ensuring that every component
+                            you pick is a stroke of genius.
+                        </Box>
                     </Text>
                 </Box>
                 <ColorModeSwitcher />
@@ -126,9 +143,10 @@ function Playground() {
             <Box
                 sx={{
                     display: 'flex',
+                    flexDirection: ['column', 'column', 'column', 'row'],
                 }}
             >
-                <Box sx={{ pr: 7 }}>
+                <Box sx={{ pr: [0, 0, 0, 7] }}>
                     <Text
                         sx={{
                             fontSize: 1,
@@ -142,7 +160,7 @@ function Playground() {
                         sx={{
                             display: 'grid',
                             width: 'max-content',
-                            maxWidth: 420,
+                            maxWidth: ['100%', '100%', '100%', 420],
                             gridTemplateColumns: 'auto',
                             gap: 4,
                             mt: 3,

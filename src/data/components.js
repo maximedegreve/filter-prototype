@@ -6,6 +6,8 @@ import imageSelectPanelDark2x from '../images/selectpanel-dark-2x.png'
 import imageSelectPanelLight2x from '../images/selectpanel-light-2x.png'
 import imageTooltipDark2x from '../images/tooltip-dark-2x.png'
 import imageTooltipLight2x from '../images/tooltip-light-2x.png'
+import imageDialogDark2x from '../images/dialog-dark-2x.png'
+import imageDialogLight2x from '../images/dialog-light-2x.png'
 
 import Feature from './feature'
 
@@ -86,6 +88,10 @@ const components = [
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
         ],
+        image: {
+            dark2x: imageDialogDark2x,
+            light2x: imageDialogLight2x,
+        },
         url: primerBaseUrl + 'components/dialog',
     },
     {
