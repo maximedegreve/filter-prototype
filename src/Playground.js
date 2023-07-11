@@ -1,5 +1,12 @@
 import { useState } from 'react'
-import { Box, Text, Button, Checkbox, useColorSchemeVar } from '@primer/react'
+import {
+    Box,
+    Text,
+    Button,
+    Checkbox,
+    Link,
+    useColorSchemeVar,
+} from '@primer/react'
 import { CheckCircleIcon, CircleSlashIcon } from '@primer/octicons-react'
 
 import components from './data/components'
@@ -43,16 +50,18 @@ const featureInfo = {
     },
 }
 
+const defaultSelection = {
+    [Feature.FormElements]: false,
+    [Feature.DeepLinking]: false,
+    [Feature.Searching]: false,
+    [Feature.FocusableContent]: false,
+    [Feature.Contextual]: false,
+    [Feature.TriggerInGlobalNavigation]: false,
+    [Feature.NoOuterRightTriggerLimitation]: false,
+}
+
 function Playground() {
-    const [selection, setSelection] = useState({
-        [Feature.FormElements]: false,
-        [Feature.DeepLinking]: false,
-        [Feature.Searching]: false,
-        [Feature.FocusableContent]: false,
-        [Feature.Contextual]: false,
-        [Feature.TriggerInGlobalNavigation]: false,
-        [Feature.NoOuterRightTriggerLimitation]: false,
-    })
+    const [selection, setSelection] = useState(defaultSelection)
 
     const features = Object.keys(selection).map((key) => {
         const value = selection[key]
@@ -152,15 +161,33 @@ function Playground() {
                 }}
             >
                 <Box sx={{ pr: [0, 0, 0, 7] }}>
-                    <Text
-                        sx={{
-                            fontSize: 1,
-                            fontWeight: 'bold',
-                            color: 'fg.muted',
-                        }}
-                    >
-                        Checklist
-                    </Text>
+                    <Box sx={{ display: 'flex' }}>
+                        <Text
+                            sx={{
+                                flex: 1,
+                                fontSize: 1,
+                                fontWeight: 'bold',
+                                color: 'fg.muted',
+                            }}
+                        >
+                            Checklist{' '}
+                            {possibleFeatures.length > 0 &&
+                                `(${possibleFeatures.length})`}
+                        </Text>
+                        <Link
+                            href="#"
+                            onClick={() => setSelection(defaultSelection)}
+                            sx={{
+                                fontSize: 1,
+                                display:
+                                    possibleFeatures.length > 0
+                                        ? 'block'
+                                        : 'none',
+                            }}
+                        >
+                            Clear
+                        </Link>
+                    </Box>
                     <Box
                         sx={{
                             display: 'grid',
