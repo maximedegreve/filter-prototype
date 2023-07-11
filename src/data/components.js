@@ -8,6 +8,12 @@ import imageTooltipDark2x from '../images/tooltip-dark-2x.png'
 import imageTooltipLight2x from '../images/tooltip-light-2x.png'
 import imageDialogDark2x from '../images/dialog-dark-2x.png'
 import imageDialogLight2x from '../images/dialog-light-2x.png'
+import imageNewPageDark2x from '../images/newpage-dark-2x.png'
+import imageNewPageLight2x from '../images/newpage-light-2x.png'
+import imageSidePanelDark2x from '../images/sidepanel-dark-2x.png'
+import imageSidePanelLight2x from '../images/sidepanel-light-2x.png'
+import imageSideSheetDark2x from '../images/sidesheet-dark-2x.png'
+import imageSideSheetLight2x from '../images/sidesheet-light-2x.png'
 
 import Feature from './feature'
 
@@ -100,6 +106,10 @@ const components = [
             Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
         ],
+        image: {
+            dark2x: imageSideSheetDark2x,
+            light2x: imageSideSheetLight2x,
+        },
         url: primerBaseUrl + 'components/dialog#side-sheets',
     },
     {
@@ -112,6 +122,10 @@ const components = [
             Feature.DeepLinking,
             Feature.Contextual,
         ],
+        image: {
+            dark2x: imageSidePanelDark2x,
+            light2x: imageSidePanelLight2x,
+        },
         url: primerBaseUrl + 'foundations/layout',
     },
     {
@@ -126,6 +140,10 @@ const components = [
             Feature.DeepLinking,
             Feature.NoOuterRightTriggerLimitation,
         ],
+        image: {
+            dark2x: imageNewPageDark2x,
+            light2x: imageNewPageLight2x,
+        },
         url: primerBaseUrl + 'foundations/layout',
     },
 ]
