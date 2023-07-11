@@ -20,7 +20,6 @@ const components = [
         description: `Appears when hovering over an element, providing rich information often including images, text, or interactive elements.`,
         features: [
             Feature.FocusableContent,
-            Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
         ],
@@ -51,7 +50,6 @@ const components = [
         description: `Provides a list of selectable actions or selections in response to a trigger.`,
         features: [
             Feature.FocusableContent,
-            Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
         ],
@@ -68,7 +66,6 @@ const components = [
         features: [
             Feature.FormElements,
             Feature.FocusableContent,
-            Feature.Contextual,
             Feature.NoOuterRightTriggerLimitation,
         ],
         image: {
