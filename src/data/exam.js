@@ -17,7 +17,7 @@ const exam = [
             darkDont: selectPanel2OneDontDark2x,
         },
         explanation:
-            'When a cancel or submit button is used radio buttons should be used.',
+            'When a cancel or submit button is used radio buttons should be used since it becomes a form.',
     },
     {
         id: 100,
@@ -28,8 +28,7 @@ const exam = [
             lightDont: selectPanelOneDontLight2x,
             darkDont: selectPanelOneDontDark2x,
         },
-        explanation:
-            'When a cancel or submit button is used this becomes a form therefore radio buttons are required.',
+        explanation: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
     },
 ]
 
