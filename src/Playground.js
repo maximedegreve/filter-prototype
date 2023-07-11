@@ -167,8 +167,26 @@ function Playground() {
                             width: 'max-content',
                             maxWidth: ['100%', '100%', '100%', 420],
                             gridTemplateColumns: 'auto',
-                            gap: 4,
+                            borderRadius: '12px',
+                            borderWidth: 1,
+                            borderStyle: 'solid',
+                            borderColor: 'border.subtle',
+                            bg: 'canvas.default',
                             mt: 3,
+                            label: {
+                                borderBottomWidth: 1,
+                                borderBottomStyle: 'solid',
+                                borderBottomColor: 'border.subtle',
+                            },
+                            'label:last-child': {
+                                borderBottomLeftRadius: '12px',
+                                borderBottomRightRadius: '12px',
+                                borderBottomWidth: 0,
+                            },
+                            'label:first-child': {
+                                borderTopLeftRadius: '12px',
+                                borderTopRightRadius: '12px',
+                            },
                         }}
                     >
                         {features}
@@ -236,7 +254,7 @@ function ComponentCard({ id, disabled }) {
                     position: 'absolute',
                     top: 0,
                     borderRadius: '12px',
-                    borderWidth: 0.5,
+                    borderWidth: 1,
                     borderStyle: 'solid',
                     borderColor: 'border.subtle',
                     bg: 'canvas.default',
@@ -331,13 +349,8 @@ function FeatureToggle({ id, isOn, onChange }) {
             as="label"
             sx={{
                 display: 'grid',
-                borderRadius: '12px',
                 gridTemplateColumns: '30px 1fr',
-                borderWidth: 0.5,
-                borderStyle: 'solid',
                 gridGap: 1,
-                borderColor: 'border.subtle',
-                bg: 'canvas.default',
                 boxShadow: 'shadow.small',
                 py: 4,
                 pl: 4,
