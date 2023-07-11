@@ -31,6 +31,7 @@ const components = [
             Feature.FormElements,
             Feature.DeepLinking,
             Feature.NoOuterRightTriggerLimitation,
+            Feature.Searching,
         ],
         image: {
             dark2x: imageNewPageDark2x,
@@ -91,6 +92,7 @@ const components = [
             Feature.FormElements,
             Feature.FocusableContent,
             Feature.NoOuterRightTriggerLimitation,
+            Feature.Searching,
         ],
         image: {
             dark2x: imageSelectPanelDark2x,
@@ -108,6 +110,7 @@ const components = [
             Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
+            Feature.Searching,
         ],
         image: {
             dark2x: imageDialogDark2x,
@@ -124,6 +127,7 @@ const components = [
             Feature.Contextual,
             Feature.FormElements,
             Feature.TriggerInGlobalNavigation,
+            Feature.Searching,
         ],
         image: {
             dark2x: imageSideSheetDark2x,
@@ -140,6 +144,7 @@ const components = [
             Feature.FocusableContent,
             Feature.DeepLinking,
             Feature.Contextual,
+            Feature.Searching,
         ],
         image: {
             dark2x: imageSidePanelDark2x,

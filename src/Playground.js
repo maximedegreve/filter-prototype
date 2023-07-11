@@ -17,6 +17,10 @@ const featureInfo = {
         description:
             'The triggered content needs to be linkable from help documentation, chat apps, social media or through tutorials.',
     },
+    [Feature.Searching]: {
+        question: 'Should be searchable or filterable',
+        description: `The triggered content needs be searchable or filterable to update it's content.`,
+    },
     [Feature.FocusableContent]: {
         question: 'Elements need keyboard focus',
         description:
@@ -43,6 +47,7 @@ function Playground() {
     const [selection, setSelection] = useState({
         [Feature.FormElements]: false,
         [Feature.DeepLinking]: false,
+        [Feature.Searching]: false,
         [Feature.FocusableContent]: false,
         [Feature.Contextual]: false,
         [Feature.TriggerInGlobalNavigation]: false,
