@@ -334,7 +334,9 @@ function FeatureToggle({ id, isOn, onChange }) {
                 borderColor: 'border.subtle',
                 bg: 'canvas.default',
                 boxShadow: 'shadow.small',
-                p: 4,
+                py: 4,
+                pl: 4,
+                pr: 5,
                 cursor: 'pointer',
                 transition: 'background .2s',
                 ':hover': {
