@@ -104,6 +104,7 @@ const components = [
         features: [
             Feature.FocusableContent,
             Feature.Contextual,
+            Feature.FormElements,
             Feature.TriggerInGlobalNavigation,
         ],
         image: {
