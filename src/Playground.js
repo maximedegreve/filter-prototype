@@ -34,18 +34,14 @@ const featureInfo = {
     [Feature.NoOuterRightTriggerLimitation]: {
         question:
             'Entry point is not positioned in the far right of the viewport',
-        description: `For example layouts with a max-width likely won't have triggers in the far right.`,
-    },
-    [Feature.Navigational]: {
-        question: 'Can initiate page navigation to a new destination.',
-        description: `Facilitating seamless transition to a fresh page through routing.`,
+        description:
+            'For example non full width layouts won’t have triggers there',
     },
 }
 
 function Playground() {
     const [selection, setSelection] = useState({
         [Feature.FormElements]: false,
-        [Feature.Navigational]: false,
         [Feature.DeepLinking]: false,
         [Feature.FocusableContent]: false,
         [Feature.Contextual]: false,
