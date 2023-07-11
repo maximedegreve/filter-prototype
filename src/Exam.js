@@ -6,6 +6,7 @@ import {
     ProgressBar,
     IconButton,
     Label,
+    SegmentedControl,
 } from '@primer/react'
 import { CheckIcon, XIcon } from '@primer/octicons-react'
 
@@ -43,7 +44,6 @@ function Exam() {
         setExam(newExam)
     }
 
-    console.log(exam)
     return (
         <Box>
             {currentExam ? (
@@ -96,7 +96,97 @@ function Grade({ exam, onClickRestart }) {
         </Box>
     )
 }
+function Fail({ data, onContinue }) {
+    const [previewIsDo, setPreviewIsDo] = useState(true)
+
+    const doImage = useColorSchemeVar(
+        {
+            light: data.step.image?.lightDo,
+            dark: data.step.image?.darkDo,
+        },
+        data.step.image?.lightDo
+    )
+
+    const dontImage = useColorSchemeVar(
+        {
+            light: data.step.image?.lightDont,
+            dark: data.step.image?.darkDont,
+        },
+        data.step.image?.lightDont
+    )
+
+    const image = previewIsDo ? doImage : dontImage
+
+    return (
+        <Box>
+            <Box
+                sx={{
+                    width: '100%',
+                    display: 'flex',
+                    bg: 'canvas.inset',
+                    justifyContent: 'center',
+                    position: 'relative',
+                    alignItems: 'center',
+                    height: 500,
+                    borderRadius: '12px',
+                    borderWidth: 1,
+                    borderStyle: 'solid',
+                    borderColor: 'border.subtle',
+                }}
+            >
+                <img
+                    src={image}
+                    alt="to be added"
+                    srcSet={`${image} 1x, ${image} 2x`}
+                />
+
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: 4,
+                    }}
+                >
+                    <SegmentedControl
+                        onChange={(selectedIndex) => {
+                            setPreviewIsDo(selectedIndex === 0 ? true : false)
+                        }}
+                        aria-label="File view"
+                    >
+                        <SegmentedControl.Button selected={previewIsDo}>
+                            Correct
+                        </SegmentedControl.Button>
+                        <SegmentedControl.Button selected={!previewIsDo}>
+                            Incorrect
+                        </SegmentedControl.Button>
+                    </SegmentedControl>
+                </Box>
+            </Box>
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    pt: 3,
+                }}
+            >
+                <Box
+                    sx={{
+                        fontSize: 0,
+                        color: 'attention.fg',
+                        textAlign: 'left',
+                        pr: 4,
+                    }}
+                >
+                    Sadly this answer is incorrect. {data.step.explanation}
+                </Box>
+                <Button onClick={onContinue}>Continue</Button>
+            </Box>
+        </Box>
+    )
+}
+
 function Step({ data, onPass, onFail, current, total }) {
+    const [isFailed, setIsFailed] = useState(false)
+
     const themeAwareImage = useColorSchemeVar(
         {
             light: data.useCorrect
@@ -109,6 +199,21 @@ function Step({ data, onPass, onFail, current, total }) {
         data.useCorrect ? data.step.image?.lightDo : data.step.image?.lightDont
     )
 
+    const setFailed = () => {
+        setIsFailed(true)
+    }
+
+    if (isFailed) {
+        return (
+            <Fail
+                data={data}
+                onContinue={() => {
+                    onFail()
+                    setIsFailed(false)
+                }}
+            />
+        )
+    }
     const left = total - current
     return (
         <Box>
@@ -137,6 +242,7 @@ function Step({ data, onPass, onFail, current, total }) {
                     sx={{
                         position: 'absolute',
                         right: 4,
+                        display: isFailed ? 'none' : 'block',
                         button: {
                             borderRadius: 20,
                         },
@@ -149,7 +255,7 @@ function Step({ data, onPass, onFail, current, total }) {
                     <IconButton
                         leadingIcon={CheckIcon}
                         variant="primary"
-                        onClick={data.useCorrect ? onPass : onFail}
+                        onClick={data.useCorrect ? onPass : setFailed}
                         size="large"
                         aria-label="Correct"
                     />
@@ -159,7 +265,6 @@ function Step({ data, onPass, onFail, current, total }) {
                     sx={{
                         position: 'absolute',
                         left: 4,
-
                         button: {
                             borderRadius: 20,
                         },
@@ -174,11 +279,44 @@ function Step({ data, onPass, onFail, current, total }) {
                         variant="danger"
                         size="large"
                         aria-label="Incorrect"
-                        onClick={data.useCorrect ? onFail : onPass}
+                        onClick={data.useCorrect ? setFailed : onPass}
                     />
                 </Box>
             </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'column', pt: 4 }}>
+
+            <Box
+                sx={{
+                    display: isFailed ? 'flex' : 'none',
+                    pt: 3,
+                }}
+            >
+                <Box
+                    sx={{
+                        fontSize: 0,
+                        color: 'attention.fg',
+                        textAlign: 'left',
+                        pr: 4,
+                    }}
+                >
+                    Sadly this answer is incorrect. {data.step.explanation}
+                </Box>
+                <Button
+                    onClick={() => {
+                        onFail()
+                        setIsFailed(false)
+                    }}
+                >
+                    Continue
+                </Button>
+            </Box>
+
+            <Box
+                sx={{
+                    display: isFailed ? 'none' : 'flex',
+                    flexDirection: 'column',
+                    pt: 4,
+                }}
+            >
                 <Box sx={{ flex: 1, px: 9, display: 'block' }}>
                     <ProgressBar progress={(current / total) * 100} />
                 </Box>
