@@ -21,6 +21,24 @@ const primerBaseUrl = 'https://primer.style/design/'
 
 const components = [
     {
+        id: 'new-page',
+        name: 'New page',
+        description: `Self-contained and navigable unit within a website or web application, accessible through deep linking with a unique URL, typically occupying a larger viewport than a dialog component.`,
+        features: [
+            Feature.FocusableContent,
+            Feature.Contextual,
+            Feature.TriggerInGlobalNavigation,
+            Feature.FormElements,
+            Feature.DeepLinking,
+            Feature.NoOuterRightTriggerLimitation,
+        ],
+        image: {
+            dark2x: imageNewPageDark2x,
+            light2x: imageNewPageLight2x,
+        },
+        url: primerBaseUrl + 'foundations/layout',
+    },
+    {
         id: 'hover-cards',
         name: 'Hover cards',
         description: `Appears when hovering over an element, providing rich information often including images, text, or interactive elements.`,
@@ -126,24 +144,6 @@ const components = [
         image: {
             dark2x: imageSidePanelDark2x,
             light2x: imageSidePanelLight2x,
-        },
-        url: primerBaseUrl + 'foundations/layout',
-    },
-    {
-        id: 'new-page',
-        name: 'New page',
-        description: `Self-contained and navigable unit within a website or web application, accessible through deep linking with a unique URL, typically occupying a larger viewport than a dialog component.`,
-        features: [
-            Feature.FocusableContent,
-            Feature.Contextual,
-            Feature.TriggerInGlobalNavigation,
-            Feature.FormElements,
-            Feature.DeepLinking,
-            Feature.NoOuterRightTriggerLimitation,
-        ],
-        image: {
-            dark2x: imageNewPageDark2x,
-            light2x: imageNewPageLight2x,
         },
         url: primerBaseUrl + 'foundations/layout',
     },
