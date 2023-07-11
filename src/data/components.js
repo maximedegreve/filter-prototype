@@ -21,6 +21,7 @@ const components = [
             Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
+            Feature.Navigational,
         ],
         image: {
             dark2x: imageCardDark2x,
@@ -49,9 +50,9 @@ const components = [
         description: `Provides a list of selectable actions or selections in response to a trigger.`,
         features: [
             Feature.FocusableContent,
-            Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
+            Feature.Navigational,
         ],
         image: {
             dark2x: imageActionMenuDark2x,
@@ -66,8 +67,8 @@ const components = [
         features: [
             Feature.FormElements,
             Feature.FocusableContent,
-            Feature.Contextual,
             Feature.NoOuterRightTriggerLimitation,
+            Feature.Navigational,
         ],
         image: {
             dark2x: imageSelectPanelDark2x,
@@ -85,6 +86,7 @@ const components = [
             Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
             Feature.NoOuterRightTriggerLimitation,
+            Feature.Navigational,
         ],
         url: primerBaseUrl + 'components/dialog',
     },
@@ -96,6 +98,7 @@ const components = [
             Feature.FocusableContent,
             Feature.Contextual,
             Feature.TriggerInGlobalNavigation,
+            Feature.Navigational,
         ],
         url: primerBaseUrl + 'components/dialog#side-sheets',
     },
@@ -108,6 +111,7 @@ const components = [
             Feature.FocusableContent,
             Feature.DeepLinking,
             Feature.Contextual,
+            Feature.Navigational,
         ],
         url: primerBaseUrl + 'foundations/layout',
     },
@@ -121,6 +125,7 @@ const components = [
             Feature.TriggerInGlobalNavigation,
             Feature.FormElements,
             Feature.DeepLinking,
+            Feature.Navigational,
             Feature.NoOuterRightTriggerLimitation,
         ],
         url: primerBaseUrl + 'foundations/layout',

@@ -5,6 +5,7 @@ const Feature = {
     NoOuterRightTriggerLimitation: 'no-outer-right-trigger-limitation',
     FormElements: 'form-elements',
     DeepLinking: 'deep-linking',
+    Navigational: 'navigational',
 }
 
 export default Feature
