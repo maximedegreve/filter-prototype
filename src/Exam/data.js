@@ -27,11 +27,6 @@ import ActionMenu4DoDark2x from './images/actionmenu4-do-dark.png'
 import ActionMenu4DontLight2x from './images/actionmenu4-dont-light.png'
 import ActionMenu4DontDark2x from './images/actionmenu4-dont-dark.png'
 
-import ActionMenu5DoLight2x from './images/actionmenu5-do-light.png'
-import ActionMenu5DoDark2x from './images/actionmenu5-do-dark.png'
-import ActionMenu5DontLight2x from './images/actionmenu5-dont-light.png'
-import ActionMenu5DontDark2x from './images/actionmenu5-dont-dark.png'
-
 import ActionMenu6DoLight2x from './images/actionmenu6-do-light.png'
 import ActionMenu6DoDark2x from './images/actionmenu6-do-dark.png'
 import ActionMenu6DontLight2x from './images/actionmenu6-dont-light.png'
@@ -72,8 +67,8 @@ const exam = [
             lightDont: ActionMenu1DontLight2x,
             darkDont: ActionMenu1DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `Introduce dividers for items with heavy descriptions to improve readability.`,
+        dont: `Don't forget to add dividers when the menu content starts to look heavy.`,
     },
     {
         id: 89,
@@ -84,8 +79,8 @@ const exam = [
             lightDont: ActionMenu2DontLight2x,
             darkDont: ActionMenu2DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `When one of the items doesn't have an icon then remove icons altogether.`,
+        dont: `Don't mix items with or without icons as this makes it harder to read.`,
     },
     {
         id: 90,
@@ -96,8 +91,8 @@ const exam = [
             lightDont: ActionMenu3DontLight2x,
             darkDont: ActionMenu3DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `Create a new section for additional functionality.`,
+        dont: `Don't store additional toggleable functionality in trailing visuals.`,
     },
     {
         id: 91,
@@ -108,20 +103,8 @@ const exam = [
             lightDont: ActionMenu4DontLight2x,
             darkDont: ActionMenu4DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-    },
-    {
-        id: 92,
-        component: 'action menu',
-        image: {
-            lightDo: ActionMenu5DoLight2x,
-            darkDo: ActionMenu5DoDark2x,
-            lightDont: ActionMenu5DontLight2x,
-            darkDont: ActionMenu5DontDark2x,
-        },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `Avoid the usage of icons if the icon conflicts with the selected states checkmark.`,
+        dont: `Don't use crossmark icons for single or multi select items.`,
     },
     {
         id: 93,
@@ -132,8 +115,8 @@ const exam = [
             lightDont: ActionMenu6DontLight2x,
             darkDont: ActionMenu6DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `Use trailing visuals for submenu indicators or keyboard shortcuts.`,
+        dont: `Don't use trailing visual to communicate selected items in submenus.`,
     },
     {
         id: 94,
@@ -144,8 +127,8 @@ const exam = [
             lightDont: ActionMenu7DontLight2x,
             darkDont: ActionMenu7DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `When a menu includes a single select or multi select then all the items in the menu should be indented.`,
+        dont: `Don't create invidiual alignments when your menu contains a single or multi select.`,
     },
     {
         id: 95,
@@ -156,8 +139,8 @@ const exam = [
             lightDont: ActionMenu8DontLight2x,
             darkDont: ActionMenu8DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `Use action menu for quick actions.`,
+        dont: `Don't add form controls like a filterable input, use SelectPanel instead.`,
     },
     {
         id: 96,
@@ -168,8 +151,8 @@ const exam = [
             lightDont: ActionMenu9DontLight2x,
             darkDont: ActionMenu9DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `Use a checkmark icon for selections.`,
+        dont: `Don't use form elements within a menu.`,
     },
     {
         id: 97,
@@ -180,8 +163,8 @@ const exam = [
             lightDont: ActionMenu10DontLight2x,
             darkDont: ActionMenu10DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `If you want to present filterable data do this through a dialog.`,
+        dont: `Don't mix select panels with action menus.`,
     },
     {
         id: 98,
@@ -192,8 +175,8 @@ const exam = [
             lightDont: ActionMenu11DontLight2x,
             darkDont: ActionMenu11DontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
-        dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `If you want to present filterable data open a dialog instead of a submenu.`,
+        dont: `Don't use form elements inside a menu.`,
     },
     {
         id: 99,
