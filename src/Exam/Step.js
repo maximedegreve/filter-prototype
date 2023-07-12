@@ -75,7 +75,7 @@ function Step({ data, onPass, onFail, current, total }) {
             <Box
                 sx={{
                     display: 'grid',
-                    gridTemplateColumns: ['auto', 'auto', 'auto', 'auto auto'],
+                    gridTemplateColumns: ['1fr', '1fr', '1fr', '1fr 1fr'],
                     gridGap: 3,
                 }}
             >

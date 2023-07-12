@@ -28,7 +28,7 @@ const exam = [
             lightDont: selectPanelOneDontLight2x,
             darkDont: selectPanelOneDontDark2x,
         },
-        do: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
+        do: `2Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
         dont: `Checkmark icons indicate that the dialog will close therefore the cancel or submit button isn't needed.`,
     },
 ]

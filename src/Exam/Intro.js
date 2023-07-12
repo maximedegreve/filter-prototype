@@ -32,6 +32,9 @@ function Intro({ onClickStart }) {
                             width: [120, 120, 200, 200],
                             height: [120, 120, 200, 200],
                             borderRadius: [60, 60, 100, 100],
+                            borderWidth: 1,
+                            borderStyle: 'solid',
+                            borderColor: 'avatar.border',
                         },
                     }}
                 >
