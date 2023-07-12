@@ -99,10 +99,16 @@ function Step({ data, onPass, onFail, current, total }) {
                             transform: 'scale(1.02)',
                             bg: 'canvas.inset',
                         },
+                        img: {
+                            maxWidth: 465,
+                            width: '100%',
+                        },
                     }}
                 >
                     <img
                         src={imageLeft}
+                        width="100%"
+                        maxWidth={456}
                         alt="to be added"
                         srcSet={`${imageLeft} 1x, ${imageLeft} 2x`}
                     />
@@ -127,6 +133,10 @@ function Step({ data, onPass, onFail, current, total }) {
                         ':hover': {
                             transform: 'scale(1.02)',
                             bg: 'canvas.inset',
+                        },
+                        img: {
+                            maxWidth: 465,
+                            width: '100%',
                         },
                     }}
                 >
