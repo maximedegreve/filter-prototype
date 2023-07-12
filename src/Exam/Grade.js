@@ -1,60 +1,64 @@
 import { Box, Button, Text, Label } from '@primer/react'
 import monaOutroImage from './images/mona-outro-2x.png'
+import Starfield from './Starfield'
 
 function Grade({ exam, onClickRestart }) {
     const totalWrongAnswers = exam.filter((t) => t.passed === false).length
     const grade = calculateGrade(totalWrongAnswers, exam.length)
 
     return (
-        <Box
-            sx={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                position: 'relative',
-                alignItems: 'center',
-                flexDirection: 'column',
-                height: 500,
-                borderColor: 'border.subtle',
-            }}
-        >
+        <Box sx={{ position: 'relative' }}>
+            <Starfield />
             <Box
                 sx={{
-                    img: {
-                        objectFit: 'cover',
-                        width: [120, 120, 200, 200],
-                        height: [120, 120, 200, 200],
-                        borderRadius: [60, 60, 100, 100],
-                        borderWidth: 1,
-                        borderStyle: 'solid',
-                        borderColor: 'avatar.border',
-                    },
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    position: 'relative',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    height: 500,
+                    borderColor: 'border.subtle',
                 }}
             >
-                <img
-                    src={monaOutroImage}
-                    alt="to be added"
-                    srcSet={`${monaOutroImage} 1x, ${monaOutroImage} 2x`}
-                />
-            </Box>
-            <Box sx={{ fontWeight: 'semibold', pt: 2 }}>
-                <Text sx={{ mr: 2, fontSize: [3, 3, 4, 4] }}>
-                    You're grade is
-                </Text>
-                <Label
-                    size="large"
-                    variant={grade.color}
-                    sx={{ fontSize: [2, 2, 3, 3], height: 30 }}
+                <Box
+                    sx={{
+                        img: {
+                            objectFit: 'cover',
+                            width: [120, 120, 200, 200],
+                            height: [120, 120, 200, 200],
+                            borderRadius: [60, 60, 100, 100],
+                            borderWidth: 1,
+                            borderStyle: 'solid',
+                            borderColor: 'avatar.border',
+                        },
+                    }}
                 >
-                    {grade.grade}
-                </Label>
+                    <img
+                        src={monaOutroImage}
+                        alt="to be added"
+                        srcSet={`${monaOutroImage} 1x, ${monaOutroImage} 2x`}
+                    />
+                </Box>
+                <Box sx={{ fontWeight: 'semibold', pt: 2 }}>
+                    <Text sx={{ mr: 2, fontSize: [3, 3, 4, 4] }}>
+                        You're grade is
+                    </Text>
+                    <Label
+                        size="large"
+                        variant={grade.color}
+                        sx={{ fontSize: [2, 2, 3, 3], height: 30 }}
+                    >
+                        {grade.grade}
+                    </Label>
+                </Box>
+                <Box sx={{ fontSize: 2, mt: 1, color: 'fg.muted' }}>
+                    {grade.message}
+                </Box>
+                <Button sx={{ mt: 3 }} onClick={onClickRestart}>
+                    Restart
+                </Button>
             </Box>
-            <Box sx={{ fontSize: 2, mt: 1, color: 'fg.muted' }}>
-                {grade.message}
-            </Box>
-            <Button sx={{ mt: 3 }} onClick={onClickRestart}>
-                Restart
-            </Button>
         </Box>
     )
 }

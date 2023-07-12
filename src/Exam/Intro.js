@@ -1,21 +1,15 @@
 import { Box, Button, Text } from '@primer/react'
-import React, { useLayoutEffect, useState } from 'react'
-import StarfieldAnimation from 'react-starfield-animation'
+import React from 'react'
 
 import { VIEW_HEIGHT } from './constants'
 import monaIntroImage from './images/mona-intro-2x.png'
 import { LightBulbIcon } from '@primer/octicons-react'
+import Starfield from './Starfield'
 
 function Intro({ onClickStart }) {
-    const [showStarField, setShowStarfield] = useState(false)
-    useLayoutEffect(() => {
-        setTimeout(() => {
-            setShowStarfield(true)
-        }, 1000)
-    }, [])
-
     return (
-        <Box sx={{ position: 'relative', minHeight: VIEW_HEIGHT }}>
+        <Box sx={{ position: 'relative' }}>
+            <Starfield />
             <Box
                 sx={{
                     minHeight: VIEW_HEIGHT,
@@ -129,21 +123,6 @@ function Intro({ onClickStart }) {
                     </Box>
                 </Box>
             </Box>
-            <StarfieldAnimation
-                style={{
-                    transition: 'opacity 1s',
-                    transitionDelay: '0.05s',
-                    opacity: showStarField ? 1 : 0,
-                    position: 'absolute',
-                    top: -16,
-                    left: -16,
-                    right: -16,
-                    zIndex: 1,
-                    bottom: -16,
-                    height: '100%',
-                    pointerEvents: 'none',
-                }}
-            />
         </Box>
     )
 }

@@ -139,6 +139,7 @@ function Playground() {
                                 fontWeight: 'semibold',
                                 pb: 1,
                                 mt: [5, 5, 5, 0],
+                                lineHeight: [1.2, 1.2, 1.3, 1.5],
                             }}
                         >
                             🪐 Galactic Design Academy
@@ -159,7 +160,7 @@ function Playground() {
                     </Box>
                     <Box
                         sx={{
-                            display: 'grid',
+                            display: 'flex',
                             gridTemplateColumns: 'auto auto',
                             gridGap: 3,
                         }}

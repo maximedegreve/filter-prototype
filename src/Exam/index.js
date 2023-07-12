@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Box } from '@primer/react'
 
-import Intro from './Intro.js'
-import Step from './Step.js'
-import Grade from './Grade.js'
+import Intro from './Intro'
+import Step from './Step'
+import Grade from './Grade'
 import exam from './data'
 
 function Exam() {
