@@ -1,9 +1,14 @@
-import { useState } from 'react'
-import { Box, Button, useColorSchemeVar, SegmentedControl } from '@primer/react'
+import {
+    Box,
+    Button,
+    useColorSchemeVar,
+    ProgressBar,
+    Label,
+} from '@primer/react'
+import { VIEW_HEIGHT } from './constants'
+import { AlertIcon } from '@primer/octicons-react'
 
-function Fail({ data, onContinue }) {
-    const [previewIsDo, setPreviewIsDo] = useState(true)
-
+function Fail({ data, onContinue, total, current }) {
     const doImage = useColorSchemeVar(
         {
             light: data.step.image?.lightDo,
@@ -20,70 +25,139 @@ function Fail({ data, onContinue }) {
         data.step.image?.lightDont
     )
 
-    const image = previewIsDo ? doImage : dontImage
+    const CorrectLabel = () => (
+        <Label size="large" variant="success">
+            Correct
+        </Label>
+    )
+
+    const IncorrectLabel = () => (
+        <Label size="large" variant="danger">
+            Incorrect
+        </Label>
+    )
+
+    const imageLeft = data.useCorrect ? doImage : dontImage
+    const imageRight = data.useCorrect ? dontImage : doImage
+    const LabelLeft = data.useCorrect ? CorrectLabel : IncorrectLabel
+    const LabelRight = data.useCorrect ? IncorrectLabel : CorrectLabel
+
+    const left = total - current
 
     return (
-        <Box>
+        <Box sx={{ minHeight: VIEW_HEIGHT }}>
+            <Box
+                sx={{ display: 'flex', justifyContent: 'center', mb: 3, mt: 1 }}
+            >
+                <Box
+                    sx={{
+                        bg: 'danger.subtle',
+                        minHeight: 46,
+                        borderRadius: 23,
+                        display: 'flex',
+                        fontSize: 1,
+                        alignItems: 'center',
+                        pl: 3,
+                        pr: '12px',
+                        color: 'danger.fg',
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderColor: 'danger.muted',
+                    }}
+                >
+                    <Box sx={{ display: 'flex', mr: 2 }}>
+                        <AlertIcon />
+                    </Box>
+                    Oh no! You've picked the incorrect application of{' '}
+                    {data.step.component}
+                    <Button
+                        onClick={onContinue}
+                        sx={{ ml: 3, borderRadius: 20 }}
+                        size="small"
+                        variant="danger"
+                    >
+                        Continue
+                    </Button>
+                </Box>
+            </Box>
             <Box
                 sx={{
-                    width: '100%',
-                    display: 'flex',
-                    bg: 'canvas.inset',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    alignItems: 'center',
-                    height: 500,
-                    borderRadius: '12px',
-                    borderWidth: 1,
-                    borderStyle: 'solid',
-                    borderColor: 'border.subtle',
+                    display: 'grid',
+                    gridTemplateColumns: ['auto', 'auto', 'auto', 'auto auto'],
+                    gridGap: 3,
                 }}
             >
-                <img
-                    src={image}
-                    alt="to be added"
-                    srcSet={`${image} 1x, ${image} 2x`}
-                />
+                <Box
+                    sx={{
+                        width: '100%',
+                        display: 'flex',
+                        bg: 'canvas.default',
+                        justifyContent: 'center',
+                        position: 'relative',
+                        alignItems: 'center',
+                        height: 500,
+                        borderRadius: '12px',
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderColor: 'border.subtle',
+                    }}
+                >
+                    <Box sx={{ position: 'absolute', left: 3, top: 3 }}>
+                        <LabelLeft />
+                    </Box>
+                    <img
+                        src={imageLeft}
+                        alt="to be added"
+                        srcSet={`${imageLeft} 1x, ${imageLeft} 2x`}
+                    />
+                </Box>
 
                 <Box
                     sx={{
-                        position: 'absolute',
-                        top: 4,
+                        width: '100%',
+                        display: 'flex',
+                        bg: 'canvas.default',
+                        justifyContent: 'center',
+                        position: 'relative',
+                        alignItems: 'center',
+                        height: 500,
+                        borderRadius: '12px',
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderColor: 'border.subtle',
                     }}
                 >
-                    <SegmentedControl
-                        onChange={(selectedIndex) => {
-                            setPreviewIsDo(selectedIndex === 0 ? true : false)
-                        }}
-                        aria-label="File view"
-                    >
-                        <SegmentedControl.Button selected={previewIsDo}>
-                            Correct
-                        </SegmentedControl.Button>
-                        <SegmentedControl.Button selected={!previewIsDo}>
-                            Incorrect
-                        </SegmentedControl.Button>
-                    </SegmentedControl>
+                    <Box sx={{ position: 'absolute', left: 3, top: 3 }}>
+                        <LabelRight />
+                    </Box>
+                    <img
+                        src={imageRight}
+                        alt="to be added"
+                        srcSet={`${imageRight} 1x, ${imageRight} 2x`}
+                    />
                 </Box>
             </Box>
-
             <Box
                 sx={{
                     display: 'flex',
-                    pt: 3,
+                    flexDirection: 'column',
+                    pt: 4,
                 }}
             >
+                <Box sx={{ flex: 1, px: 9, display: 'block' }}>
+                    <ProgressBar progress={(current / total) * 100} />
+                </Box>
                 <Box
                     sx={{
                         fontSize: 0,
-                        color: 'attention.fg',
-                        textAlign: 'left',
-                        pr: 4,
+                        pt: 3,
+                        color: 'fg.muted',
+                        fontWeight: 'semibold',
+                        textAlign: 'center',
                     }}
                 >
-                    Sadly this answer is incorrect. {data.step.explanation}
+                    {left} slides left to reveal your grade
                 </Box>
-                <Button onClick={onContinue}>Continue</Button>
             </Box>
         </Box>
     )

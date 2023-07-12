@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Box, useColorSchemeVar, Button, ProgressBar } from '@primer/react'
 import { VIEW_HEIGHT } from './constants'
+import { TelescopeIcon } from '@primer/octicons-react'
 
 import Fail from './Fail'
 
@@ -34,6 +35,8 @@ function Step({ data, onPass, onFail, current, total }) {
         return (
             <Fail
                 data={data}
+                current={current}
+                total={total}
                 onContinue={() => {
                     onFail()
                     setIsFailed(false)
@@ -44,19 +47,27 @@ function Step({ data, onPass, onFail, current, total }) {
     const left = total - current
     return (
         <Box sx={{ minHeight: VIEW_HEIGHT }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+            <Box
+                sx={{ display: 'flex', justifyContent: 'center', mb: 3, mt: 1 }}
+            >
                 <Box
                     sx={{
-                        bg: 'canvas.default',
+                        bg: 'accent.subtle',
+                        color: 'accent.fg',
                         py: 2,
                         borderRadius: 20,
                         fontSize: 1,
+                        display: 'flex',
                         px: 3,
                         borderWidth: 1,
                         borderStyle: 'solid',
-                        borderColor: 'border.subtle',
+                        alignItems: 'center',
+                        borderColor: 'accent.muted',
                     }}
                 >
+                    <Box sx={{ display: 'flex', mr: 2 }}>
+                        <TelescopeIcon />
+                    </Box>
                     Which variant is the correct application of{' '}
                     {data.step.component}?
                 </Box>
@@ -128,32 +139,7 @@ function Step({ data, onPass, onFail, current, total }) {
             </Box>
             <Box
                 sx={{
-                    display: isFailed ? 'flex' : 'none',
-                    pt: 3,
-                }}
-            >
-                <Box
-                    sx={{
-                        fontSize: 0,
-                        color: 'attention.fg',
-                        textAlign: 'left',
-                        pr: 4,
-                    }}
-                >
-                    Sadly this answer is incorrect. {data.step.explanation}
-                </Box>
-                <Button
-                    onClick={() => {
-                        onFail()
-                        setIsFailed(false)
-                    }}
-                >
-                    Continue
-                </Button>
-            </Box>
-            <Box
-                sx={{
-                    display: isFailed ? 'none' : 'flex',
+                    display: 'flex',
                     flexDirection: 'column',
                     pt: 4,
                 }}
