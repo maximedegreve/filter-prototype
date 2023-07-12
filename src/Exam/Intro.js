@@ -53,8 +53,7 @@ function Intro({ onClickStart }) {
                 </Text>
                 <Text
                     sx={{
-                        fontWeight: 'normal',
-                        mb: 3,
+                        mb: [3, 3, 4, 4],
                         fontSize: [1, 1, 2, 2],
                         color: 'fg.muted',
                     }}

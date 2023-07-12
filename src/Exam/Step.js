@@ -1,0 +1,180 @@
+import { useState } from 'react'
+import { Box, useColorSchemeVar, Button, ProgressBar } from '@primer/react'
+import { VIEW_HEIGHT } from './constants'
+
+import Fail from './Fail'
+
+function Step({ data, onPass, onFail, current, total }) {
+    const [isFailed, setIsFailed] = useState(false)
+
+    const doImage = useColorSchemeVar(
+        {
+            light: data.step.image?.lightDo,
+            dark: data.step.image?.darkDo,
+        },
+        data.step.image?.lightDo
+    )
+
+    const dontImage = useColorSchemeVar(
+        {
+            light: data.step.image?.lightDont,
+            dark: data.step.image?.darkDont,
+        },
+        data.step.image?.lightDont
+    )
+
+    const imageLeft = data.useCorrect ? doImage : dontImage
+    const imageRight = data.useCorrect ? dontImage : doImage
+
+    const setFailed = () => {
+        setIsFailed(true)
+    }
+
+    if (isFailed) {
+        return (
+            <Fail
+                data={data}
+                onContinue={() => {
+                    onFail()
+                    setIsFailed(false)
+                }}
+            />
+        )
+    }
+    const left = total - current
+    return (
+        <Box sx={{ minHeight: VIEW_HEIGHT }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                <Box
+                    sx={{
+                        bg: 'canvas.default',
+                        py: 2,
+                        borderRadius: 20,
+                        fontSize: 1,
+                        px: 3,
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderColor: 'border.subtle',
+                    }}
+                >
+                    Which variant is the correct application of{' '}
+                    {data.step.component}?
+                </Box>
+            </Box>
+            <Box
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: ['auto', 'auto', 'auto', 'auto auto'],
+                    gridGap: 3,
+                }}
+            >
+                <Box
+                    onClick={data.useCorrect ? onPass : setFailed}
+                    sx={{
+                        width: '100%',
+                        display: 'flex',
+                        bg: 'canvas.default',
+                        justifyContent: 'center',
+                        position: 'relative',
+                        alignItems: 'center',
+                        height: 500,
+                        borderRadius: '12px',
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderColor: 'border.subtle',
+                        cursor: 'pointer',
+                        transition: 'all .2s ease-in-out',
+                        ':hover': {
+                            transform: 'scale(1.02)',
+                            bg: 'canvas.inset',
+                        },
+                    }}
+                >
+                    <img
+                        src={imageLeft}
+                        alt="to be added"
+                        srcSet={`${imageLeft} 1x, ${imageLeft} 2x`}
+                    />
+                </Box>
+
+                <Box
+                    onClick={data.useCorrect ? setFailed : onPass}
+                    sx={{
+                        width: '100%',
+                        display: 'flex',
+                        bg: 'canvas.default',
+                        justifyContent: 'center',
+                        position: 'relative',
+                        alignItems: 'center',
+                        height: 500,
+                        borderRadius: '12px',
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderColor: 'border.subtle',
+                        cursor: 'pointer',
+                        transition: 'all .2s ease-in-out',
+                        ':hover': {
+                            transform: 'scale(1.02)',
+                            bg: 'canvas.inset',
+                        },
+                    }}
+                >
+                    <img
+                        src={imageRight}
+                        alt="to be added"
+                        srcSet={`${imageRight} 1x, ${imageRight} 2x`}
+                    />
+                </Box>
+            </Box>
+            <Box
+                sx={{
+                    display: isFailed ? 'flex' : 'none',
+                    pt: 3,
+                }}
+            >
+                <Box
+                    sx={{
+                        fontSize: 0,
+                        color: 'attention.fg',
+                        textAlign: 'left',
+                        pr: 4,
+                    }}
+                >
+                    Sadly this answer is incorrect. {data.step.explanation}
+                </Box>
+                <Button
+                    onClick={() => {
+                        onFail()
+                        setIsFailed(false)
+                    }}
+                >
+                    Continue
+                </Button>
+            </Box>
+            <Box
+                sx={{
+                    display: isFailed ? 'none' : 'flex',
+                    flexDirection: 'column',
+                    pt: 4,
+                }}
+            >
+                <Box sx={{ flex: 1, px: 9, display: 'block' }}>
+                    <ProgressBar progress={(current / total) * 100} />
+                </Box>
+                <Box
+                    sx={{
+                        fontSize: 0,
+                        pt: 3,
+                        color: 'fg.muted',
+                        fontWeight: 'semibold',
+                        textAlign: 'center',
+                    }}
+                >
+                    {left} slides left to reveal your grade
+                </Box>
+            </Box>
+        </Box>
+    )
+}
+
+export default Step
