@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, useColorSchemeVar, Button, ProgressBar } from '@primer/react'
+import { Box, useColorSchemeVar, ProgressBar } from '@primer/react'
 import { VIEW_HEIGHT } from './constants'
 import { TelescopeIcon } from '@primer/octicons-react'
 
