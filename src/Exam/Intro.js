@@ -9,6 +9,7 @@ function Intro({ onClickStart }) {
             sx={{
                 minHeight: VIEW_HEIGHT,
                 display: 'flex',
+                p: 4,
                 justifyContent: 'center',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -21,16 +22,16 @@ function Intro({ onClickStart }) {
                     display: 'flex',
                     alignItems: 'center',
                     flexDirection: 'column',
-                    pt: 4,
+                    pt: [0, 0, 4, 4],
                 }}
             >
                 <Box
                     sx={{
                         img: {
                             objectFit: 'cover',
-                            width: 200,
-                            height: 200,
-                            borderRadius: 100,
+                            width: [120, 120, 200, 200],
+                            height: [120, 120, 200, 200],
+                            borderRadius: [60, 60, 100, 100],
                         },
                     }}
                 >
@@ -41,21 +42,62 @@ function Intro({ onClickStart }) {
                     />
                 </Box>
                 <Text
-                    sx={{ fontWeight: 'semibold', fontSize: 4, mt: 3, mb: 2 }}
+                    sx={{
+                        fontWeight: 'semibold',
+                        fontSize: [3, 3, 4, 4],
+                        mt: 3,
+                        mb: 2,
+                    }}
                 >
                     Welcome to the Test Flight Simulator, cadet!
                 </Text>
-                <Text sx={{ fontWeight: 'normal', mb: 3, color: 'fg.muted' }}>
+                <Text
+                    sx={{
+                        fontWeight: 'normal',
+                        mb: 3,
+                        fontSize: [1, 1, 2, 2],
+                        color: 'fg.muted',
+                    }}
+                >
                     Get ready to test your design skills and make split-second
                     decisions as you navigate our challenging slides. Buckle up,
                     soar high, and let's see how far you can fly!
                 </Text>
-                <Button variant="primary" size="large" onClick={onClickStart}>
-                    Ready for takeoff
-                </Button>
+                <Box sx={{ display: ['none', 'none', 'block', 'block'] }}>
+                    <Button
+                        variant="primary"
+                        size="large"
+                        onClick={onClickStart}
+                    >
+                        Ready for takeoff
+                    </Button>
+                </Box>
+                <Box sx={{ display: ['block', 'block', 'none', 'none'] }}>
+                    <Button
+                        variant="primary"
+                        size="medium"
+                        onClick={onClickStart}
+                    >
+                        Ready for takeoff
+                    </Button>
+                </Box>
 
-                <Box sx={{ mt: 8, display: 'flex', alignItems: 'center' }}>
-                    <Box sx={{ color: 'attention.fg', display: 'flex', mr: 2 }}>
+                <Box
+                    sx={{
+                        mt: 8,
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: ['column', 'column', 'row', 'row'],
+                    }}
+                >
+                    <Box
+                        sx={{
+                            color: 'attention.fg',
+                            display: 'flex',
+                            mr: [0, 0, 2, 2],
+                            mb: [2, 2, 0, 0],
+                        }}
+                    >
                         <LightBulbIcon size={16} />
                     </Box>
 
@@ -63,7 +105,6 @@ function Intro({ onClickStart }) {
                         sx={{
                             fontWeight: 'normal',
                             fontSize: 0,
-
                             color: 'attention.fg',
                         }}
                     >
