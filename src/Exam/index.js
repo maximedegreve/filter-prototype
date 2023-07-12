@@ -5,16 +5,17 @@ import {
     Button,
     ProgressBar,
     Text,
-    IconButton,
     Label,
     SegmentedControl,
 } from '@primer/react'
-import { CheckIcon, XIcon } from '@primer/octicons-react'
+import { CheckIcon, XIcon, RocketIcon } from '@primer/octicons-react'
 
-import exam from './data/exam'
+import Intro from './Intro.js'
+import exam from './data'
 
 function Exam() {
     const [exam, setExam] = useState(generateExam())
+    const [started, setStarted] = useState(false)
 
     const currentExam = exam.find((t) => t.passed === null)
     const current = exam.filter((t) => t.passed !== null).length
@@ -45,6 +46,16 @@ function Exam() {
         setExam(newExam)
     }
 
+    if (!started) {
+        return (
+            <Intro
+                onClickStart={() => {
+                    setStarted(true)
+                }}
+            />
+        )
+    }
+
     return (
         <Box>
             {currentExam ? (
@@ -58,7 +69,10 @@ function Exam() {
             ) : (
                 <Grade
                     exam={exam}
-                    onClickRestart={() => setExam(generateExam())}
+                    onClickRestart={() => {
+                        setStarted(false)
+                        setExam(generateExam())
+                    }}
                 />
             )}
         </Box>
@@ -188,19 +202,24 @@ function Fail({ data, onContinue }) {
 function Step({ data, onPass, onFail, current, total }) {
     const [isFailed, setIsFailed] = useState(false)
 
-    console.log(data)
-
-    const themeAwareImage = useColorSchemeVar(
+    const doImage = useColorSchemeVar(
         {
-            light: data.useCorrect
-                ? data.step.image?.lightDo
-                : data.step.image?.lightDont,
-            dark: data.useCorrect
-                ? data.step.image?.darkDo
-                : data.step.image?.darkDont,
+            light: data.step.image?.lightDo,
+            dark: data.step.image?.darkDo,
         },
-        data.useCorrect ? data.step.image?.lightDo : data.step.image?.lightDont
+        data.step.image?.lightDo
     )
+
+    const dontImage = useColorSchemeVar(
+        {
+            light: data.step.image?.lightDont,
+            dark: data.step.image?.darkDont,
+        },
+        data.step.image?.lightDont
+    )
+
+    const imageLeft = data.useCorrect ? doImage : dontImage
+    const imageRight = data.useCorrect ? dontImage : doImage
 
     const setFailed = () => {
         setIsFailed(true)
@@ -220,73 +239,88 @@ function Step({ data, onPass, onFail, current, total }) {
     const left = total - current
     return (
         <Box>
-            <Box
-                sx={{
-                    width: '100%',
-                    display: 'flex',
-                    bg: 'canvas.inset',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    alignItems: 'center',
-                    height: 500,
-                    borderRadius: '12px',
-                    borderWidth: 1,
-                    borderStyle: 'solid',
-                    borderColor: 'border.subtle',
-                }}
-            >
-                <img
-                    src={themeAwareImage}
-                    alt="to be added"
-                    srcSet={`${themeAwareImage} 1x, ${themeAwareImage} 2x`}
-                />
-
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
                 <Box
                     sx={{
-                        position: 'absolute',
-                        right: 4,
-                        display: isFailed ? 'none' : 'block',
-                        button: {
-                            borderRadius: 20,
-                        },
+                        bg: 'canvas.default',
+                        py: 2,
+                        borderRadius: 20,
+                        fontSize: 1,
+                        px: 3,
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderColor: 'border.subtle',
+                    }}
+                >
+                    Which variant is the correct application of{' '}
+                    {data.step.component}?
+                </Box>
+            </Box>
+            <Box
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: ['auto', 'auto', 'auto', 'auto auto'],
+                    gridGap: 3,
+                }}
+            >
+                <Box
+                    onClick={data.useCorrect ? onPass : setFailed}
+                    sx={{
+                        width: '100%',
+                        display: 'flex',
+                        bg: 'canvas.default',
+                        justifyContent: 'center',
+                        position: 'relative',
+                        alignItems: 'center',
+                        height: 500,
+                        borderRadius: '12px',
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderColor: 'border.subtle',
+                        cursor: 'pointer',
                         transition: 'all .2s ease-in-out',
                         ':hover': {
-                            transform: 'scale(1.2)',
+                            transform: 'scale(1.02)',
+                            bg: 'canvas.inset',
                         },
                     }}
                 >
-                    <IconButton
-                        leadingIcon={CheckIcon}
-                        variant="primary"
-                        onClick={data.useCorrect ? onPass : setFailed}
-                        size="large"
-                        aria-label="Correct"
+                    <img
+                        src={imageLeft}
+                        alt="to be added"
+                        srcSet={`${imageLeft} 1x, ${imageLeft} 2x`}
                     />
                 </Box>
 
                 <Box
+                    onClick={data.useCorrect ? setFailed : onPass}
                     sx={{
-                        position: 'absolute',
-                        left: 4,
-                        button: {
-                            borderRadius: 20,
-                        },
+                        width: '100%',
+                        display: 'flex',
+                        bg: 'canvas.default',
+                        justifyContent: 'center',
+                        position: 'relative',
+                        alignItems: 'center',
+                        height: 500,
+                        borderRadius: '12px',
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderColor: 'border.subtle',
+                        cursor: 'pointer',
                         transition: 'all .2s ease-in-out',
                         ':hover': {
-                            transform: 'scale(1.2)',
+                            transform: 'scale(1.02)',
+                            bg: 'canvas.inset',
                         },
                     }}
                 >
-                    <IconButton
-                        leadingIcon={XIcon}
-                        variant="danger"
-                        size="large"
-                        aria-label="Incorrect"
-                        onClick={data.useCorrect ? setFailed : onPass}
+                    <img
+                        src={imageRight}
+                        alt="to be added"
+                        srcSet={`${imageRight} 1x, ${imageRight} 2x`}
                     />
                 </Box>
             </Box>
-
             <Box
                 sx={{
                     display: isFailed ? 'flex' : 'none',
@@ -312,7 +346,6 @@ function Step({ data, onPass, onFail, current, total }) {
                     Continue
                 </Button>
             </Box>
-
             <Box
                 sx={{
                     display: isFailed ? 'none' : 'flex',
@@ -442,3 +475,49 @@ function shuffle(array) {
 }
 
 export default Exam
+
+/*
+<Box
+                    sx={{
+                        position: 'absolute',
+                        right: 4,
+                        display: isFailed ? 'none' : 'block',
+                        button: {
+                            borderRadius: 20,
+                        },
+                        transition: 'all .2s ease-in-out',
+                        ':hover': {
+                            transform: 'scale(1.2)',
+                        },
+                    }}
+                >
+                    <IconButton
+                        leadingIcon={CheckIcon}
+                        variant="primary"
+                        onClick={data.useCorrect ? onPass : setFailed}
+                        size="large"
+                        aria-label="Correct"
+                    />
+                </Box>
+
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        left: 4,
+                        button: {
+                            borderRadius: 20,
+                        },
+                        transition: 'all .2s ease-in-out',
+                        ':hover': {
+                            transform: 'scale(1.2)',
+                        },
+                    }}
+                >
+                    <IconButton
+                        leadingIcon={XIcon}
+                        variant="danger"
+                        size="large"
+                        aria-label="Incorrect"
+                        onClick={data.useCorrect ? setFailed : onPass}
+                    />
+                </Box>*/

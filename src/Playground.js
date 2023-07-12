@@ -12,7 +12,7 @@ import { Dialog } from '@primer/react/drafts'
 import {
     CheckCircleIcon,
     CircleSlashIcon,
-    MortarBoardIcon,
+    RocketIcon,
 } from '@primer/octicons-react'
 
 import components from './data/components'
@@ -141,30 +141,20 @@ function Playground() {
                                 mt: [5, 5, 5, 0],
                             }}
                         >
-                            🪄 Component Whiz
+                            🪐 Galactic Design Academy
                         </Text>
                         <Text
                             sx={{
                                 fontSize: [1, 2, 2, 3],
                                 fontWeight: 'light',
                                 letterSpacing: 1.1,
+                                maxWidth: 860,
                             }}
                         >
-                            The secret potion to unlocking design/accessibility
-                            excellence.{' '}
-                            <Box
-                                sx={{
-                                    display: [
-                                        'inline',
-                                        'inline',
-                                        'inline',
-                                        'block',
-                                    ],
-                                }}
-                            >
-                                Make informed choices, ensuring that every
-                                component you pick is a stroke of genius.
-                            </Box>
+                            Navigate the cosmos of our design system and find
+                            the perfect components for your project. So buckle
+                            up, cadets, and get ready for a wild ride through
+                            the galaxy of design!
                         </Text>
                     </Box>
                     <Box
@@ -175,10 +165,10 @@ function Playground() {
                         }}
                     >
                         <Button
-                            leadingIcon={MortarBoardIcon}
+                            leadingIcon={RocketIcon}
                             onClick={() => setExamOpen(true)}
                         >
-                            Mini exam
+                            Test Flight
                         </Button>
                         <ColorModeSwitcher />
                     </Box>
@@ -293,16 +283,8 @@ function Playground() {
             </Box>
             {examIsOpen && (
                 <Dialog
-                    title="Mini exam"
-                    subtitle={
-                        <Text sx={{ fontWeight: 'normal' }}>
-                            Every slide is a correct or mind-bogglingly
-                            incorrect example, rack up points, and emerge
-                            victorious from this twisted academic adventure!
-                        </Text>
-                    }
-                    width="xlarge"
-                    height="auto"
+                    title="Test Flight"
+                    sx={{ width: 1200 }}
                     onClose={() => setExamOpen(false)}
                 >
                     <Exam />
