@@ -7,7 +7,13 @@ function App() {
     return (
         <ThemeProvider colorMode="dark">
             <BaseStyles>
-                <SelectPanel title="Select labels" modal={true} />
+                <SelectPanel
+                    title="Select labels"
+                    modal={true}
+                    onSearchValueChange={() => alert('update')}
+                    onSearchValueClear={() => alert('clear')}
+                    searchValue="Test"
+                />
                 <Playground />
             </BaseStyles>
         </ThemeProvider>

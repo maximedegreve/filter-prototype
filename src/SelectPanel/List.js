@@ -2,7 +2,7 @@ import { Box, ActionList } from '@primer/react'
 
 function List({ items, onSelect, type }) {
     return (
-        <Box sx={{ flex: 1 }}>
+        <Box sx={{ flex: 1, overflow: 'scroll' }}>
             <ActionList selectionVariant={type}>
                 {items.map((item) => (
                     <ActionList.Item
