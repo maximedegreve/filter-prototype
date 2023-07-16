@@ -123,6 +123,7 @@ function SelectPanel({
     modal = false,
     onSearchValueChange,
     onSearchValueClear,
+    description,
     searchValue,
     searchPlaceholder = 'Search',
 }) {
@@ -133,6 +134,7 @@ function SelectPanel({
                 onSearchValueChange={onSearchValueChange}
                 onSearchValueClear={onSearchValueClear}
                 searchValue={searchValue}
+                description={description}
                 searchPlaceholder={searchPlaceholder}
             />
             <List items={items} type={type} />

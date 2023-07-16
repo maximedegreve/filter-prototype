@@ -13,6 +13,7 @@ function Header({
     onSearchValueClear,
     searchValue,
     searchPlaceholder,
+    description,
 }) {
     return (
         <Box
@@ -41,7 +42,12 @@ function Header({
                         fontWeight: 'semibold',
                     }}
                 >
-                    {title}
+                    <Text sx={{ fontSize: 1 }}>{title}</Text>
+                    {description && (
+                        <Text sx={{ fontSize: 0, color: 'fg.muted' }}>
+                            {description}
+                        </Text>
+                    )}
                 </Box>
                 <Box sx={{ display: 'grid', gridGap: 2 }}>
                     <IconButton variant="invisible" icon={XIcon} />

@@ -9,6 +9,7 @@ function App() {
             <BaseStyles>
                 <SelectPanel
                     title="Select labels"
+                    description="Pick your favourite labels"
                     modal={true}
                     onSearchValueChange={() => alert('update')}
                     onSearchValueClear={() => alert('clear')}
