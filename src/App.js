@@ -14,7 +14,7 @@ function App() {
                     title="Select labels"
                     type="multiple"
                     modal={false}
-                    subtleError={
+                    subtleWarning={
                         <>
                             We couldn't load the authors. Try again or if the
                             problem persists{' '}

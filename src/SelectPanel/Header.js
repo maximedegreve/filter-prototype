@@ -87,7 +87,11 @@ function Header({
                                 onClick={onSearchValueClear}
                                 icon={XCircleFillIcon}
                                 aria-label="Clear"
-                                sx={{ color: 'fg.subtle', bg: 'none' }}
+                                sx={{
+                                    color: 'fg.subtle',
+                                    bg: 'none',
+                                    display: searchValue ? 'block' : 'none',
+                                }}
                             />
                         }
                     />
