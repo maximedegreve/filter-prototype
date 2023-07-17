@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, IconButton, TextInput } from '@primer/react'
+import { Box, IconButton, TextInput, Text } from '@primer/react'
 import { XIcon, XCircleFillIcon, SearchIcon } from '@primer/octicons-react'
 
 // Input component
@@ -11,17 +11,24 @@ function Header({
     title,
     onSearchValueChange,
     onSearchValueClear,
+    onKeyDown,
     searchValue,
     searchPlaceholder,
     description,
+    bordered,
 }) {
+    const onKeyDownDelegate = (e) => {
+        if (e.keyCode === 40) {
+            onKeyDown()
+        }
+    }
     return (
         <Box
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 borderBottomColor: 'border.default',
-                borderBottomWidth: 1,
+                borderBottomWidth: bordered ? 1 : 0,
                 borderBottomStyle: 'solid',
             }}
         >
@@ -30,7 +37,7 @@ function Header({
                     display: 'flex',
                     py: 2,
                     width: '100%',
-                    alignItems: 'center',
+                    alignItems: 'stretch',
                     pl: 3,
                     pr: 2,
                 }}
@@ -38,13 +45,22 @@ function Header({
                 <Box
                     sx={{
                         flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
                         fontSize: 1,
                         fontWeight: 'semibold',
                     }}
                 >
-                    <Text sx={{ fontSize: 1 }}>{title}</Text>
+                    <Text sx={{ fontSize: 1, display: 'block' }}>{title}</Text>
                     {description && (
-                        <Text sx={{ fontSize: 0, color: 'fg.muted' }}>
+                        <Text
+                            sx={{
+                                fontSize: 0,
+                                color: 'fg.muted',
+                                display: 'block',
+                            }}
+                        >
                             {description}
                         </Text>
                     )}
@@ -53,7 +69,7 @@ function Header({
                     <IconButton variant="invisible" icon={XIcon} />
                 </Box>
             </Box>
-            {onSearchValueChange && searchValue && onSearchValueClear && (
+            {onSearchValueChange && onSearchValueClear && (
                 <Box sx={{ width: '100%', px: 2, pb: '12px' }}>
                     <TextInput
                         leadingVisual={SearchIcon}
@@ -63,6 +79,9 @@ function Header({
                         width="100%"
                         placeholder={searchPlaceholder}
                         size="medium"
+                        autoFocus
+                        onKeyDown={onKeyDownDelegate}
+                        tabIndex={0}
                         trailingAction={
                             <TextInput.Action
                                 onClick={onSearchValueClear}

@@ -1,28 +1,27 @@
 import { Box, ActionList } from '@primer/react'
+import Item from './Item'
 
-function List({ items, onSelect, type }) {
+function List({ items, selectedItems, onSelect, type }) {
+    let hasBlockDescriptions =
+        items.filter((item) => item.descriptionVariant === 'block').length > 0
+
+    const selectedItemIds = selectedItems.map((item) => item.id)
+    const itemsWithoutSelected = items.filter(
+        (item) => !selectedItemIds.includes(item.id)
+    )
     return (
-        <Box sx={{ flex: 1, overflow: 'scroll' }}>
-            <ActionList selectionVariant={type}>
-                {items.map((item) => (
-                    <ActionList.Item
-                        key={item.text}
-                        selected={false}
-                        onSelect={onSelect}
-                    >
-                        {item.text}
-                        {item.description && (
-                            <ActionList.Description
-                                variant={
-                                    item.descriptionVariant
-                                        ? item.descriptionVariant
-                                        : 'block'
-                                }
-                            >
-                                {item.description}
-                            </ActionList.Description>
-                        )}
-                    </ActionList.Item>
+        <Box sx={{ flex: 1, overflowY: 'scroll' }}>
+            <ActionList
+                selectionVariant={type}
+                showDividers={hasBlockDescriptions}
+                role="listbox"
+            >
+                {selectedItems.map((item) => (
+                    <Item item={item} selected={true} onSelect={onSelect} />
+                ))}
+                <ActionList.Divider />
+                {itemsWithoutSelected.map((item) => (
+                    <Item item={item} selected={false} onSelect={onSelect} />
                 ))}
             </ActionList>
         </Box>
