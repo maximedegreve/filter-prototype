@@ -17,11 +17,21 @@ function List({ items, selectedItems, onSelect, type }) {
                 role="listbox"
             >
                 {selectedItems.map((item) => (
-                    <Item item={item} selected={true} onSelect={onSelect} />
+                    <Item
+                        item={item}
+                        key={item.id}
+                        selected={true}
+                        onSelect={onSelect}
+                    />
                 ))}
                 <ActionList.Divider />
                 {itemsWithoutSelected.map((item) => (
-                    <Item item={item} selected={false} onSelect={onSelect} />
+                    <Item
+                        item={item}
+                        key={item.id}
+                        selected={false}
+                        onSelect={onSelect}
+                    />
                 ))}
             </ActionList>
         </Box>

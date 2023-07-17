@@ -13,7 +13,7 @@ function App() {
                 <SelectPanel
                     title="Select labels"
                     type="multiple"
-                    modal={true}
+                    modal={false}
                     subtleError={
                         <>
                             We couldn't load the authors. Try again or if the

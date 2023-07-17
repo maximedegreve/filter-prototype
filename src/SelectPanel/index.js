@@ -9,20 +9,6 @@ import TemporaryDialog from './TemporaryDialog.js'
 
 const selectedItems = [
     {
-        id: 1,
-        text: 'Status',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
-    },
-    {
-        id: 2,
-        text: 'Stage',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
-    },
-    {
         id: 3,
         text: 'Assignee',
         description: 'A fox jumps through a white fence',
