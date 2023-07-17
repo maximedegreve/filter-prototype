@@ -13,9 +13,17 @@ function App() {
                 <SelectPanel
                     title="Select labels"
                     type="multiple"
-                    modal={false}
-                    subtleError={`We couldn't load the authors. Try again or if the
-                    problem persists contact support`}
+                    modal={true}
+                    subtleError={
+                        <>
+                            We couldn't load the authors. Try again or if the
+                            problem persists{' '}
+                            <a href="mailto:hello@github.com">
+                                contact support
+                            </a>
+                            .
+                        </>
+                    }
                     onSearchValueChange={(e) => setSearchValue(e.target.value)}
                     onSearchValueClear={() => setSearchValue('')}
                     searchValue={searchValue}

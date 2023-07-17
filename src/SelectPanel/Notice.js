@@ -23,6 +23,9 @@ function Notice({ message, type }) {
                 borderTopColor:
                     type === 'warning' ? 'attention.muted' : 'danger.muted',
                 fontSize: 0,
+                a: {
+                    color: type === 'warning' ? 'attention.fg' : 'danger.fg',
+                },
             }}
         >
             <Box sx={{ display: 'grid', pt: '1px' }}>
