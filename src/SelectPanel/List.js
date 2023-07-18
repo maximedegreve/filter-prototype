@@ -6,9 +6,8 @@ function List({ items, selectedItems, onSelect, type }) {
         items.filter((item) => item.descriptionVariant === 'block').length > 0
 
     const selectedItemIds = selectedItems.map((item) => item.id)
-    const itemsWithoutSelected = items.filter(
-        (item) => !selectedItemIds.includes(item.id)
-    )
+    const itemsWithoutSelected =
+        items?.filter((item) => !selectedItemIds.includes(item.id)) || []
     return (
         <Box sx={{ flex: 1, overflowY: 'scroll' }}>
             <ActionList
@@ -21,7 +20,9 @@ function List({ items, selectedItems, onSelect, type }) {
                         item={item}
                         key={item.id}
                         selected={true}
-                        onSelect={onSelect}
+                        onSelect={(e, item) =>
+                            onSelect({ item, selected: !selected })
+                        }
                     />
                 ))}
                 {itemsWithoutSelected.length === 0 ||
@@ -31,7 +32,9 @@ function List({ items, selectedItems, onSelect, type }) {
                         item={item}
                         key={item.id}
                         selected={false}
-                        onSelect={onSelect}
+                        onSelect={(e, item) =>
+                            onSelect({ item, selected: !selected })
+                        }
                     />
                 ))}
             </ActionList>

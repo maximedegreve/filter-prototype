@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Box, IconButton, TextInput, Text } from '@primer/react'
+import { Box, IconButton, TextInput, Text, Tooltip } from '@primer/react'
 import {
     XIcon,
     XCircleFillIcon,
@@ -50,12 +49,14 @@ function Header({
                 }}
             >
                 {onClickBack && (
-                    <Box sx={{ pr: 1 }}>
-                        <IconButton
-                            variant="invisible"
-                            onClick={onClickBack}
-                            icon={ArrowLeftIcon}
-                        />
+                    <Box sx={{ pr: 1, display: 'grid' }}>
+                        <Tooltip text="Back">
+                            <IconButton
+                                variant="invisible"
+                                onClick={onClickBack}
+                                icon={ArrowLeftIcon}
+                            />
+                        </Tooltip>
                     </Box>
                 )}
 
@@ -83,7 +84,9 @@ function Header({
                     )}
                 </Box>
                 <Box sx={{ display: 'grid', gridGap: 2 }}>
-                    <IconButton variant="invisible" icon={XIcon} />
+                    <Tooltip text="Close">
+                        <IconButton variant="invisible" icon={XIcon} />
+                    </Tooltip>
                 </Box>
             </Box>
             {onSearchValueChange && onSearchValueClear && (

@@ -5,13 +5,14 @@ import { Avatar } from '@primer/react'
 import Playground from './Playground'
 import SelectPanel from './SelectPanel'
 
-const selectedItems = [
+const defaultSelectedItems = [
     {
         id: 3,
         text: 'Assignee',
         description: 'A fox jumps through a white fence',
         descriptionVariant: 'block',
         leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        trailingVisual: 'Default',
     },
     {
         id: 4,
@@ -21,21 +22,7 @@ const selectedItems = [
         leadingVisual: <Avatar src="https://github.com/mona.png" />,
     },
 ]
-const items = [
-    {
-        id: 3,
-        text: 'Assignee',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
-    },
-    {
-        id: 4,
-        text: 'Team',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
-    },
+const defaultItems = [
     {
         id: 5,
         text: 'Estimate',
@@ -140,6 +127,8 @@ const items = [
 
 function App() {
     const [searchValue, setSearchValue] = useState('')
+    const [selectedItems, setSelectedItems] = useState(defaultSelectedItems)
+    const [items, setItems] = useState(defaultItems)
 
     return (
         <ThemeProvider colorMode="dark">
@@ -147,7 +136,10 @@ function App() {
                 <SelectPanel
                     title="Select labels"
                     type="multiple"
-                    modal={true}
+                    modal={false}
+                    onSelect={(e) => {
+                        console.log(e)
+                    }}
                     declaritive={true}
                     subtleWarning={
                         <>

@@ -20,6 +20,11 @@ function Item({ item, selected, onSelect }) {
                     {item.description}
                 </ActionList.Description>
             )}
+            {item.trailingVisual && (
+                <ActionList.TrailingVisual>
+                    {item.trailingVisual}
+                </ActionList.TrailingVisual>
+            )}
         </ActionList.Item>
     )
 }

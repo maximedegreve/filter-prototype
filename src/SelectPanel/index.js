@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import Header from './Header.js'
 import Footer from './Footer.js'
 import List from './List.js'
@@ -25,9 +27,13 @@ function SelectPanel({
     selectedItems,
     loading,
     onClickBack,
+    onSelect,
     declaritive,
     width = 360,
 }) {
+    const [selectedItemsInternal, setSelectedItemsInternal] =
+        useState(selectedItems)
+
     let spinner = null
     if (loading) {
         spinner = <Loading message={loading} />
@@ -78,8 +84,9 @@ function SelectPanel({
                     {subtleNotice}
                     <List
                         items={items}
-                        selectedItems={selectedItems}
+                        selectedItems={selectedItemsInternal}
                         type={type}
+                        onSelect={onSelect}
                     />
                     <Footer declaritive={declaritive} modal={modal} />
                 </>
