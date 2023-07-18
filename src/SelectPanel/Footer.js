@@ -1,6 +1,6 @@
 import { Box, Button } from '@primer/react'
 
-function Footer({ declaritveControlsEnabled, modal }) {
+function Footer({ declaritive, modal }) {
     return (
         <Box
             sx={{
@@ -39,7 +39,7 @@ function Footer({ declaritveControlsEnabled, modal }) {
 
             <Box
                 sx={{
-                    display: declaritveControlsEnabled ? 'block' : 'none',
+                    display: declaritive ? 'block' : 'none',
                 }}
             >
                 <Box

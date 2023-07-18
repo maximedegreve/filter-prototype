@@ -24,7 +24,8 @@ function List({ items, selectedItems, onSelect, type }) {
                         onSelect={onSelect}
                     />
                 ))}
-                <ActionList.Divider />
+                {itemsWithoutSelected.length === 0 ||
+                    (selectedItems.length === 0 && <ActionList.Divider />)}
                 {itemsWithoutSelected.map((item) => (
                     <Item
                         item={item}

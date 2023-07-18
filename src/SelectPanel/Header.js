@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { Box, IconButton, TextInput, Text } from '@primer/react'
-import { XIcon, XCircleFillIcon, SearchIcon } from '@primer/octicons-react'
+import {
+    XIcon,
+    XCircleFillIcon,
+    SearchIcon,
+    ArrowLeftIcon,
+} from '@primer/octicons-react'
 
 // Input component
 // Tooltip should not appear for clearing
@@ -15,7 +20,9 @@ function Header({
     searchValue,
     searchPlaceholder,
     description,
+    onClickBack,
     bordered,
+    subtleLoading,
 }) {
     const onKeyDownDelegate = (e) => {
         if (e.keyCode === 40) {
@@ -38,10 +45,20 @@ function Header({
                     py: 2,
                     width: '100%',
                     alignItems: 'stretch',
-                    pl: 3,
+                    pl: onClickBack ? 2 : 3,
                     pr: 2,
                 }}
             >
+                {onClickBack && (
+                    <Box sx={{ pr: 1 }}>
+                        <IconButton
+                            variant="invisible"
+                            onClick={onClickBack}
+                            icon={ArrowLeftIcon}
+                        />
+                    </Box>
+                )}
+
                 <Box
                     sx={{
                         flex: 1,
