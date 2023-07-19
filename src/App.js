@@ -180,6 +180,10 @@ function App() {
                             .
                         </>
                     }
+                    empty={{
+                        title: `No actors found for ‘${searchValue}’`,
+                        description: 'Try a different search term',
+                    }}
                     initialSelectedItems={defaultSelectedItems}
                     items={filteredItems}
                     onClickBack={(e) => alert('click back')}

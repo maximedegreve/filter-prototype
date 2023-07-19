@@ -23,6 +23,7 @@ function SelectPanel({
     subtleLoading,
     warning,
     error,
+    empty,
     items,
     initialSelectedItems,
     loading,
@@ -64,6 +65,14 @@ function SelectPanel({
                 title={warning.title}
                 description={warning.description}
                 type="warning"
+            />
+        )
+    } else if (items.length === 0) {
+        notice = (
+            <Notice
+                title={empty.title}
+                description={empty.description}
+                type="empty"
             />
         )
     }

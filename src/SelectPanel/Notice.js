@@ -22,6 +22,7 @@ function Notice({ title, description, type }) {
                 sx={{
                     color: type === 'warning' ? 'attention.fg' : 'danger.fg',
                     pb: 2,
+                    display: type === 'empty' ? 'none' : 'block',
                 }}
             >
                 <AlertIcon size={16} />
