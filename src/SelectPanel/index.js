@@ -87,6 +87,8 @@ function SelectPanel({
                 subtleLoading={subtleLoading}
                 onKeyDown={() => alert('test')}
                 onClickBack={onClickBack}
+                showClearIcon={selectedItems.length > 0}
+                onClickClear={() => setSelectedItems([])}
                 bordered={error || warning || (!subtleError && !subtleWarning)}
             />
             {spinner || notice || (

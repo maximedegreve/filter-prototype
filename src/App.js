@@ -48,17 +48,22 @@ const defaultItems = [
     },
     {
         id: 5,
-        text: 'Estimate',
-        description: 'A fox jumps through a white fence',
+        text: 'Rachel Cohen',
+        description:
+            'Director of Design Infrastructure @github. Sucker for systems, scaling ops, and charcuterie plates 🧀 🍖 🍷.',
         descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/3454298?s=80&v=4" />
+        ),
     },
     {
         id: 6,
-        text: 'Due Date',
-        description: 'A fox jumps through a white fence',
+        text: 'Tyler Benning',
+        description: 'Im a designer that plays with code.',
         descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/7265547?s=80&v=4" />
+        ),
     },
     {
         id: 7,
@@ -154,8 +159,6 @@ function App() {
           )
         : defaultItems
 
-    console.log(searchValue)
-    console.log(filteredItems)
     return (
         <ThemeProvider colorMode="dark">
             <BaseStyles>
@@ -167,7 +170,7 @@ function App() {
                         console.log(e)
                     }}
                     declaritive={true}
-                    subtleWarning={
+                    subtleError={
                         <>
                             We couldn't load the authors. Try again or if the
                             problem persists{' '}

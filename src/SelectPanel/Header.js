@@ -5,6 +5,7 @@ import {
     SearchIcon,
     ArrowLeftIcon,
 } from '@primer/octicons-react'
+import ClearIcon from './ClearIcon.js'
 
 // Input component
 // Tooltip should not appear for clearing
@@ -20,6 +21,8 @@ function Header({
     searchPlaceholder,
     description,
     onClickBack,
+    onClickClear,
+    showClearIcon,
     bordered,
     subtleLoading,
 }) {
@@ -83,7 +86,21 @@ function Header({
                         </Text>
                     )}
                 </Box>
-                <Box sx={{ display: 'grid', gridGap: 2 }}>
+                <Box
+                    sx={{
+                        display: 'grid',
+                        gridTemplateColumns: 'auto auto',
+                    }}
+                >
+                    {showClearIcon && (
+                        <Tooltip text="Clear selection">
+                            <IconButton
+                                variant="invisible"
+                                icon={ClearIcon}
+                                onClick={onClickClear}
+                            />
+                        </Tooltip>
+                    )}
                     <Tooltip text="Close">
                         <IconButton variant="invisible" icon={XIcon} />
                     </Tooltip>
