@@ -1,8 +1,7 @@
-import { ThemeProvider, BaseStyles } from '@primer/react'
+import { useControls, folder } from 'leva'
 import { useState } from 'react'
-import { Avatar } from '@primer/react'
+import { Box, Avatar } from '@primer/react'
 
-import Playground from './Playground'
 import SelectPanel from './SelectPanel'
 
 const defaultSelectedItems = [
@@ -172,7 +171,7 @@ const defaultItems = [
     },
 ]
 
-function App() {
+function Explorer() {
     const [searchValue, setSearchValue] = useState('')
     const filteredItems = searchValue
         ? defaultItems.filter((item) =>
@@ -180,58 +179,117 @@ function App() {
           )
         : defaultItems
 
+    const {
+        title,
+        description,
+        type,
+        modal,
+        declaritive,
+        loading_enabled,
+        loading_title,
+        loading_subtle,
+        error_enabled,
+        error_description,
+        error_title,
+        error_message_subtle,
+        error_enabled_subtle,
+        warning_title,
+        warning_description,
+        warning_enabled,
+        warning_message_subtle,
+        warning_enabled_subtle,
+        empty_title,
+        empty_description,
+    } = useControls({
+        title: 'Select authors',
+        description: '',
+        modal: false,
+        type: {
+            options: { multiple: 'multiple', single: 'single' },
+        },
+        declaritive: true,
+        loading_subtle: false,
+        empty: folder({
+            empty_title: `No actors found for your search term`,
+            empty_description: 'Try a different search term',
+        }),
+        error: folder({
+            error_title: `We couldn't load the authors`,
+            error_description:
+                'Try again or if the problem persists contact support',
+            error_enabled: false,
+        }),
+        warning: folder({
+            warning_title: `We couldn't load the authors`,
+            warning_description:
+                'Try again or if the problem persists contact support',
+            warning_enabled: false,
+        }),
+        warning_subtle: folder({
+            warning_message_subtle: `We couldn't load the authors. Try again or if the
+            problem persists contact support.`,
+            warning_enabled_subtle: false,
+        }),
+        error_subtle: folder({
+            error_message_subtle: `We couldn't load the authors. Try again or if the
+            problem persists contact support.`,
+            error_enabled_subtle: false,
+        }),
+        loading: folder({
+            loading_enabled: false,
+            loading_title: 'Fetching users...',
+        }),
+    })
+
     return (
-        <ThemeProvider colorMode="dark">
-            <BaseStyles>
-                <SelectPanel
-                    title="Select authors"
-                    type="multiple"
-                    modal={false}
-                    onSelect={(e) => {
-                        console.log(e)
-                    }}
-                    declaritive={true}
-                    subtleError={
-                        <>
-                            We couldn't load the authors. Try again or if the
-                            problem persists{' '}
-                            <a href="mailto:hello@github.com">
-                                contact support
-                            </a>
-                            .
-                        </>
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                bg: 'canvas.default',
+                width: '100%',
+                height: '100vh',
+            }}
+        >
+            <SelectPanel
+                title={title}
+                description={description}
+                type={type}
+                modal={modal}
+                onSelect={(e) => {
+                    console.log(e)
+                }}
+                subtleLoading={loading_subtle}
+                declaritive={declaritive}
+                subtleError={error_enabled_subtle && error_message_subtle}
+                subtleWarning={warning_enabled_subtle && warning_message_subtle}
+                error={
+                    error_enabled && {
+                        title: error_title,
+                        description: error_description,
                     }
-                    empty={{
-                        title: `No actors found for ‘${searchValue}’`,
-                        description: 'Try a different search term',
-                    }}
-                    initialSelectedItems={defaultSelectedItems}
-                    items={filteredItems}
-                    onClickBack={(e) => alert('click back')}
-                    onSearchValueChange={(e) => setSearchValue(e.target.value)}
-                    onSearchValueClear={() => setSearchValue('')}
-                    searchValue={searchValue}
-                />
-                <Playground />
-            </BaseStyles>
-        </ThemeProvider>
+                }
+                warning={
+                    warning_enabled && {
+                        title: warning_title,
+                        description: warning_description,
+                    }
+                }
+                empty={{
+                    title: empty_title,
+                    description: empty_description,
+                }}
+                initialSelectedItems={defaultSelectedItems}
+                items={filteredItems}
+                onClickBack={(e) => alert('click back')}
+                onSearchValueChange={(e) => setSearchValue(e.target.value)}
+                onSearchValueClear={() => setSearchValue('')}
+                searchValue={searchValue}
+                loading={loading_enabled && loading_title}
+            />
+        </Box>
     )
 }
-// subtleLoading={true}
-// loading="Fetching users..."
-/*
-error={{
-    title: `We couldn’t load the authors`,
-    description: (
-        <>
-            Try again or if the problem persists{' '}
-            <a href="mailto:hello@github.com">
-                contact support
-            </a>
-            .
-        </>
-    ),
-}}
-*/
 
-export default App
+export default Explorer
