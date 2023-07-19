@@ -8,10 +8,16 @@ function List({ items, selectedItems, onSelect, type }) {
 
     useEffect(() => {
         const selectedItemIds = selectedItems.map((item) => item.id)
+        const unSelectedItemIds = items.map((item) => item.id)
+
         const unSelectedItemsWithoutSelected = items?.filter(
             (item) => !selectedItemIds.includes(item.id)
         )
-        setSelectedItemsGroup(selectedItems)
+
+        const visibleSelectedItems = selectedItems.filter((selectedItem) =>
+            unSelectedItemIds.includes(selectedItem.id)
+        )
+        setSelectedItemsGroup(visibleSelectedItems)
         setUnselectedItemsGroup(unSelectedItemsWithoutSelected)
     }, [items])
 

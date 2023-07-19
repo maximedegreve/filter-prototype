@@ -24,7 +24,7 @@ function Footer({ declaritive, modal }) {
                             : ['none', 'none', 'block', 'block'],
                     }}
                 >
-                    <Button size="small">View labels</Button>
+                    <Button size="small">View authors</Button>
                 </Box>
                 <Box
                     sx={{
@@ -33,7 +33,7 @@ function Footer({ declaritive, modal }) {
                             : ['block', 'block', 'none', 'none'],
                     }}
                 >
-                    <Button>View labels</Button>
+                    <Button>View authors</Button>
                 </Box>
             </Box>
 

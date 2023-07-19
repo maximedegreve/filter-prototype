@@ -8,21 +8,44 @@ import SelectPanel from './SelectPanel'
 const defaultSelectedItems = [
     {
         id: 3,
-        text: 'Assignee',
-        description: 'A fox jumps through a white fence',
+        text: 'Max Schoening',
+        description:
+            'Assistant to the assistant regional branch manager @github.',
         descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
-        trailingVisual: 'Default',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/111631?s=80&v=4" />
+        ),
     },
     {
         id: 4,
-        text: 'Team',
-        description: 'A fox jumps through a white fence',
+        text: 'Max Woolf',
+        description: 'Data Scientist @buzzfeed. Plotter of pretty charts.',
         descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/2179708?s=80&v=4" />
+        ),
     },
 ]
 const defaultItems = [
+    {
+        id: 3,
+        text: 'Max Schoening',
+        description:
+            'Assistant to the assistant regional branch manager @github.',
+        descriptionVariant: 'block',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/111631?s=80&v=4" />
+        ),
+    },
+    {
+        id: 4,
+        text: 'Max Woolf',
+        description: 'Data Scientist @buzzfeed. Plotter of pretty charts.',
+        descriptionVariant: 'block',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/2179708?s=80&v=4" />
+        ),
+    },
     {
         id: 5,
         text: 'Estimate',
@@ -126,13 +149,18 @@ const defaultItems = [
 function App() {
     const [searchValue, setSearchValue] = useState('')
     const filteredItems = searchValue
-        ? defaultItems.filter((item) => item.text.includes(searchValue))
+        ? defaultItems.filter((item) =>
+              item.text.toLowerCase().includes(searchValue.toLowerCase())
+          )
         : defaultItems
+
+    console.log(searchValue)
+    console.log(filteredItems)
     return (
         <ThemeProvider colorMode="dark">
             <BaseStyles>
                 <SelectPanel
-                    title="Select labels"
+                    title="Select authors"
                     type="multiple"
                     modal={false}
                     onSelect={(e) => {
