@@ -19,6 +19,7 @@ function List({ items, selectedItems, onSelect, type }) {
         )
         setSelectedItemsGroup(visibleSelectedItems)
         setUnselectedItemsGroup(unSelectedItemsWithoutSelected)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [items])
 
     const isSelected = (id) => {
