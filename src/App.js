@@ -70,7 +70,6 @@ const defaultItems = [
         text: 'Estimate',
         description: 'A fox jumps through a white fence',
         descriptionVariant: 'block',
-        selected: false,
         leadingVisual: <Avatar src="https://github.com/mona.png" />,
     },
     {
@@ -78,7 +77,6 @@ const defaultItems = [
         text: 'Due Date',
         description: 'A fox jumps through a white fence',
         descriptionVariant: 'block',
-        selected: false,
         leadingVisual: <Avatar src="https://github.com/mona.png" />,
     },
     {
@@ -127,8 +125,6 @@ const defaultItems = [
 
 function App() {
     const [searchValue, setSearchValue] = useState('')
-    const [selectedItems, setSelectedItems] = useState(defaultSelectedItems)
-    const [items, setItems] = useState(defaultItems)
 
     return (
         <ThemeProvider colorMode="dark">
@@ -151,8 +147,8 @@ function App() {
                             .
                         </>
                     }
-                    selectedItems={selectedItems}
-                    items={items}
+                    initialSelectedItems={defaultSelectedItems}
+                    items={defaultItems}
                     onClickBack={(e) => alert('click back')}
                     onSearchValueChange={(e) => setSearchValue(e.target.value)}
                     onSearchValueClear={() => setSearchValue('')}

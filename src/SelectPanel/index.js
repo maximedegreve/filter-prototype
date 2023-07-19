@@ -24,16 +24,26 @@ function SelectPanel({
     warning,
     error,
     items,
-    selectedItems,
+    initialSelectedItems,
     loading,
     onClickBack,
-    onSelect,
+    onSelectionChange,
     declaritive,
     width = 360,
 }) {
-    const [selectedItemsInternal, setSelectedItemsInternal] =
-        useState(selectedItems)
+    const [selectedItems, setSelectedItems] = useState(initialSelectedItems)
 
+    const onSelect = ({ item, selected }) => {
+        const selectedItemsWithout = selectedItems.filter(
+            (selectedItem) => selectedItem.id !== item.id
+        )
+        let newSelectedItems = [...selectedItemsWithout]
+
+        if (selected) {
+            newSelectedItems.push(item)
+        }
+        setSelectedItems(newSelectedItems)
+    }
     let spinner = null
     if (loading) {
         spinner = <Loading message={loading} />
@@ -84,7 +94,7 @@ function SelectPanel({
                     {subtleNotice}
                     <List
                         items={items}
-                        selectedItems={selectedItemsInternal}
+                        selectedItems={selectedItems}
                         type={type}
                         onSelect={onSelect}
                     />
