@@ -185,6 +185,7 @@ function Explorer() {
         type,
         modal,
         declaritive,
+        back_button,
         loading_enabled,
         loading_title,
         loading_subtle,
@@ -204,6 +205,7 @@ function Explorer() {
         title: 'Select authors',
         description: '',
         modal: false,
+        back_button: false,
         type: {
             options: { multiple: 'multiple', single: 'single' },
         },
@@ -241,6 +243,7 @@ function Explorer() {
         }),
     })
 
+    const onClickBack = (e) => alert('click back')
     return (
         <Box
             sx={{
@@ -282,7 +285,7 @@ function Explorer() {
                 }}
                 initialSelectedItems={defaultSelectedItems}
                 items={filteredItems}
-                onClickBack={(e) => alert('click back')}
+                onClickBack={back_button && onClickBack}
                 onSearchValueChange={(e) => setSearchValue(e.target.value)}
                 onSearchValueClear={() => setSearchValue('')}
                 searchValue={searchValue}
