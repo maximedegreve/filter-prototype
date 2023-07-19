@@ -29,6 +29,7 @@ function TemporaryDialog({ children, modal, width }) {
                     maxHeight: ['100%', '100%', 500, 500],
                     flexDirection: 'column',
                     bg: 'canvas.default',
+                    margin: 8,
                     width: '100%',
                     height: ['100%', '100%', 'auto', 'auto'],
                     borderRadius: [0, 0, '12px', '12px'],
