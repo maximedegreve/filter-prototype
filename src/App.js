@@ -8,146 +8,167 @@ import SelectPanel from './SelectPanel'
 const defaultSelectedItems = [
     {
         id: 3,
-        text: 'Max Schoening',
-        description:
-            'Assistant to the assistant regional branch manager @github.',
-        descriptionVariant: 'block',
+        text: 'max',
+        description: 'Max Schoening',
+        descriptionVariant: 'inline',
         leadingVisual: (
             <Avatar src="https://avatars.githubusercontent.com/u/111631?s=80&v=4" />
         ),
     },
     {
         id: 4,
-        text: 'Max Woolf',
-        description: 'Data Scientist @buzzfeed. Plotter of pretty charts.',
-        descriptionVariant: 'block',
+        text: 'jonrohan',
+        description: 'Jon Rohan',
+        descriptionVariant: 'inline',
         leadingVisual: (
-            <Avatar src="https://avatars.githubusercontent.com/u/2179708?s=80&v=4" />
+            <Avatar src="https://avatars.githubusercontent.com/u/54012?s=60&v=4" />
         ),
     },
 ]
 const defaultItems = [
     {
         id: 3,
-        text: 'Max Schoening',
-        description:
-            'Assistant to the assistant regional branch manager @github.',
-        descriptionVariant: 'block',
+        text: 'max',
+        description: 'Max Schoening',
+        descriptionVariant: 'inline',
         leadingVisual: (
             <Avatar src="https://avatars.githubusercontent.com/u/111631?s=80&v=4" />
         ),
     },
     {
         id: 4,
-        text: 'Max Woolf',
-        description: 'Data Scientist @buzzfeed. Plotter of pretty charts.',
-        descriptionVariant: 'block',
+        text: 'jonrohan',
+        description: 'Jon Rohan',
+        descriptionVariant: 'inline',
         leadingVisual: (
-            <Avatar src="https://avatars.githubusercontent.com/u/2179708?s=80&v=4" />
+            <Avatar src="https://avatars.githubusercontent.com/u/54012?s=60&v=4" />
         ),
     },
     {
         id: 5,
-        text: 'Rachel Cohen',
-        description:
-            'Director of Design Infrastructure @github. Sucker for systems, scaling ops, and charcuterie plates 🧀 🍖 🍷.',
-        descriptionVariant: 'block',
+        text: 'howdyray',
+        description: 'Rachel Cohen',
+        descriptionVariant: 'inline',
         leadingVisual: (
             <Avatar src="https://avatars.githubusercontent.com/u/3454298?s=80&v=4" />
         ),
     },
     {
         id: 6,
-        text: 'Tyler Benning',
-        description: 'Im a designer that plays with code.',
-        descriptionVariant: 'block',
+        text: 'tbenning',
+        description: 'Tyler Benning',
+        descriptionVariant: 'inline',
         leadingVisual: (
             <Avatar src="https://avatars.githubusercontent.com/u/7265547?s=80&v=4" />
         ),
     },
     {
         id: 7,
-        text: 'Status',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'cheshire137',
+        description: 'Sarah Vessels',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/82317?s=60&v=4" />
+        ),
     },
     {
         id: 8,
-        text: 'Stage',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'technoweenie',
+        description: 'technoweenie',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/21?s=60&v=4" />
+        ),
     },
     {
         id: 9,
-        text: 'Assignee',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'tobiasahlin',
+        description: 'Tobias Ahlin',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/211284?s=60&v=4" />
+        ),
     },
     {
         id: 10,
-        text: 'Team',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'dgraham',
+        description: 'David Graham',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/122102?s=60&v=4" />
+        ),
     },
     {
         id: 11,
-        text: 'Estimate',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'mdo',
+        description: 'Mark Otto',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/98681?s=60&v=4" />
+        ),
     },
     {
         id: 12,
-        text: 'Due Date',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'tclem',
+        description: 'Timothy Clem',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/136521?s=60&v=4" />
+        ),
     },
     {
         id: 13,
-        text: 'Status',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'oreoshake',
+        description: 'Neil Matatall',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/448516?s=60&v=4" />
+        ),
     },
     {
         id: 14,
-        text: 'Stage',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'latentflip',
+        description: 'Philip Roberts',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/78225?s=60&v=4" />
+        ),
     },
     {
         id: 15,
-        text: 'Assignee',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'koddsson',
+        description: 'Kristján Oddsson',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/318208?s=60&v=4" />
+        ),
     },
     {
         id: 16,
-        text: 'Team',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'shayfrendt',
+        description: 'Shay Frendt',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/32535?s=60&v=4" />
+        ),
     },
     {
         id: 17,
-        text: 'Estimate',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'dmarcey',
+        description: 'Derrick Marcey',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/5487287?s=60&v=4" />
+        ),
     },
     {
         id: 18,
-        text: 'Due Date',
-        description: 'A fox jumps through a white fence',
-        descriptionVariant: 'block',
-        leadingVisual: <Avatar src="https://github.com/mona.png" />,
+        text: 'benbalter',
+        description: 'Ben Balter',
+        descriptionVariant: 'inline',
+        leadingVisual: (
+            <Avatar src="https://avatars.githubusercontent.com/u/282759?s=60&v=4" />
+        ),
     },
 ]
 
