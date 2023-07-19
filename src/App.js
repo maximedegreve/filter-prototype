@@ -125,7 +125,9 @@ const defaultItems = [
 
 function App() {
     const [searchValue, setSearchValue] = useState('')
-
+    const filteredItems = searchValue
+        ? defaultItems.filter((item) => item.text.includes(searchValue))
+        : defaultItems
     return (
         <ThemeProvider colorMode="dark">
             <BaseStyles>
@@ -148,7 +150,7 @@ function App() {
                         </>
                     }
                     initialSelectedItems={defaultSelectedItems}
-                    items={defaultItems}
+                    items={filteredItems}
                     onClickBack={(e) => alert('click back')}
                     onSearchValueChange={(e) => setSearchValue(e.target.value)}
                     onSearchValueClear={() => setSearchValue('')}
