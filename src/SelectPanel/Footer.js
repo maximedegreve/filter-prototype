@@ -10,7 +10,7 @@ function Footer({ declaritive, modal }) {
                 borderTopStyle: 'solid',
                 alignItems: 'center',
                 gridGap: 4,
-                gridTemplateColumns: '1fr min-content',
+                gridTemplateColumns: declaritive ? '1fr min-content' : '1fr',
                 py: 3,
                 pl: 3,
                 pr: 3,
@@ -24,7 +24,9 @@ function Footer({ declaritive, modal }) {
                             : ['none', 'none', 'block', 'block'],
                     }}
                 >
-                    <Button size="small">View authors</Button>
+                    <Button size="small" block={!declaritive}>
+                        View authors
+                    </Button>
                 </Box>
                 <Box
                     sx={{
@@ -33,7 +35,7 @@ function Footer({ declaritive, modal }) {
                             : ['block', 'block', 'none', 'none'],
                     }}
                 >
-                    <Button>View authors</Button>
+                    <Button block={!declaritive}>View authors</Button>
                 </Box>
             </Box>
 
