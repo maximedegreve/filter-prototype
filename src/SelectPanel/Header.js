@@ -92,7 +92,9 @@ function Header({
             {onSearchValueChange && onSearchValueClear && (
                 <Box sx={{ width: '100%', px: 2, pb: '12px' }}>
                     <TextInput
-                        leadingVisual={SearchIcon}
+                        leadingVisual={!subtleLoading && SearchIcon}
+                        loaderPosition={subtleLoading && 'leading'}
+                        loading={subtleLoading}
                         aria-label="Search"
                         value={searchValue}
                         onChange={onSearchValueChange}
