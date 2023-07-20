@@ -112,6 +112,7 @@ function SelectPanel({
                 </>
             )}
             <Footer
+                size={size}
                 declaritive={declaritive}
                 onClickConfirm={() => alert('clicked confirm')}
                 onClickCancel={() => alert('clicked cancel')}

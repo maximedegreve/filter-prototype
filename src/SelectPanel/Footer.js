@@ -8,8 +8,10 @@ function Footer({
     extraAction,
     onClickConfirm,
     onClickCancel,
+    size,
 }) {
     const showSaveCancel = declaritive || modal
+    const alwaysMedium = size !== 'small' && modal
     return (
         <Box
             sx={{
@@ -38,7 +40,7 @@ function Footer({
         >
             {extraAction && (
                 <ResponsiveButton
-                    alwaysMedium={modal}
+                    alwaysMedium={alwaysMedium}
                     variant={
                         extraAction.type === 'button' ? 'default' : 'invisible'
                     }
@@ -58,7 +60,7 @@ function Footer({
             >
                 <ResponsiveButton
                     variant="primary"
-                    alwaysMedium={modal}
+                    alwaysMedium={alwaysMedium}
                     onClick={onClickConfirm}
                 >
                     Done
@@ -78,13 +80,13 @@ function Footer({
                     }}
                 >
                     <ResponsiveButton
-                        alwaysMedium={modal}
+                        alwaysMedium={alwaysMedium}
                         onClick={onClickCancel}
                     >
                         Cancel
                     </ResponsiveButton>
                     <ResponsiveButton
-                        alwaysMedium={modal}
+                        alwaysMedium={alwaysMedium}
                         variant="primary"
                         onClick={onClickConfirm}
                     >
