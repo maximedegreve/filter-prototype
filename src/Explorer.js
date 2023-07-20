@@ -220,7 +220,7 @@ function Explorer() {
         },
         declaritive: {
             value: true,
-            render: (get) => get('modal') == false,
+            render: (get) => get('modal') === false,
         },
         back_button: false,
         selection_type: {

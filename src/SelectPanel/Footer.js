@@ -1,4 +1,4 @@
-import { Box, Button } from '@primer/react'
+import { Box } from '@primer/react'
 
 import ResponsiveButton from './ResponsiveButton'
 
