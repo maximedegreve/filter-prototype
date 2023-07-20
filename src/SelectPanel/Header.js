@@ -66,18 +66,19 @@ function Header({
 
                 <Box
                     sx={{
-                        flex: 1,
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         fontSize: 1,
+                        position: 'relative',
                         fontWeight: 'semibold',
+                        width: '100%',
+                        minWidth: 0,
                     }}
                 >
                     <Text
                         sx={{
                             fontSize: 1,
-                            display: 'block',
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
