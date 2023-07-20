@@ -110,15 +110,15 @@ function SelectPanel({
                         type={type}
                         onSelect={onSelect}
                     />
-                    <Footer
-                        declaritive={declaritive}
-                        onClickConfirm={() => alert('clicked confirm')}
-                        onClickCancel={() => alert('clicked cancel')}
-                        modal={modal}
-                        extraAction={extraAction}
-                    />
                 </>
             )}
+            <Footer
+                declaritive={declaritive}
+                onClickConfirm={() => alert('clicked confirm')}
+                onClickCancel={() => alert('clicked cancel')}
+                modal={modal}
+                extraAction={extraAction}
+            />
         </TemporaryDialog>
     )
 }
