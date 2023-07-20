@@ -182,7 +182,7 @@ function Explorer() {
     const {
         title,
         description,
-        type,
+        selection_type,
         modal,
         declaritive,
         back_button,
@@ -201,19 +201,32 @@ function Explorer() {
         warning_enabled_subtle,
         empty_title,
         empty_description,
+        extra_action_title,
+        extra_action_enabled,
+        extra_action_type,
     } = useControls({
         title: 'Select authors',
         description: '',
         modal: false,
+        declaritive: {
+            value: true,
+            render: (get) => get('modal') == false,
+        },
         back_button: false,
-        type: {
+        selection_type: {
             options: { multiple: 'multiple', single: 'single' },
         },
-        declaritive: true,
         loading_subtle: false,
         empty: folder({
             empty_title: `No actors found for your search term`,
             empty_description: 'Try a different search term',
+        }),
+        extra_action: folder({
+            extra_action_title: `View authors`,
+            extra_action_enabled: true,
+            extra_action_type: {
+                options: { button: 'button', link: 'link' },
+            },
         }),
         error: folder({
             error_title: `We couldn't load the authors`,
@@ -244,6 +257,8 @@ function Explorer() {
     })
 
     const onClickBack = (e) => alert('click back')
+    const onClickExtraAction = (e) => alert('click extra action')
+
     return (
         <Box
             sx={{
@@ -258,7 +273,7 @@ function Explorer() {
             <SelectPanel
                 title={title}
                 description={description}
-                type={type}
+                type={selection_type}
                 modal={modal}
                 onSelect={(e) => {
                     console.log(e)
@@ -283,6 +298,13 @@ function Explorer() {
                     title: empty_title,
                     description: empty_description,
                 }}
+                extraAction={
+                    extra_action_enabled && {
+                        title: extra_action_title,
+                        onClick: onClickExtraAction,
+                        type: extra_action_type,
+                    }
+                }
                 initialSelectedItems={defaultSelectedItems}
                 items={filteredItems}
                 onClickBack={back_button && onClickBack}

@@ -1,74 +1,95 @@
 import { Box, Button } from '@primer/react'
 
-function Footer({ declaritive, modal }) {
+import ResponsiveButton from './ResponsiveButton'
+
+function Footer({
+    declaritive,
+    modal,
+    extraAction,
+    onClickConfirm,
+    onClickCancel,
+}) {
+    const showSaveCancel = declaritive || modal
     return (
         <Box
             sx={{
-                display: 'grid',
                 borderTopColor: 'border.default',
                 borderTopWidth: 1,
                 borderTopStyle: 'solid',
                 alignItems: 'center',
                 gridGap: 4,
-                gridTemplateColumns: declaritive ? '1fr min-content' : '1fr',
+                display:
+                    showSaveCancel || extraAction
+                        ? 'grid'
+                        : ['grid', 'grid', 'none', 'none'],
+                gridTemplateColumns:
+                    showSaveCancel && extraAction
+                        ? 'min-content auto'
+                        : [
+                              extraAction ? 'min-content auto' : '1fr',
+                              extraAction ? 'min-content auto' : '1fr',
+                              '1fr',
+                              '1fr',
+                          ],
                 py: 3,
                 pl: 3,
                 pr: 3,
             }}
         >
-            <Box sx={{ flex: 1 }}>
-                <Box
-                    sx={{
-                        display: modal
-                            ? 'none'
-                            : ['none', 'none', 'block', 'block'],
-                    }}
+            {extraAction && (
+                <ResponsiveButton
+                    alwaysMedium={modal}
+                    variant={
+                        extraAction.type === 'button' ? 'default' : 'invisible'
+                    }
+                    onClick={extraAction.onClick}
                 >
-                    <Button size="small" block={!declaritive}>
-                        View authors
-                    </Button>
-                </Box>
-                <Box
-                    sx={{
-                        display: modal
-                            ? 'block'
-                            : ['block', 'block', 'none', 'none'],
-                    }}
-                >
-                    <Button block={!declaritive}>View authors</Button>
-                </Box>
-            </Box>
+                    {extraAction.title}
+                </ResponsiveButton>
+            )}
 
             <Box
                 sx={{
-                    display: declaritive ? 'block' : 'none',
+                    display: showSaveCancel
+                        ? 'none'
+                        : ['inline', 'inline', 'none', 'none'],
+                    textAlign: 'right',
+                }}
+            >
+                <ResponsiveButton
+                    variant="primary"
+                    alwaysMedium={modal}
+                    onClick={onClickConfirm}
+                >
+                    Done
+                </ResponsiveButton>
+            </Box>
+            <Box
+                sx={{
+                    display: showSaveCancel ? 'block' : 'none',
+                    textAlign: 'right',
                 }}
             >
                 <Box
                     sx={{
-                        display: modal
-                            ? 'none'
-                            : ['none', 'none', 'inline-grid', 'inline-grid'],
+                        display: 'inline-grid',
                         gridGap: 2,
                         gridTemplateColumns: 'auto auto',
                     }}
                 >
-                    <Button size="small">Cancel</Button>
-                    <Button size="small" variant="primary">
+                    <ResponsiveButton
+                        alwaysMedium={modal}
+                        onClick={onClickCancel}
+                    >
+                        Cancel
+                    </ResponsiveButton>
+                    <ResponsiveButton
+                        alwaysMedium={modal}
+                        variant="primary"
+                        onClick={onClickConfirm}
+                    >
                         Save
-                    </Button>
-                </Box>
-                <Box
-                    sx={{
-                        display: modal
-                            ? 'inline-grid'
-                            : ['inline-grid', 'inline-grid', 'none', 'none'],
-                        gridGap: 2,
-                        gridTemplateColumns: 'auto auto',
-                    }}
-                >
-                    <Button>Cancel</Button>
-                    <Button variant="primary">Save</Button>
+                    </ResponsiveButton>
                 </Box>
             </Box>
         </Box>
