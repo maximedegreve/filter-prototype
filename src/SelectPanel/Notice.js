@@ -5,7 +5,7 @@ function Notice({ title, description, type }) {
     return (
         <Box
             sx={{
-                minHeight: 320,
+                minHeight: 270,
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',

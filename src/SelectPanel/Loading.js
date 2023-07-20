@@ -4,7 +4,7 @@ function Loading({ message }) {
     return (
         <Box
             sx={{
-                minHeight: 320,
+                minHeight: 270,
                 flex: 1,
                 display: 'flex',
                 justifyContent: 'center',
