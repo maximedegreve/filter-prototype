@@ -25,13 +25,12 @@ function SelectPanel({
     error,
     empty,
     items,
+    size,
     initialSelectedItems,
     loading,
     onClickBack,
-    onSelectionChange,
     extraAction,
     declaritive,
-    width = 360,
 }) {
     const [selectedItems, setSelectedItems] = useState(initialSelectedItems)
 
@@ -86,7 +85,7 @@ function SelectPanel({
     }
 
     return (
-        <TemporaryDialog modal={modal} width={width}>
+        <TemporaryDialog modal={modal} size={size}>
             <Header
                 title={title}
                 onSearchValueChange={onSearchValueChange}

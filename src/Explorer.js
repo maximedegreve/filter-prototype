@@ -204,10 +204,20 @@ function Explorer() {
         extra_action_title,
         extra_action_enabled,
         extra_action_type,
+        size,
     } = useControls({
         title: 'Select authors',
         description: '',
         modal: false,
+        size: {
+            options: {
+                small: 'small',
+                medium: 'medium',
+                portrait: 'portrait',
+                large: 'large',
+                xlarge: 'xlarge',
+            },
+        },
         declaritive: {
             value: true,
             render: (get) => get('modal') == false,
@@ -326,6 +336,7 @@ function Explorer() {
                         type: extra_action_type,
                     }
                 }
+                size={size}
                 initialSelectedItems={defaultSelectedItems}
                 items={filteredItems}
                 onClickBack={back_button && onClickBack}

@@ -1,6 +1,28 @@
 import { Box } from '@primer/react'
 
-function TemporaryDialog({ children, modal, width }) {
+function TemporaryDialog({ children, modal, size }) {
+    let pxWidth = 320
+    let pxHeight = 432
+
+    if (size === 'medium') {
+        pxWidth = 480
+        pxHeight = 320
+    }
+
+    if (size === 'portrait') {
+        pxWidth = 480
+        pxHeight = 600
+    }
+
+    if (size === 'large') {
+        pxWidth = 640
+        pxHeight = 432
+    }
+
+    if (size === 'xlarge') {
+        pxWidth = 960
+        pxHeight = 600
+    }
     return (
         <Box
             sx={{
@@ -25,8 +47,8 @@ function TemporaryDialog({ children, modal, width }) {
                 role={modal ? 'dialog' : 'overlay'}
                 sx={{
                     display: 'flex',
-                    maxWidth: ['100%', '100%', width, width],
-                    maxHeight: ['100%', '100%', 500, 500],
+                    maxWidth: ['100%', '100%', pxWidth, pxWidth],
+                    maxHeight: ['100%', '100%', pxHeight, pxHeight],
                     flexDirection: 'column',
                     bg: 'canvas.default',
                     margin: [0, 0, 8, 8],
