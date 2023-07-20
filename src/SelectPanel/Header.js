@@ -25,6 +25,7 @@ function Header({
     showClearIcon,
     bordered,
     subtleLoading,
+    tooltipDirection,
 }) {
     const onKeyDownDelegate = (e) => {
         if (e.keyCode === 40) {
@@ -73,7 +74,18 @@ function Header({
                         fontWeight: 'semibold',
                     }}
                 >
-                    <Text sx={{ fontSize: 1, display: 'block' }}>{title}</Text>
+                    <Text
+                        sx={{
+                            fontSize: 1,
+                            display: 'block',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            pt: description && 1,
+                        }}
+                    >
+                        {title}
+                    </Text>
                     {description && (
                         <Text
                             sx={{
