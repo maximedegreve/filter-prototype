@@ -217,43 +217,64 @@ function Explorer() {
             options: { multiple: 'multiple', single: 'single' },
         },
         loading_subtle: false,
-        empty: folder({
-            empty_title: `No actors found for your search term`,
-            empty_description: 'Try a different search term',
-        }),
-        extra_action: folder({
-            extra_action_title: `View authors`,
-            extra_action_enabled: true,
-            extra_action_type: {
-                options: { button: 'button', link: 'link' },
+        empty: folder(
+            {
+                empty_title: `No actors found for your search term`,
+                empty_description: 'Try a different search term',
             },
-        }),
-        error: folder({
-            error_title: `We couldn't load the authors`,
-            error_description:
-                'Try again or if the problem persists contact support',
-            error_enabled: false,
-        }),
-        warning: folder({
-            warning_title: `We couldn't load the authors`,
-            warning_description:
-                'Try again or if the problem persists contact support',
-            warning_enabled: false,
-        }),
-        warning_subtle: folder({
-            warning_message_subtle: `We couldn't load the authors. Try again or if the
+            { collapsed: true }
+        ),
+        extra_action: folder(
+            {
+                extra_action_title: `View authors`,
+                extra_action_enabled: true,
+                extra_action_type: {
+                    options: { button: 'button', link: 'link' },
+                },
+            },
+            { collapsed: true }
+        ),
+        error: folder(
+            {
+                error_title: `We couldn't load the authors`,
+                error_description:
+                    'Try again or if the problem persists contact support',
+                error_enabled: false,
+            },
+            { collapsed: true }
+        ),
+        warning: folder(
+            {
+                warning_title: `We couldn't load the authors`,
+                warning_description:
+                    'Try again or if the problem persists contact support',
+                warning_enabled: false,
+            },
+            { collapsed: true }
+        ),
+        warning_subtle: folder(
+            {
+                warning_message_subtle: `We couldn't load the authors. Try again or if the
             problem persists contact support.`,
-            warning_enabled_subtle: false,
-        }),
-        error_subtle: folder({
-            error_message_subtle: `We couldn't load the authors. Try again or if the
+                warning_enabled_subtle: false,
+            },
+            { collapsed: true }
+        ),
+        error_subtle: folder(
+            {
+                error_message_subtle: `We couldn't load the authors. Try again or if the
             problem persists contact support.`,
-            error_enabled_subtle: false,
-        }),
-        loading: folder({
-            loading_enabled: false,
-            loading_title: 'Fetching users...',
-        }),
+                error_enabled_subtle: false,
+            },
+            { collapsed: true }
+        ),
+        loading: folder(
+            {
+                loading_enabled: false,
+                loading_title: 'Fetching users...',
+            },
+            { collapsed: true }
+        ),
     })
 
     const onClickBack = (e) => alert('click back')
