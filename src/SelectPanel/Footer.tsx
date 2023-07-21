@@ -30,7 +30,7 @@ function Footer({
     onClickConfirm?: () => void | undefined
     onClickCancel?: () => void | undefined
     size: DialogSizeType
-    selectedItems: [ItemType]
+    selectedItems: ItemType[]
     type: SelectionType
 }) {
     const showSaveCancel = declaritive || modal

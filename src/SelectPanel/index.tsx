@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
-import Header from './Header.js'
-import Footer from './Footer.js'
-import List from './List.js'
-import Loading from './Loading.js'
-import Notice from './Notice.js'
-import SubtleNotice from './SubtleNotice.js'
+import Header from './Header'
+import Footer from './Footer'
+import List from './List'
+import Loading from './Loading'
+import Notice from './Notice'
+import SubtleNotice from './SubtleNotice'
 
-import TemporaryDialog from './TemporaryDialog.js'
+import TemporaryDialog from './TemporaryDialog'
 
 import {
     SelectionType,
@@ -46,10 +46,10 @@ function SelectPanel({
     description?: string
     modal: boolean
     type: SelectionType
-    items: [ItemType]
+    items: ItemType[]
+    initialSelectedItems: ItemType[]
     size: DialogSizeType
     searchPlaceholder?: string
-    initialSelectedItems: [ItemType]
     declaritive: boolean
     searchValue?: string
     onClickBack?: () => void
@@ -63,7 +63,13 @@ function SelectPanel({
 }) {
     const [selectedItems, setSelectedItems] = useState(initialSelectedItems)
 
-    const onSelect = ({ item, selected }) => {
+    const onSelect = ({
+        item,
+        selected,
+    }: {
+        item: ItemType
+        selected: boolean
+    }) => {
         const selectedItemsWithout = selectedItems.filter(
             (selectedItem) => selectedItem.id !== item.id
         )
@@ -85,7 +91,7 @@ function SelectPanel({
             <Notice
                 title={error.title}
                 description={error.description}
-                type="error"
+                type={NoticeType.Error}
             />
         )
     } else if (warning) {
@@ -93,7 +99,7 @@ function SelectPanel({
             <Notice
                 title={warning.title}
                 description={warning.description}
-                type="warning"
+                type={NoticeType.Warning}
             />
         )
     } else if (items.length === 0) {
@@ -101,7 +107,7 @@ function SelectPanel({
             <Notice
                 title={empty.title}
                 description={empty.description}
-                type="empty"
+                type={NoticeType.Empty}
             />
         )
     }

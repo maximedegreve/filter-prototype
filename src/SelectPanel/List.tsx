@@ -9,8 +9,8 @@ function List({
     onSelect,
     type,
 }: {
-    items: [ItemType]
-    selectedItems: [ItemType]
+    items: ItemType[]
+    selectedItems: ItemType[]
     onSelect: ({
         item,
         selected,
