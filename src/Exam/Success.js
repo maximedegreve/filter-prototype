@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import { Box, useColorSchemeVar, ProgressBar } from '@primer/react'
+import {
+    Box,
+    Button,
+    useColorSchemeVar,
+    ProgressBar,
+    Label,
+} from '@primer/react'
 import { VIEW_HEIGHT } from './constants'
-import { TelescopeIcon } from '@primer/octicons-react'
+import { RocketIcon } from '@primer/octicons-react'
 
-import Fail from './Fail'
-import Success from './Success'
-
-function Step({ data, onPass, onFail, current, total }) {
-    const [result, setResult] = useState(null)
-
+function Success({ data, onContinue, total, current }) {
     const doImage = useColorSchemeVar(
         {
             light: data.step.image?.lightDo,
@@ -25,45 +25,27 @@ function Step({ data, onPass, onFail, current, total }) {
         data.step.image?.lightDont
     )
 
+    const CorrectLabel = () => (
+        <Label size="large" variant="success">
+            Correct
+        </Label>
+    )
+
+    const IncorrectLabel = () => (
+        <Label size="large" variant="danger">
+            Incorrect
+        </Label>
+    )
+
     const imageLeft = data.useCorrect ? doImage : dontImage
     const imageRight = data.useCorrect ? dontImage : doImage
+    const LabelLeft = data.useCorrect ? CorrectLabel : IncorrectLabel
+    const LabelRight = data.useCorrect ? IncorrectLabel : CorrectLabel
+    const messageLeft = data.useCorrect ? data.step.do : data.step.dont
+    const messageRight = data.useCorrect ? data.step.dont : data.step.do
 
-    const setSuccess = () => {
-        setResult('success')
-    }
-
-    const setFailed = () => {
-        setResult('failed')
-    }
-
-    if (result === 'failed') {
-        return (
-            <Fail
-                data={data}
-                current={current}
-                total={total}
-                onContinue={() => {
-                    onFail()
-                    setResult(null)
-                }}
-            />
-        )
-    }
-
-    if (result === 'success') {
-        return (
-            <Success
-                data={data}
-                current={current}
-                total={total}
-                onContinue={() => {
-                    onPass()
-                    setResult(null)
-                }}
-            />
-        )
-    }
     const left = total - current
+
     return (
         <Box sx={{ minHeight: VIEW_HEIGHT }}>
             <Box
@@ -71,24 +53,32 @@ function Step({ data, onPass, onFail, current, total }) {
             >
                 <Box
                     sx={{
-                        bg: 'accent.subtle',
-                        color: 'accent.fg',
-                        py: 2,
-                        borderRadius: 20,
-                        fontSize: 1,
+                        bg: 'success.subtle',
+                        minHeight: 46,
+                        borderRadius: 23,
                         display: 'flex',
-                        px: 3,
+                        fontSize: 1,
+                        alignItems: 'center',
+                        pl: 3,
+                        pr: '12px',
+                        color: 'success.fg',
                         borderWidth: 1,
                         borderStyle: 'solid',
-                        alignItems: 'center',
-                        borderColor: 'accent.muted',
+                        borderColor: 'success.muted',
                     }}
                 >
                     <Box sx={{ display: 'flex', mr: 2 }}>
-                        <TelescopeIcon />
+                        <RocketIcon />
                     </Box>
-                    Which variant is the correct application of{' '}
-                    {data.step.component}?
+                    Congratulations! You've picked the correct application of{' '}
+                    {data.step.component}
+                    <Button
+                        onClick={onContinue}
+                        sx={{ ml: 3, borderRadius: 20 }}
+                        size="small"
+                    >
+                        Continue
+                    </Button>
                 </Box>
             </Box>
             <Box
@@ -99,7 +89,6 @@ function Step({ data, onPass, onFail, current, total }) {
                 }}
             >
                 <Box
-                    onClick={data.useCorrect ? setSuccess : setFailed}
                     sx={{
                         width: '100%',
                         display: 'flex',
@@ -111,30 +100,37 @@ function Step({ data, onPass, onFail, current, total }) {
                         borderRadius: '12px',
                         borderWidth: 1,
                         borderStyle: 'solid',
+                        overflow: 'hidden',
                         borderColor: 'border.subtle',
-                        cursor: 'pointer',
-                        transition: 'all .2s ease-in-out',
-                        ':hover': {
-                            transform: 'scale(1.02)',
-                            bg: 'canvas.inset',
-                        },
-                        img: {
-                            maxWidth: 465,
-                            width: '100%',
-                        },
                     }}
                 >
+                    <Box sx={{ position: 'absolute', left: 3, top: 3 }}>
+                        <LabelLeft />
+                    </Box>
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            bg: 'primer.canvas.backdrop',
+                            left: 0,
+                            bottom: 0,
+                            right: 0,
+                            p: 3,
+                            fontSize: 0,
+                            borderTopWidth: 1,
+                            borderTopStyle: 'solid',
+                            borderTopColor: 'border.subtle',
+                        }}
+                    >
+                        {messageLeft}
+                    </Box>
                     <img
                         src={imageLeft}
-                        width="100%"
-                        maxWidth={456}
                         alt="to be added"
                         srcSet={`${imageLeft} 1x, ${imageLeft} 2x`}
                     />
                 </Box>
 
                 <Box
-                    onClick={data.useCorrect ? setFailed : setSuccess}
                     sx={{
                         width: '100%',
                         display: 'flex',
@@ -144,21 +140,31 @@ function Step({ data, onPass, onFail, current, total }) {
                         alignItems: 'center',
                         height: 500,
                         borderRadius: '12px',
+                        overflow: 'hidden',
                         borderWidth: 1,
                         borderStyle: 'solid',
                         borderColor: 'border.subtle',
-                        cursor: 'pointer',
-                        transition: 'all .2s ease-in-out',
-                        ':hover': {
-                            transform: 'scale(1.02)',
-                            bg: 'canvas.inset',
-                        },
-                        img: {
-                            maxWidth: 465,
-                            width: '100%',
-                        },
                     }}
                 >
+                    <Box sx={{ position: 'absolute', left: 3, top: 3 }}>
+                        <LabelRight />
+                    </Box>
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            bg: 'primer.canvas.backdrop',
+                            left: 0,
+                            bottom: 0,
+                            right: 0,
+                            p: 3,
+                            fontSize: 0,
+                            borderTopWidth: 1,
+                            borderTopStyle: 'solid',
+                            borderTopColor: 'border.subtle',
+                        }}
+                    >
+                        {messageRight}
+                    </Box>
                     <img
                         src={imageRight}
                         alt="to be added"
@@ -192,4 +198,4 @@ function Step({ data, onPass, onFail, current, total }) {
     )
 }
 
-export default Step
+export default Success
