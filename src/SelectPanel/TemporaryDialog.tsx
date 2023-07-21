@@ -13,7 +13,7 @@ function TemporaryDialog({
     modal: boolean
     size: DialogSizeType
     ariaLabelledby: string
-    ariaDescribedby: string
+    ariaDescribedby?: string
 }) {
     let pxWidth = 320
     let pxHeight = 432

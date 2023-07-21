@@ -5,6 +5,7 @@ import {
     ExtraActionButtonType,
     ExtraActionLinkType,
     ExtraActionCheckboxType,
+    DialogSizeType,
 } from './types'
 
 import ResponsiveButton from './ResponsiveButton'
@@ -28,12 +29,12 @@ function Footer({
         | undefined
     onClickConfirm?: () => void | undefined
     onClickCancel?: () => void | undefined
-    size: string
+    size: DialogSizeType
     selectedItems: [ItemType]
     type: SelectionType
 }) {
     const showSaveCancel = declaritive || modal
-    const alwaysMedium = size !== 'small' && modal
+    const alwaysMedium = size !== DialogSizeType.Small && modal
     const totalSelection = selectedItems.length
     const isMultiple = type === SelectionType.Multiple
     return (

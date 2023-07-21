@@ -146,7 +146,7 @@ function Header({
                         value={searchValue}
                         onChange={onSearchValueChange}
                         width="100%"
-                        placeholder={searchPlaceholder}
+                        placeholder={searchPlaceholder || 'Search'}
                         size="medium"
                         autoFocus
                         onKeyDown={onKeyDownDelegate}
