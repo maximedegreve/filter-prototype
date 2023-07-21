@@ -26,8 +26,6 @@ function List({ items, selectedItems, onSelect, type }) {
         return !!selectedItems?.find((item) => item.id === id)
     }
 
-    const isSingleGroup =
-        selectedItemsGroup.length === 0 || unSelectedItemsGroup.length === 0
     let hasBlockDescriptions =
         items?.filter((item) => item.descriptionVariant === 'block').length > 0
 
