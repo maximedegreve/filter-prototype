@@ -1,6 +1,12 @@
 import { Box } from '@primer/react'
 
-function TemporaryDialog({ children, modal, size }) {
+function TemporaryDialog({
+    children,
+    modal,
+    size,
+    ariaLabelledby,
+    ariaDescribedby,
+}) {
     let pxWidth = 320
     let pxHeight = 432
 
@@ -44,7 +50,10 @@ function TemporaryDialog({ children, modal, size }) {
             }}
         >
             <Box
-                role={modal ? 'dialog' : 'overlay'}
+                role="dialog"
+                aria-labelledby={ariaLabelledby}
+                aria-describedby={ariaDescribedby}
+                aria-modal={modal}
                 sx={{
                     display: 'flex',
                     maxWidth: ['100%', '100%', pxWidth, pxWidth],

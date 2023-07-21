@@ -85,7 +85,12 @@ function SelectPanel({
     }
 
     return (
-        <TemporaryDialog modal={modal} size={size}>
+        <TemporaryDialog
+            modal={modal}
+            size={size}
+            ariaLabelledby={title}
+            ariaDescribedby={description}
+        >
             <Header
                 title={title}
                 onSearchValueChange={onSearchValueChange}
@@ -94,6 +99,7 @@ function SelectPanel({
                 description={description}
                 searchPlaceholder={searchPlaceholder}
                 subtleLoading={subtleLoading}
+                modal={modal}
                 onKeyDown={() => alert('test')}
                 onClickBack={onClickBack}
                 showClearIcon={selectedItems.length > 0}

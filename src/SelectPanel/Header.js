@@ -7,11 +7,6 @@ import {
 } from '@primer/octicons-react'
 import ClearIcon from './ClearIcon.js'
 
-// Input component
-// Tooltip should not appear for clearing
-// No content for tooltip results in empty tooltip
-// Clearing should not have a background state
-
 function Header({
     title,
     onSearchValueChange,
@@ -20,12 +15,12 @@ function Header({
     searchValue,
     searchPlaceholder,
     description,
+    modal,
     onClickBack,
     onClickClear,
     showClearIcon,
     bordered,
     subtleLoading,
-    tooltipDirection,
 }) {
     const onKeyDownDelegate = (e) => {
         if (e.keyCode === 40) {
@@ -34,6 +29,7 @@ function Header({
     }
     return (
         <Box
+            role="header"
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -77,6 +73,7 @@ function Header({
                     }}
                 >
                     <Text
+                        as={modal ? 'h1' : 'h2'}
                         sx={{
                             fontSize: 1,
                             textOverflow: 'ellipsis',
@@ -108,6 +105,7 @@ function Header({
                     {showClearIcon && (
                         <Tooltip text="Clear selection">
                             <IconButton
+                                aria-label="Clear selection"
                                 variant="invisible"
                                 icon={ClearIcon}
                                 onClick={onClickClear}
@@ -115,7 +113,11 @@ function Header({
                         </Tooltip>
                     )}
                     <Tooltip text="Close">
-                        <IconButton variant="invisible" icon={XIcon} />
+                        <IconButton
+                            variant="invisible"
+                            icon={XIcon}
+                            aria-label="Close"
+                        />
                     </Tooltip>
                 </Box>
             </Box>

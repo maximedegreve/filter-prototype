@@ -18,6 +18,7 @@ function Footer({
     const isMultiple = type === 'multiple'
     return (
         <Box
+            role="footer"
             sx={{
                 borderTopColor: 'border.default',
                 borderTopWidth: 1,
