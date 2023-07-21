@@ -331,7 +331,7 @@ function Explorer() {
                 }}
                 extraAction={
                     extra_action_enabled && {
-                        title: extra_action_title,
+                        text: extra_action_title,
                         onClick: onClickExtraAction,
                         type: extra_action_type,
                     }
