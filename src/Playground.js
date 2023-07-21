@@ -190,7 +190,7 @@ function Playground() {
                                     color: 'fg.muted',
                                 }}
                             >
-                                Checklist{' '}
+                                Requirements{' '}
                                 {possibleFeatures.length > 0 &&
                                     `(${possibleFeatures.length})`}
                             </Text>
