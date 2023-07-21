@@ -1,6 +1,11 @@
 import { Box } from '@primer/react'
 import { SelectionType } from './types'
-import { ItemType } from './types'
+import {
+    ItemType,
+    ExtraActionButtonType,
+    ExtraActionLinkType,
+    ExtraActionCheckboxType,
+} from './types'
 
 import ResponsiveButton from './ResponsiveButton'
 
@@ -16,9 +21,13 @@ function Footer({
 }: {
     declaritive: boolean
     modal: boolean
-    extraAction: string
-    onClickConfirm: void
-    onClickCancel: void
+    extraAction:
+        | ExtraActionButtonType
+        | ExtraActionLinkType
+        | ExtraActionCheckboxType
+        | undefined
+    onClickConfirm?: () => void | undefined
+    onClickCancel?: () => void | undefined
     size: string
     selectedItems: [ItemType]
     type: SelectionType
@@ -54,15 +63,23 @@ function Footer({
                 pr: 3,
             }}
         >
-            {extraAction && (
+            {extraAction?.type === 'button' && (
                 <ResponsiveButton
                     alwaysMedium={alwaysMedium}
-                    variant={
-                        extraAction.type === 'button' ? 'default' : 'invisible'
-                    }
+                    variant="default"
                     onClick={extraAction.onClick}
                 >
-                    {extraAction.title}
+                    {extraAction.text}
+                </ResponsiveButton>
+            )}
+
+            {extraAction?.type === 'link' && (
+                <ResponsiveButton
+                    alwaysMedium={alwaysMedium}
+                    variant="invisible"
+                    onClick={extraAction.onClick}
+                >
+                    {extraAction.text}
                 </ResponsiveButton>
             )}
 

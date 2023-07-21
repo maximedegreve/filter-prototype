@@ -6,32 +6,40 @@ import { Button } from '@primer/react'
 
 function ResponsiveButton({
     children,
+    variant,
     alwaysMedium,
+    onClick,
     ...rest
 }: {
     children: ReactNode
+    variant?: 'default' | 'primary' | 'invisible' | 'danger'
     alwaysMedium: boolean
+    onClick?: () => void | undefined
 }) {
     return (
         <>
             <Button
                 size="medium"
+                variant={variant}
                 sx={{
                     display: alwaysMedium
                         ? 'inline'
                         : ['inline', 'inline', 'none', 'none'],
                 }}
+                onClick={onClick}
                 {...rest}
             >
                 {children}
             </Button>
             <Button
                 size="small"
+                variant={variant}
                 sx={{
                     display: alwaysMedium
                         ? 'none'
                         : ['none', 'none', 'inline', 'inline'],
                 }}
+                onClick={onClick}
                 {...rest}
             >
                 {children}

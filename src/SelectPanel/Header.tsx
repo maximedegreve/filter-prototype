@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Box, IconButton, TextInput, Text, Tooltip } from '@primer/react'
 import {
     XIcon,
@@ -10,20 +9,34 @@ import ClearIcon from './ClearIcon'
 
 function Header({
     title,
+    description,
+    modal,
+    bordered,
+    subtleLoading,
+    showClearIcon,
+    searchValue,
+    searchPlaceholder,
     onSearchValueChange,
     onSearchValueClear,
     onKeyDown,
-    searchValue,
-    searchPlaceholder,
-    description,
-    modal,
     onClickBack,
     onClickClear,
-    showClearIcon,
-    bordered,
-    subtleLoading,
+}: {
+    title: string
+    description?: string
+    modal: boolean
+    bordered: boolean
+    subtleLoading: boolean
+    showClearIcon: boolean
+    searchValue?: string
+    searchPlaceholder?: string
+    onSearchValueChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
+    onSearchValueClear?: () => void
+    onClickBack?: () => void
+    onClickClear: () => void
+    onKeyDown: () => void
 }) {
-    const onKeyDownDelegate = (e) => {
+    const onKeyDownDelegate = (e: React.KeyboardEvent<HTMLElement>) => {
         if (e.keyCode === 40) {
             onKeyDown()
         }
@@ -127,7 +140,7 @@ function Header({
                 <Box sx={{ width: '100%', px: 2, pb: '12px' }}>
                     <TextInput
                         leadingVisual={!subtleLoading && SearchIcon}
-                        loaderPosition={subtleLoading && 'leading'}
+                        loaderPosition={subtleLoading ? 'leading' : undefined}
                         loading={subtleLoading}
                         aria-label="Search"
                         value={searchValue}

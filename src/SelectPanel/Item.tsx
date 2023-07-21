@@ -4,13 +4,7 @@ import { ItemType } from './types'
 type ItemDataType = {
     item: ItemType
     selected: boolean
-    onSelect?:
-        | ((
-              event:
-                  | React.KeyboardEvent<HTMLLIElement>
-                  | React.MouseEvent<HTMLLIElement, MouseEvent>
-          ) => void)
-        | undefined
+    onSelect?: (() => void) | undefined
 }
 
 function Item({ item, selected, onSelect }: ItemDataType) {

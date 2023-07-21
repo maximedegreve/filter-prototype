@@ -1,11 +1,31 @@
-import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { Box, ActionList } from '@primer/react'
-import Item from './Item.tsx'
+import Item from './Item'
+import { SelectionType, ItemType } from './types'
 
-function List({ items, selectedItems, onSelect, type }) {
-    const [selectedItemsGroup, setSelectedItemsGroup] = useState([])
-    const [unSelectedItemsGroup, setUnselectedItemsGroup] = useState([])
+function List({
+    items,
+    selectedItems,
+    onSelect,
+    type,
+}: {
+    items: [ItemType]
+    selectedItems: [ItemType]
+    onSelect: ({
+        item,
+        selected,
+    }: {
+        item: ItemType
+        selected: boolean
+    }) => void
+    type: SelectionType
+}) {
+    const [selectedItemsGroup, setSelectedItemsGroup] = useState<
+        ItemType[] | []
+    >([])
+    const [unSelectedItemsGroup, setUnselectedItemsGroup] = useState<
+        ItemType[] | []
+    >([])
 
     useEffect(() => {
         const selectedItemIds = selectedItems.map((item) => item.id)
@@ -23,7 +43,7 @@ function List({ items, selectedItems, onSelect, type }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [items])
 
-    const isSelected = (id) => {
+    const isSelected = (id: string | number) => {
         return !!selectedItems?.find((item) => item.id === id)
     }
 
