@@ -113,6 +113,7 @@ function SelectPanel({
             )}
             <Footer
                 size={size}
+                type={type}
                 selectedItems={selectedItems}
                 declaritive={declaritive}
                 onClickConfirm={() => alert('clicked confirm')}

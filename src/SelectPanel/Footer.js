@@ -10,10 +10,12 @@ function Footer({
     onClickCancel,
     size,
     selectedItems,
+    type,
 }) {
     const showSaveCancel = declaritive || modal
     const alwaysMedium = size !== 'small' && modal
     const totalSelection = selectedItems.length
+    const isMultiple = type === 'multiple'
     return (
         <Box
             sx={{
@@ -65,7 +67,8 @@ function Footer({
                     alwaysMedium={alwaysMedium}
                     onClick={onClickConfirm}
                 >
-                    Done{totalSelection > 0 && ` (${totalSelection})`}
+                    Done
+                    {totalSelection > 0 && isMultiple && ` (${totalSelection})`}
                 </ResponsiveButton>
             </Box>
             <Box
@@ -92,7 +95,10 @@ function Footer({
                         variant="primary"
                         onClick={onClickConfirm}
                     >
-                        Save{totalSelection > 0 && ` (${totalSelection})`}
+                        Save
+                        {totalSelection > 0 &&
+                            isMultiple &&
+                            ` (${totalSelection})`}
                     </ResponsiveButton>
                 </Box>
             </Box>
