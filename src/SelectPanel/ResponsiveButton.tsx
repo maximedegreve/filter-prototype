@@ -1,8 +1,17 @@
+import { ReactNode } from 'react'
 import { Button } from '@primer/react'
 
-// Created this because buttons right now don't support responsive values for the size
+// 🐛 Waiting for a Primer fix to remove this file
+// https://github.com/github/primer/issues/2408
 
-function ResponsiveButton({ children, alwaysMedium, ...rest }) {
+function ResponsiveButton({
+    children,
+    alwaysMedium,
+    ...rest
+}: {
+    children: ReactNode
+    alwaysMedium: boolean
+}) {
     return (
         <>
             <Button

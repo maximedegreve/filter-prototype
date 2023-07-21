@@ -1,4 +1,6 @@
+import { ReactNode } from 'react'
 import { Box } from '@primer/react'
+import { DialogSizeType } from './types'
 
 function TemporaryDialog({
     children,
@@ -6,47 +8,56 @@ function TemporaryDialog({
     size,
     ariaLabelledby,
     ariaDescribedby,
+}: {
+    children: ReactNode
+    modal: boolean
+    size: DialogSizeType
+    ariaLabelledby: string
+    ariaDescribedby: string
 }) {
     let pxWidth = 320
     let pxHeight = 432
 
-    if (size === 'medium') {
-        pxWidth = 480
-        pxHeight = 320
+    switch (size) {
+        case DialogSizeType.Medium:
+            pxWidth = 480
+            pxHeight = 320
+            break
+        case DialogSizeType.Portrait:
+            pxWidth = 480
+            pxHeight = 600
+            break
+        case DialogSizeType.Large:
+            pxWidth = 640
+            pxHeight = 432
+            break
+        case DialogSizeType.XLarge:
+            pxWidth = 960
+            pxHeight = 600
+            break
+        default:
+            pxWidth = 320
+            pxHeight = 432
     }
 
-    if (size === 'portrait') {
-        pxWidth = 480
-        pxHeight = 600
-    }
-
-    if (size === 'large') {
-        pxWidth = 640
-        pxHeight = 432
-    }
-
-    if (size === 'xlarge') {
-        pxWidth = 960
-        pxHeight = 600
-    }
     return (
         <Box
             sx={{
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: 2,
                 display: modal ? 'flex' : 'block',
                 justifyContent: 'center',
                 alignItems: 'center',
-                bg: modal && 'neutral.muted',
+                bg: modal ? 'neutral.muted' : 'transparent',
                 position: [
                     'fixed',
                     'fixed',
                     modal ? 'fixed' : 'absolute',
                     modal ? 'fixed' : 'absolute',
                 ],
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: 2,
             }}
         >
             <Box

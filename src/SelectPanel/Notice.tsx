@@ -1,7 +1,17 @@
+import { ReactNode } from 'react'
 import { Box, Text } from '@primer/react'
 import { AlertIcon } from '@primer/octicons-react'
+import { NoticeType } from './types'
 
-function Notice({ title, description, type }) {
+function Notice({
+    title,
+    description,
+    type,
+}: {
+    title: string
+    description: ReactNode
+    type: NoticeType
+}) {
     return (
         <Box
             sx={{
@@ -20,9 +30,12 @@ function Notice({ title, description, type }) {
         >
             <Box
                 sx={{
-                    color: type === 'warning' ? 'attention.fg' : 'danger.fg',
+                    color:
+                        type === NoticeType.Warning
+                            ? 'attention.fg'
+                            : 'danger.fg',
                     pb: 2,
-                    display: type === 'empty' ? 'none' : 'block',
+                    display: type === NoticeType.Empty ? 'none' : 'block',
                 }}
             >
                 <AlertIcon size={16} />

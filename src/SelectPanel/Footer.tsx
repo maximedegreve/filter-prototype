@@ -1,4 +1,6 @@
 import { Box } from '@primer/react'
+import { SelectionType } from './types'
+import { ItemType } from './types'
 
 import ResponsiveButton from './ResponsiveButton'
 
@@ -11,11 +13,20 @@ function Footer({
     size,
     selectedItems,
     type,
+}: {
+    declaritive: boolean
+    modal: boolean
+    extraAction: string
+    onClickConfirm: void
+    onClickCancel: void
+    size: string
+    selectedItems: [ItemType]
+    type: SelectionType
 }) {
     const showSaveCancel = declaritive || modal
     const alwaysMedium = size !== 'small' && modal
     const totalSelection = selectedItems.length
-    const isMultiple = type === 'multiple'
+    const isMultiple = type === SelectionType.Multiple
     return (
         <Box
             role="footer"
@@ -24,7 +35,7 @@ function Footer({
                 borderTopWidth: 1,
                 borderTopStyle: 'solid',
                 alignItems: 'center',
-                gridGap: 4,
+                gap: 4,
                 display:
                     showSaveCancel || extraAction
                         ? 'grid'
@@ -81,7 +92,7 @@ function Footer({
                 <Box
                     sx={{
                         display: 'inline-grid',
-                        gridGap: 2,
+                        gap: 2,
                         gridTemplateColumns: 'auto auto',
                     }}
                 >

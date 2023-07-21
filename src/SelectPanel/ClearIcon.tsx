@@ -1,7 +1,3 @@
-import React from 'react'
-
-// This needs to move inside Octicons
-
 function ClearIcon() {
     return (
         <svg

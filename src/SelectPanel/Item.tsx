@@ -1,6 +1,19 @@
 import { ActionList } from '@primer/react'
+import { ItemType } from './types'
 
-function Item({ item, selected, onSelect }) {
+type ItemDataType = {
+    item: ItemType
+    selected: boolean
+    onSelect?:
+        | ((
+              event:
+                  | React.KeyboardEvent<HTMLLIElement>
+                  | React.MouseEvent<HTMLLIElement, MouseEvent>
+          ) => void)
+        | undefined
+}
+
+function Item({ item, selected, onSelect }: ItemDataType) {
     return (
         <ActionList.Item key={item.id} selected={selected} onSelect={onSelect}>
             {item.leadingVisual && (
@@ -11,11 +24,7 @@ function Item({ item, selected, onSelect }) {
             {item.text}
             {item.description && (
                 <ActionList.Description
-                    variant={
-                        item.descriptionVariant
-                            ? item.descriptionVariant
-                            : 'block'
-                    }
+                    variant={item.descriptionVariant || 'block'}
                 >
                     {item.description}
                 </ActionList.Description>

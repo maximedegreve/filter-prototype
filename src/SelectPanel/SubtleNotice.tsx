@@ -1,7 +1,15 @@
+import { ReactNode } from 'react'
 import { Box } from '@primer/react'
 import { AlertIcon } from '@primer/octicons-react'
+import { NoticeType } from './types'
 
-function SubtleNotice({ message, type }) {
+function SubtleNotice({
+    message,
+    type,
+}: {
+    message: ReactNode
+    type: NoticeType
+}) {
     const iconSize = 16
     return (
         <Box
@@ -11,27 +19,35 @@ function SubtleNotice({ message, type }) {
                 py: '12px',
                 display: 'grid',
                 px: 3,
-                color: type === 'warning' ? 'attention.fg' : 'danger.fg',
+                color:
+                    type === NoticeType.Warning ? 'attention.fg' : 'danger.fg',
                 gridTemplateColumns: `${iconSize}px auto`,
-                gridGap: 2,
+                gap: 2,
                 borderBottomColor:
-                    type === 'warning' ? 'attention.muted' : 'danger.muted',
+                    type === NoticeType.Warning
+                        ? 'attention.muted'
+                        : 'danger.muted',
                 borderBottomStyle: 'solid',
                 borderBottomWidth: 1,
                 borderTopWidth: 1,
                 borderTopStyle: 'solid',
                 borderTopColor:
-                    type === 'warning' ? 'attention.muted' : 'danger.muted',
+                    type === NoticeType.Warning
+                        ? 'attention.muted'
+                        : 'danger.muted',
                 fontSize: 0,
                 a: {
-                    color: type === 'warning' ? 'attention.fg' : 'danger.fg',
+                    color:
+                        type === NoticeType.Warning
+                            ? 'attention.fg'
+                            : 'danger.fg',
                 },
             }}
         >
             <Box sx={{ display: 'grid', pt: '1px' }}>
                 <AlertIcon size={iconSize} />
             </Box>
-            <Box sx={{}}>{message}</Box>
+            <Box>{message}</Box>
         </Box>
     )
 }

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { Box, IconButton, TextInput, Text, Tooltip } from '@primer/react'
 import {
     XIcon,
@@ -5,7 +6,7 @@ import {
     SearchIcon,
     ArrowLeftIcon,
 } from '@primer/octicons-react'
-import ClearIcon from './ClearIcon.js'
+import ClearIcon from './ClearIcon'
 
 function Header({
     title,
@@ -53,6 +54,7 @@ function Header({
                         <Tooltip text="Back">
                             <IconButton
                                 variant="invisible"
+                                aria-label="Back"
                                 onClick={onClickBack}
                                 icon={ArrowLeftIcon}
                             />

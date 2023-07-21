@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
-import Header from './Header.js'
-import Footer from './Footer.js'
-import List from './List.js'
-import Loading from './Loading.js'
-import Notice from './Notice.js'
-import SubtleNotice from './SubtleNotice.js'
+import Header from './Header.tsx'
+import Footer from './Footer.tsx'
+import List from './List.tsx'
+import Loading from './Loading.tsx'
+import Notice from './Notice.tsx'
+import SubtleNotice from './SubtleNotice.tsx'
 
-import TemporaryDialog from './TemporaryDialog.js'
+import TemporaryDialog from './TemporaryDialog.tsx'
 
 function SelectPanel({
     type = 'single',

@@ -1,6 +1,7 @@
+import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { Box, ActionList } from '@primer/react'
-import Item from './Item'
+import Item from './Item.tsx'
 
 function List({ items, selectedItems, onSelect, type }) {
     const [selectedItemsGroup, setSelectedItemsGroup] = useState([])
