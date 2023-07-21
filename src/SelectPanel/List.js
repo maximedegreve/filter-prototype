@@ -48,7 +48,6 @@ function List({ items, selectedItems, onSelect, type }) {
                         }
                     />
                 ))}
-                {!isSingleGroup && <ActionList.Divider />}
                 {unSelectedItemsGroup.map((item) => (
                     <Item
                         item={item}

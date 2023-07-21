@@ -296,7 +296,7 @@ function Explorer() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                bg: 'canvas.default',
+                bg: 'canvas.subtle',
                 width: '100%',
                 height: '100vh',
             }}
