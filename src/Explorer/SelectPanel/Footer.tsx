@@ -5,6 +5,7 @@ import {
     ExtraActionButton,
     ExtraActionLink,
     ExtraActionCheckbox,
+    ExtraActionType,
     DialogSize,
 } from './types'
 
@@ -64,7 +65,8 @@ function Footer({
                 pr: 3,
             }}
         >
-            {extraAction?.type === 'button' && (
+            {extraAction?.type === ExtraActionType.Checkbox && <>checkbox</>}
+            {extraAction?.type === ExtraActionType.Button && (
                 <ResponsiveButton
                     alwaysMedium={alwaysMedium}
                     variant="default"
@@ -74,7 +76,7 @@ function Footer({
                 </ResponsiveButton>
             )}
 
-            {extraAction?.type === 'link' && (
+            {extraAction?.type === ExtraActionType.Link && (
                 <ResponsiveButton
                     alwaysMedium={alwaysMedium}
                     variant="invisible"

@@ -114,7 +114,7 @@ function SelectPanel({
             {items.length === 0 && !isLoading && !message && (
                 <Empty title={empty.title} description={empty.description} />
             )}
-            {message && !(items.length === 0 && isLoading) && (
+            {!(items.length === 0 && isLoading) && message && (
                 <Message
                     title={message.title}
                     description={message.description}

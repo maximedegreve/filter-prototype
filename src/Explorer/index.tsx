@@ -1,5 +1,5 @@
 import { useControls, folder } from 'leva'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Box } from '@primer/react'
 
 import SelectPanel from './SelectPanel'
@@ -12,6 +12,7 @@ import {
     MessageLevel,
     ExtraActionButton,
     ExtraActionLink,
+    ExtraActionCheckbox,
 } from './SelectPanel/types'
 
 import { defaultSelectedItems, defaultItems } from './data'
@@ -43,6 +44,7 @@ function Explorer() {
         extra_action_title,
         extra_action_enabled,
         extra_action_type,
+        extra_action_checked,
         size,
     } = useControls({
         title: 'Select authors',
@@ -100,13 +102,19 @@ function Explorer() {
         ),
         extra_action: folder(
             {
-                extra_action_title: `View authors`,
                 extra_action_enabled: true,
                 extra_action_type: {
                     options: {
                         button: ExtraActionType.Button,
                         link: ExtraActionType.Link,
+                        checkbox: ExtraActionType.Checkbox,
                     },
+                },
+                extra_action_title: `View authors`,
+                extra_action_checked: {
+                    value: true,
+                    render: (get) =>
+                        get('extra_action.extra_action_type') === 'checkbox',
                 },
             },
             { collapsed: true }
@@ -115,6 +123,8 @@ function Explorer() {
 
     const onClickBack = () => alert('click back')
     const onClickExtraAction = () => alert('click extra action')
+    const onClickCheckbox = (event: React.ChangeEvent<HTMLInputElement>) =>
+        alert(`clicked checkbox ${event}`)
 
     const message: Message = {
         title: message_title,
@@ -122,10 +132,36 @@ function Explorer() {
         level: message_level,
     }
 
-    const extraAction: ExtraActionButton = {
+    const extraActionButton: ExtraActionButton = {
         text: extra_action_title,
         onClick: onClickExtraAction,
         type: ExtraActionType.Button,
+    }
+
+    const extraActionCheckbox: ExtraActionCheckbox = {
+        text: extra_action_title,
+        checked: extra_action_checked,
+        onChange: onClickCheckbox,
+        type: ExtraActionType.Checkbox,
+    }
+
+    const extraActionLink: ExtraActionLink = {
+        text: extra_action_title,
+        onClick: onClickExtraAction,
+        type: ExtraActionType.Link,
+    }
+
+    let action = undefined
+
+    switch (extra_action_type) {
+        case ExtraActionType.Checkbox:
+            action = extraActionCheckbox
+            break
+        case ExtraActionType.Button:
+            action = extraActionButton
+            break
+        default:
+            action = extraActionLink
     }
 
     return (
@@ -150,7 +186,7 @@ function Explorer() {
                     title: empty_title,
                     description: empty_description,
                 }}
-                extraAction={extra_action_enabled ? extraAction : undefined}
+                extraAction={extra_action_enabled ? action : undefined}
                 size={size}
                 initialSelectedItems={defaultSelectedItems}
                 items={noItems ? [] : filteredItems}

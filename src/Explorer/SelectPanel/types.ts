@@ -47,8 +47,8 @@ export type ExtraActionLink = {
 
 export type ExtraActionCheckbox = {
     text: string | number
-    onChange: React.ChangeEvent<HTMLInputElement>
-    selected: boolean
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    checked: boolean
     type: ExtraActionType.Checkbox
 }
 
