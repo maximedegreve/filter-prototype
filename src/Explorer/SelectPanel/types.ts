@@ -27,23 +27,29 @@ export type Item = {
     trailingVisual?: ReactNode
 }
 
+export enum ExtraActionType {
+    Checkbox = 'checkbox',
+    Link = 'link',
+    Button = 'button',
+}
+
 export type ExtraActionButton = {
     text: string | number
     onClick: () => void
-    type: 'button'
+    type: ExtraActionType.Button
 }
 
 export type ExtraActionLink = {
     text: string | number
     onClick: () => void
-    type: 'link'
+    type: ExtraActionType.Link
 }
 
 export type ExtraActionCheckbox = {
     text: string | number
     onChange: React.ChangeEvent<HTMLInputElement>
     selected: boolean
-    type: 'checkbox'
+    type: ExtraActionType.Checkbox
 }
 
 export type Message = {
