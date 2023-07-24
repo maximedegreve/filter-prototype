@@ -1,10 +1,25 @@
 import { useState, useEffect } from 'react'
 import { Box, ActionList } from '@primer/react'
-import Item from './Item'
+import ActionListItem from './ActionListItem'
+import { SelectionVariant, Item } from './types'
 
-function List({ items, selectedItems, onSelect, type }) {
-    const [selectedItemsGroup, setSelectedItemsGroup] = useState([])
-    const [unSelectedItemsGroup, setUnselectedItemsGroup] = useState([])
+function List({
+    items,
+    selectedItems,
+    onSelect,
+    type,
+}: {
+    items: Item[]
+    selectedItems: Item[]
+    onSelect: ({ item, selected }: { item: Item; selected: boolean }) => void
+    type: SelectionVariant
+}) {
+    const [selectedItemsGroup, setSelectedItemsGroup] = useState<Item[] | []>(
+        []
+    )
+    const [unSelectedItemsGroup, setUnselectedItemsGroup] = useState<
+        Item[] | []
+    >([])
 
     useEffect(() => {
         const selectedItemIds = selectedItems.map((item) => item.id)
@@ -22,7 +37,7 @@ function List({ items, selectedItems, onSelect, type }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [items])
 
-    const isSelected = (id) => {
+    const isSelected = (id: string | number) => {
         return !!selectedItems?.find((item) => item.id === id)
     }
 
@@ -37,7 +52,7 @@ function List({ items, selectedItems, onSelect, type }) {
                 role="listbox"
             >
                 {selectedItemsGroup.map((item) => (
-                    <Item
+                    <ActionListItem
                         item={item}
                         key={item.id}
                         selected={isSelected(item.id)}
@@ -47,7 +62,7 @@ function List({ items, selectedItems, onSelect, type }) {
                     />
                 ))}
                 {unSelectedItemsGroup.map((item) => (
-                    <Item
+                    <ActionListItem
                         item={item}
                         key={item.id}
                         selected={isSelected(item.id)}

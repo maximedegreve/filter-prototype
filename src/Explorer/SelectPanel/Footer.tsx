@@ -1,4 +1,13 @@
-import { Box } from '@primer/react'
+import { Box, FormControl, Checkbox } from '@primer/react'
+import {
+    SelectionVariant,
+    Item,
+    ExtraActionButton,
+    ExtraActionLink,
+    ExtraActionCheckbox,
+    ExtraActionType,
+    DialogSize,
+} from './types'
 
 import ResponsiveButton from './ResponsiveButton'
 
@@ -11,11 +20,24 @@ function Footer({
     size,
     selectedItems,
     type,
+}: {
+    declaritive: boolean
+    modal: boolean
+    extraAction:
+        | ExtraActionButton
+        | ExtraActionLink
+        | ExtraActionCheckbox
+        | undefined
+    onClickConfirm?: () => void | undefined
+    onClickCancel?: () => void | undefined
+    size: DialogSize
+    selectedItems: Item[]
+    type: SelectionVariant
 }) {
     const showSaveCancel = declaritive || modal
-    const alwaysMedium = size !== 'small' && modal
+    const alwaysMedium = size !== DialogSize.Small && modal
     const totalSelection = selectedItems.length
-    const isMultiple = type === 'multiple'
+    const isMultiple = type === SelectionVariant.Multiple
     return (
         <Box
             role="footer"
@@ -24,7 +46,7 @@ function Footer({
                 borderTopWidth: 1,
                 borderTopStyle: 'solid',
                 alignItems: 'center',
-                gridGap: 4,
+                gap: 4,
                 display:
                     showSaveCancel || extraAction
                         ? 'grid'
@@ -43,15 +65,34 @@ function Footer({
                 pr: 3,
             }}
         >
-            {extraAction && (
+            {extraAction?.type === ExtraActionType.Checkbox && (
+                <FormControl>
+                    <Checkbox
+                        onChange={extraAction.onChange}
+                        id="default-checkbox"
+                    />
+                    <FormControl.Label sx={{ fontSize: [1, 1, 0, 0] }}>
+                        {extraAction.text}
+                    </FormControl.Label>
+                </FormControl>
+            )}
+            {extraAction?.type === ExtraActionType.Button && (
                 <ResponsiveButton
                     alwaysMedium={alwaysMedium}
-                    variant={
-                        extraAction.type === 'button' ? 'default' : 'invisible'
-                    }
+                    variant="default"
                     onClick={extraAction.onClick}
                 >
-                    {extraAction.title}
+                    {extraAction.text}
+                </ResponsiveButton>
+            )}
+
+            {extraAction?.type === ExtraActionType.Link && (
+                <ResponsiveButton
+                    alwaysMedium={alwaysMedium}
+                    variant="invisible"
+                    onClick={extraAction.onClick}
+                >
+                    {extraAction.text}
                 </ResponsiveButton>
             )}
 
@@ -81,7 +122,7 @@ function Footer({
                 <Box
                     sx={{
                         display: 'inline-grid',
-                        gridGap: 2,
+                        gap: 2,
                         gridTemplateColumns: 'auto auto',
                     }}
                 >

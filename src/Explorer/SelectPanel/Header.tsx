@@ -5,24 +5,38 @@ import {
     SearchIcon,
     ArrowLeftIcon,
 } from '@primer/octicons-react'
-import ClearIcon from './ClearIcon.js'
+import ClearIcon from './ClearIcon'
 
 function Header({
     title,
+    description,
+    modal,
+    bordered,
+    subtleLoading,
+    showClearIcon,
+    searchValue,
+    searchPlaceholder,
     onSearchValueChange,
     onSearchValueClear,
     onKeyDown,
-    searchValue,
-    searchPlaceholder,
-    description,
-    modal,
     onClickBack,
     onClickClear,
-    showClearIcon,
-    bordered,
-    subtleLoading,
+}: {
+    title: string
+    description?: string
+    modal: boolean
+    bordered: boolean
+    subtleLoading: boolean
+    showClearIcon: boolean
+    searchValue?: string
+    searchPlaceholder?: string
+    onSearchValueChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
+    onSearchValueClear?: () => void
+    onClickBack?: () => void
+    onClickClear: () => void
+    onKeyDown: () => void
 }) {
-    const onKeyDownDelegate = (e) => {
+    const onKeyDownDelegate = (e: React.KeyboardEvent<HTMLElement>) => {
         if (e.keyCode === 40) {
             onKeyDown()
         }
@@ -53,6 +67,7 @@ function Header({
                         <Tooltip text="Back">
                             <IconButton
                                 variant="invisible"
+                                aria-label="Back"
                                 onClick={onClickBack}
                                 icon={ArrowLeftIcon}
                             />
@@ -125,13 +140,13 @@ function Header({
                 <Box sx={{ width: '100%', px: 2, pb: '12px' }}>
                     <TextInput
                         leadingVisual={!subtleLoading && SearchIcon}
-                        loaderPosition={subtleLoading && 'leading'}
+                        loaderPosition={subtleLoading ? 'leading' : undefined}
                         loading={subtleLoading}
                         aria-label="Search"
                         value={searchValue}
                         onChange={onSearchValueChange}
                         width="100%"
-                        placeholder={searchPlaceholder}
+                        placeholder={searchPlaceholder || 'Search'}
                         size="medium"
                         autoFocus
                         onKeyDown={onKeyDownDelegate}

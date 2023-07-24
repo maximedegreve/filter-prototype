@@ -1,6 +1,6 @@
 import { Box, Text, Spinner } from '@primer/react'
 
-function Loading({ message }) {
+function Loading({ message }: { message: string }) {
     return (
         <Box
             sx={{
@@ -19,7 +19,6 @@ function Loading({ message }) {
             >
                 <Spinner />
             </Box>
-
             <Text sx={{ textAlign: 'center', fontSize: 0, color: 'fg.muted' }}>
                 {message}
             </Text>
