@@ -1,15 +1,8 @@
-import { ReactNode } from 'react'
 import { Box } from '@primer/react'
 import { AlertIcon } from '@primer/octicons-react'
-import { NoticeType } from './types'
+import { Message, MessageLevel } from '../types'
 
-function SubtleNotice({
-    message,
-    type,
-}: {
-    message: ReactNode
-    type: NoticeType
-}) {
+function SubtleMessage({ title, level }: Message) {
     const iconSize = 16
     return (
         <Box
@@ -20,11 +13,13 @@ function SubtleNotice({
                 display: 'grid',
                 px: 3,
                 color:
-                    type === NoticeType.Warning ? 'attention.fg' : 'danger.fg',
+                    level === MessageLevel.Warning
+                        ? 'attention.fg'
+                        : 'danger.fg',
                 gridTemplateColumns: `${iconSize}px auto`,
                 gap: 2,
                 borderBottomColor:
-                    type === NoticeType.Warning
+                    level === MessageLevel.Warning
                         ? 'attention.muted'
                         : 'danger.muted',
                 borderBottomStyle: 'solid',
@@ -32,13 +27,13 @@ function SubtleNotice({
                 borderTopWidth: 1,
                 borderTopStyle: 'solid',
                 borderTopColor:
-                    type === NoticeType.Warning
+                    level === MessageLevel.Warning
                         ? 'attention.muted'
                         : 'danger.muted',
                 fontSize: 0,
                 a: {
                     color:
-                        type === NoticeType.Warning
+                        level === MessageLevel.Warning
                             ? 'attention.fg'
                             : 'danger.fg',
                 },
@@ -47,9 +42,9 @@ function SubtleNotice({
             <Box sx={{ display: 'grid', pt: '1px' }}>
                 <AlertIcon size={iconSize} />
             </Box>
-            <Box>{message}</Box>
+            <Box>{title}</Box>
         </Box>
     )
 }
 
-export default SubtleNotice
+export default SubtleMessage

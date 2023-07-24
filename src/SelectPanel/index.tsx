@@ -4,19 +4,20 @@ import Header from './Header'
 import Footer from './Footer'
 import List from './List'
 import Loading from './Loading'
-import Notice from './Notice'
-import SubtleNotice from './SubtleNotice'
+import Message from './Message'
+import Empty from './Empty'
 
 import TemporaryDialog from './TemporaryDialog'
 
 import {
-    SelectionType,
-    ItemType,
-    DialogSizeType,
-    ExtraActionButtonType,
-    ExtraActionLinkType,
-    ExtraActionCheckboxType,
-    NoticeType,
+    SelectionVariant,
+    Item,
+    DialogSize,
+    ExtraActionButton,
+    ExtraActionLink,
+    ExtraActionCheckbox,
+    Message as MessageType,
+    Empty as EmptyType,
 } from './types'
 
 function SelectPanel({
@@ -28,16 +29,13 @@ function SelectPanel({
     onSearchValueClear,
     searchValue,
     searchPlaceholder = 'Search',
-    subtleWarning,
-    subtleError,
-    subtleLoading,
-    warning,
-    error,
+    message,
     empty,
     items,
     size,
     initialSelectedItems,
-    loading,
+    loadingMessage,
+    isLoading,
     onClickBack,
     extraAction,
     declaritive,
@@ -45,20 +43,24 @@ function SelectPanel({
     title: string
     description?: string
     modal: boolean
-    type: SelectionType
-    items: ItemType[]
-    initialSelectedItems: ItemType[]
-    size: DialogSizeType
+    type: SelectionVariant
+    items: Item[]
+    initialSelectedItems: Item[]
+    size: DialogSize
     searchPlaceholder?: string
     declaritive: boolean
+    message?: MessageType
+    empty: EmptyType
+    loadingMessage: string
+    isLoading: boolean
     searchValue?: string
     onClickBack?: () => void
     onSearchValueChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
     onSearchValueClear?: () => void
-    extraAction:
-        | ExtraActionButtonType
-        | ExtraActionLinkType
-        | ExtraActionCheckboxType
+    extraAction?:
+        | ExtraActionButton
+        | ExtraActionLink
+        | ExtraActionCheckbox
         | undefined
 }) {
     const [selectedItems, setSelectedItems] = useState(initialSelectedItems)
@@ -67,7 +69,7 @@ function SelectPanel({
         item,
         selected,
     }: {
-        item: ItemType
+        item: Item
         selected: boolean
     }) => {
         const selectedItemsWithout = selectedItems.filter(
@@ -79,48 +81,6 @@ function SelectPanel({
             newSelectedItems.push(item)
         }
         setSelectedItems(newSelectedItems)
-    }
-    let spinner = null
-    if (loading) {
-        spinner = <Loading message={loading} />
-    }
-
-    let notice = null
-    if (error) {
-        notice = (
-            <Notice
-                title={error.title}
-                description={error.description}
-                type={NoticeType.Error}
-            />
-        )
-    } else if (warning) {
-        notice = (
-            <Notice
-                title={warning.title}
-                description={warning.description}
-                type={NoticeType.Warning}
-            />
-        )
-    } else if (items.length === 0) {
-        notice = (
-            <Notice
-                title={empty.title}
-                description={empty.description}
-                type={NoticeType.Empty}
-            />
-        )
-    }
-
-    let subtleNotice = null
-    if (subtleError) {
-        subtleNotice = (
-            <SubtleNotice message={subtleError} type={NoticeType.Error} />
-        )
-    } else if (subtleWarning) {
-        subtleNotice = (
-            <SubtleNotice message={subtleWarning} type={NoticeType.Warning} />
-        )
     }
 
     return (
@@ -137,24 +97,33 @@ function SelectPanel({
                 searchValue={searchValue}
                 description={description}
                 searchPlaceholder={searchPlaceholder}
-                subtleLoading={subtleLoading}
+                subtleLoading={items.length > 0}
                 modal={modal}
                 onKeyDown={() => alert('test')}
                 onClickBack={onClickBack}
                 showClearIcon={selectedItems.length > 0}
                 onClickClear={() => setSelectedItems([])}
-                bordered={error || warning || (!subtleError && !subtleWarning)}
+                bordered={items.length > 0}
             />
-            {spinner || notice || (
-                <>
-                    {subtleNotice}
-                    <List
-                        items={items}
-                        selectedItems={selectedItems}
-                        type={type}
-                        onSelect={onSelect}
-                    />
-                </>
+            {isLoading && <Loading message={loadingMessage} />}
+            {empty && (
+                <Empty title={empty.title} description={empty.description} />
+            )}
+            {message && (
+                <Message
+                    title={message.title}
+                    description={message.description}
+                    level={message.level}
+                    totalItems={items.length}
+                />
+            )}
+            {items.length > 0 && (
+                <List
+                    items={items}
+                    selectedItems={selectedItems}
+                    type={type}
+                    onSelect={onSelect}
+                />
             )}
             <Footer
                 size={size}

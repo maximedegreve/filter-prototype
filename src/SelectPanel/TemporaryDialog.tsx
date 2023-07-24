@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Box } from '@primer/react'
-import { DialogSizeType } from './types'
+import { DialogSize } from './types'
 
 function TemporaryDialog({
     children,
@@ -11,7 +11,7 @@ function TemporaryDialog({
 }: {
     children: ReactNode
     modal: boolean
-    size: DialogSizeType
+    size: DialogSize
     ariaLabelledby: string
     ariaDescribedby?: string
 }) {
@@ -19,19 +19,19 @@ function TemporaryDialog({
     let pxHeight = 432
 
     switch (size) {
-        case DialogSizeType.Medium:
+        case DialogSize.Medium:
             pxWidth = 480
             pxHeight = 320
             break
-        case DialogSizeType.Portrait:
+        case DialogSize.Portrait:
             pxWidth = 480
             pxHeight = 600
             break
-        case DialogSizeType.Large:
+        case DialogSize.Large:
             pxWidth = 640
             pxHeight = 432
             break
-        case DialogSizeType.XLarge:
+        case DialogSize.XLarge:
             pxWidth = 960
             pxHeight = 600
             break

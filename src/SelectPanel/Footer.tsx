@@ -1,11 +1,11 @@
 import { Box } from '@primer/react'
-import { SelectionType } from './types'
 import {
-    ItemType,
-    ExtraActionButtonType,
-    ExtraActionLinkType,
-    ExtraActionCheckboxType,
-    DialogSizeType,
+    SelectionVariant,
+    Item,
+    ExtraActionButton,
+    ExtraActionLink,
+    ExtraActionCheckbox,
+    DialogSize,
 } from './types'
 
 import ResponsiveButton from './ResponsiveButton'
@@ -23,20 +23,20 @@ function Footer({
     declaritive: boolean
     modal: boolean
     extraAction:
-        | ExtraActionButtonType
-        | ExtraActionLinkType
-        | ExtraActionCheckboxType
+        | ExtraActionButton
+        | ExtraActionLink
+        | ExtraActionCheckbox
         | undefined
     onClickConfirm?: () => void | undefined
     onClickCancel?: () => void | undefined
-    size: DialogSizeType
-    selectedItems: ItemType[]
-    type: SelectionType
+    size: DialogSize
+    selectedItems: Item[]
+    type: SelectionVariant
 }) {
     const showSaveCancel = declaritive || modal
-    const alwaysMedium = size !== DialogSizeType.Small && modal
+    const alwaysMedium = size !== DialogSize.Small && modal
     const totalSelection = selectedItems.length
-    const isMultiple = type === SelectionType.Multiple
+    const isMultiple = type === SelectionVariant.Multiple
     return (
         <Box
             role="footer"

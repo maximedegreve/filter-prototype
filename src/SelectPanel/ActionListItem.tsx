@@ -1,5 +1,5 @@
 import { ActionList } from '@primer/react'
-import { ItemType } from './types'
+import { Item as ItemType } from './types'
 
 type ItemDataType = {
     item: ItemType

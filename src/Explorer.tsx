@@ -4,7 +4,9 @@ import { Box, Avatar } from '@primer/react'
 
 import SelectPanel from './SelectPanel'
 
-const defaultSelectedItems = [
+import { SelectionVariant, Item, DialogSize } from './SelectPanel/types'
+
+const defaultSelectedItems: Array<Item> = [
     {
         id: 3,
         text: 'max',
@@ -24,7 +26,7 @@ const defaultSelectedItems = [
         ),
     },
 ]
-const defaultItems = [
+const defaultItems: Array<Item> = [
     {
         id: 3,
         text: 'max',
@@ -211,11 +213,11 @@ function Explorer() {
         modal: false,
         size: {
             options: {
-                small: 'small',
-                medium: 'medium',
-                portrait: 'portrait',
-                large: 'large',
-                xlarge: 'xlarge',
+                small: DialogSize.Small,
+                medium: DialogSize.Medium,
+                portrait: DialogSize.Portrait,
+                large: DialogSize.Large,
+                xlarge: DialogSize.XLarge,
             },
         },
         declaritive: {
@@ -224,7 +226,10 @@ function Explorer() {
         },
         back_button: false,
         selection_type: {
-            options: { multiple: 'multiple', single: 'single' },
+            options: {
+                multiple: SelectionVariant.Multiple,
+                single: SelectionVariant.Single,
+            },
         },
         loading_subtle: false,
         empty: folder(
@@ -239,7 +244,12 @@ function Explorer() {
                 extra_action_title: `View authors`,
                 extra_action_enabled: true,
                 extra_action_type: {
-                    options: { button: 'button', link: 'link' },
+                    options: {
+                        button: 'button',
+                        link: 'link',
+                        checkbox: 'checkbox',
+                        none: undefined,
+                    },
                 },
             },
             { collapsed: true }
@@ -287,8 +297,8 @@ function Explorer() {
         ),
     })
 
-    const onClickBack = (e) => alert('click back')
-    const onClickExtraAction = (e) => alert('click extra action')
+    const onClickBack = () => alert('click back')
+    const onClickExtraAction = () => alert('click extra action')
 
     return (
         <Box
@@ -306,44 +316,38 @@ function Explorer() {
                 description={description}
                 type={selection_type}
                 modal={modal}
-                onSelect={(e) => {
-                    console.log(e)
-                }}
-                subtleLoading={loading_subtle}
                 declaritive={declaritive}
-                subtleError={error_enabled_subtle && error_message_subtle}
-                subtleWarning={warning_enabled_subtle && warning_message_subtle}
-                error={
-                    error_enabled && {
-                        title: error_title,
-                        description: error_description,
-                    }
+                extraAction={
+                    extra_action_enabled
+                        ? {
+                              text: extra_action_title,
+                              onClick: onClickExtraAction,
+                              type: extra_action_type,
+                          }
+                        : undefined
                 }
-                warning={
-                    warning_enabled && {
-                        title: warning_title,
-                        description: warning_description,
-                    }
+                message={
+                    error_enabled
+                        ? {
+                              title: error_title,
+                              description: error_description,
+                              level: 'error',
+                          }
+                        : undefined
                 }
                 empty={{
                     title: empty_title,
                     description: empty_description,
                 }}
-                extraAction={
-                    extra_action_enabled && {
-                        text: extra_action_title,
-                        onClick: onClickExtraAction,
-                        type: extra_action_type,
-                    }
-                }
                 size={size}
                 initialSelectedItems={defaultSelectedItems}
                 items={filteredItems}
-                onClickBack={back_button && onClickBack}
+                onClickBack={back_button ? onClickBack : undefined}
                 onSearchValueChange={(e) => setSearchValue(e.target.value)}
                 onSearchValueClear={() => setSearchValue('')}
                 searchValue={searchValue}
-                loading={loading_enabled && loading_title}
+                loadingMessage={loading_title}
+                isLoading={loading_enabled}
             />
         </Box>
     )

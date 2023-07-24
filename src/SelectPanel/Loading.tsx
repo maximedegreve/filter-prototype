@@ -1,7 +1,6 @@
-import { ReactNode } from 'react'
 import { Box, Text, Spinner } from '@primer/react'
 
-function Loading({ message }: { message: ReactNode }) {
+function Loading({ message }: { message: string }) {
     return (
         <Box
             sx={{

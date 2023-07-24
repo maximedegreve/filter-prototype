@@ -1,17 +1,8 @@
-import { ReactNode } from 'react'
 import { Box, Text } from '@primer/react'
 import { AlertIcon } from '@primer/octicons-react'
-import { NoticeType } from './types'
+import { MessageLevel, Message } from '../types'
 
-function Notice({
-    title,
-    description,
-    type,
-}: {
-    title: string
-    description: ReactNode
-    type: NoticeType
-}) {
+function FullMessage({ title, description, level }: Message) {
     return (
         <Box
             sx={{
@@ -31,11 +22,10 @@ function Notice({
             <Box
                 sx={{
                     color:
-                        type === NoticeType.Warning
+                        level === MessageLevel.Warning
                             ? 'attention.fg'
                             : 'danger.fg',
                     pb: 2,
-                    display: type === NoticeType.Empty ? 'none' : 'block',
                 }}
             >
                 <AlertIcon size={16} />
@@ -61,4 +51,4 @@ function Notice({
     )
 }
 
-export default Notice
+export default FullMessage

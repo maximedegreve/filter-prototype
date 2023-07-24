@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Box, ActionList } from '@primer/react'
-import Item from './Item'
-import { SelectionType, ItemType } from './types'
+import ActionListItem from './ActionListItem'
+import { SelectionVariant, Item } from './types'
 
 function List({
     items,
@@ -9,22 +9,16 @@ function List({
     onSelect,
     type,
 }: {
-    items: ItemType[]
-    selectedItems: ItemType[]
-    onSelect: ({
-        item,
-        selected,
-    }: {
-        item: ItemType
-        selected: boolean
-    }) => void
-    type: SelectionType
+    items: Item[]
+    selectedItems: Item[]
+    onSelect: ({ item, selected }: { item: Item; selected: boolean }) => void
+    type: SelectionVariant
 }) {
-    const [selectedItemsGroup, setSelectedItemsGroup] = useState<
-        ItemType[] | []
-    >([])
+    const [selectedItemsGroup, setSelectedItemsGroup] = useState<Item[] | []>(
+        []
+    )
     const [unSelectedItemsGroup, setUnselectedItemsGroup] = useState<
-        ItemType[] | []
+        Item[] | []
     >([])
 
     useEffect(() => {
@@ -58,7 +52,7 @@ function List({
                 role="listbox"
             >
                 {selectedItemsGroup.map((item) => (
-                    <Item
+                    <ActionListItem
                         item={item}
                         key={item.id}
                         selected={isSelected(item.id)}
@@ -68,7 +62,7 @@ function List({
                     />
                 ))}
                 {unSelectedItemsGroup.map((item) => (
-                    <Item
+                    <ActionListItem
                         item={item}
                         key={item.id}
                         selected={isSelected(item.id)}
