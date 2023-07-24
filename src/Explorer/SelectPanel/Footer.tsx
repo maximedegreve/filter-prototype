@@ -1,4 +1,4 @@
-import { Box } from '@primer/react'
+import { Box, FormControl, Checkbox } from '@primer/react'
 import {
     SelectionVariant,
     Item,
@@ -65,7 +65,17 @@ function Footer({
                 pr: 3,
             }}
         >
-            {extraAction?.type === ExtraActionType.Checkbox && <>checkbox</>}
+            {extraAction?.type === ExtraActionType.Checkbox && (
+                <FormControl>
+                    <Checkbox
+                        onChange={extraAction.onChange}
+                        id="default-checkbox"
+                    />
+                    <FormControl.Label sx={{ fontSize: [1, 1, 0, 0] }}>
+                        {extraAction.text}
+                    </FormControl.Label>
+                </FormControl>
+            )}
             {extraAction?.type === ExtraActionType.Button && (
                 <ResponsiveButton
                     alwaysMedium={alwaysMedium}
