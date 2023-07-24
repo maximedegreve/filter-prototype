@@ -8,6 +8,10 @@ import {
     SelectionVariant,
     DialogSize,
     ExtraActionType,
+    Message,
+    MessageLevel,
+    ExtraActionButton,
+    ExtraActionLink,
 } from './SelectPanel/types'
 
 import { defaultSelectedItems, defaultItems } from './data'
@@ -29,18 +33,12 @@ function Explorer() {
         back_button,
         loading_enabled,
         loading_title,
-        loading_subtle,
-        error_enabled,
-        error_description,
-        error_title,
-        error_message_subtle,
-        error_enabled_subtle,
-        warning_title,
-        warning_description,
-        warning_enabled,
-        warning_message_subtle,
-        warning_enabled_subtle,
+        message_enabled,
+        message_description,
+        message_title,
+        message_level,
         empty_title,
+        noItems,
         empty_description,
         extra_action_title,
         extra_action_enabled,
@@ -50,6 +48,7 @@ function Explorer() {
         title: 'Select authors',
         description: '',
         modal: false,
+        noItems: false,
         size: {
             options: {
                 small: DialogSize.Small,
@@ -70,11 +69,32 @@ function Explorer() {
                 single: SelectionVariant.Single,
             },
         },
-        loading_subtle: false,
         empty: folder(
             {
                 empty_title: `No actors found for your search term`,
                 empty_description: 'Try a different search term',
+            },
+            { collapsed: true }
+        ),
+        message: folder(
+            {
+                message_title: `We couldn't load the authors`,
+                message_description:
+                    'Try again or if the problem persists contact support',
+                message_enabled: false,
+                message_level: {
+                    options: {
+                        warning: MessageLevel.Warning,
+                        error: MessageLevel.Error,
+                    },
+                },
+            },
+            { collapsed: true }
+        ),
+        loading: folder(
+            {
+                loading_enabled: false,
+                loading_title: 'Fetching users...',
             },
             { collapsed: true }
         ),
@@ -91,51 +111,22 @@ function Explorer() {
             },
             { collapsed: true }
         ),
-        error: folder(
-            {
-                error_title: `We couldn't load the authors`,
-                error_description:
-                    'Try again or if the problem persists contact support',
-                error_enabled: false,
-            },
-            { collapsed: true }
-        ),
-        warning: folder(
-            {
-                warning_title: `We couldn't load the authors`,
-                warning_description:
-                    'Try again or if the problem persists contact support',
-                warning_enabled: false,
-            },
-            { collapsed: true }
-        ),
-        warning_subtle: folder(
-            {
-                warning_message_subtle: `We couldn't load the authors. Try again or if the
-            problem persists contact support.`,
-                warning_enabled_subtle: false,
-            },
-            { collapsed: true }
-        ),
-        error_subtle: folder(
-            {
-                error_message_subtle: `We couldn't load the authors. Try again or if the
-            problem persists contact support.`,
-                error_enabled_subtle: false,
-            },
-            { collapsed: true }
-        ),
-        loading: folder(
-            {
-                loading_enabled: false,
-                loading_title: 'Fetching users...',
-            },
-            { collapsed: true }
-        ),
     })
 
     const onClickBack = () => alert('click back')
     const onClickExtraAction = () => alert('click extra action')
+
+    const message: Message = {
+        title: message_title,
+        description: message_description,
+        level: message_level,
+    }
+
+    const extraAction: ExtraActionButton = {
+        text: extra_action_title,
+        onClick: onClickExtraAction,
+        type: ExtraActionType.Button,
+    }
 
     return (
         <Box
@@ -154,31 +145,15 @@ function Explorer() {
                 type={selection_type}
                 modal={modal}
                 declaritive={declaritive}
-                extraAction={
-                    extra_action_enabled
-                        ? {
-                              text: extra_action_title,
-                              onClick: onClickExtraAction,
-                              type: extra_action_type,
-                          }
-                        : undefined
-                }
-                message={
-                    error_enabled
-                        ? {
-                              title: error_title,
-                              description: error_description,
-                              level: 'error',
-                          }
-                        : undefined
-                }
+                message={message_enabled ? message : undefined}
                 empty={{
                     title: empty_title,
                     description: empty_description,
                 }}
+                extraAction={extra_action_enabled ? extraAction : undefined}
                 size={size}
                 initialSelectedItems={defaultSelectedItems}
-                items={filteredItems}
+                items={noItems ? [] : filteredItems}
                 onClickBack={back_button ? onClickBack : undefined}
                 onSearchValueChange={(e) => setSearchValue(e.target.value)}
                 onSearchValueClear={() => setSearchValue('')}

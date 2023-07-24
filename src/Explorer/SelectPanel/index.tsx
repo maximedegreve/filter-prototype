@@ -97,24 +97,29 @@ function SelectPanel({
                 searchValue={searchValue}
                 description={description}
                 searchPlaceholder={searchPlaceholder}
-                subtleLoading={items.length > 0}
+                subtleLoading={items.length > 0 && isLoading}
                 modal={modal}
                 onKeyDown={() => alert('test')}
                 onClickBack={onClickBack}
                 showClearIcon={selectedItems.length > 0}
                 onClickClear={() => setSelectedItems([])}
-                bordered={items.length > 0}
+                bordered={
+                    items.length === 0 || !!(items.length > 0 && !message)
+                }
             />
-            {isLoading && <Loading message={loadingMessage} />}
-            {empty && (
+
+            {items.length === 0 && isLoading && (
+                <Loading message={loadingMessage} />
+            )}
+            {items.length === 0 && !isLoading && !message && (
                 <Empty title={empty.title} description={empty.description} />
             )}
-            {message && (
+            {message && !(items.length === 0 && isLoading) && (
                 <Message
                     title={message.title}
                     description={message.description}
                     level={message.level}
-                    totalItems={items.length}
+                    isSubtle={items.length > 0}
                 />
             )}
             {items.length > 0 && (

@@ -7,16 +7,16 @@ export default function Message({
     title,
     description,
     level,
-    totalItems,
+    isSubtle,
 }: {
     title: string
     description: ReactNode
     level: MessageLevel
-    totalItems: number
+    isSubtle: boolean
 }) {
-    if (totalItems > 0) {
+    if (isSubtle) {
         return (
-            <FullMessage
+            <SubtleMessage
                 title={title}
                 description={description}
                 level={level}
@@ -24,7 +24,7 @@ export default function Message({
         )
     } else {
         return (
-            <SubtleMessage
+            <FullMessage
                 title={title}
                 description={description}
                 level={level}
