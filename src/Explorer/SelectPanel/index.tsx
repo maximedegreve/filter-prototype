@@ -69,16 +69,6 @@ function SelectPanel({
 }) {
     const [selectedItems, setSelectedItems] = useState(initialSelectedItems)
 
-    // 🧠 The onChange event depends heavily on the context of the SelectPanel.
-
-    // 1️⃣ For example onChange is instantly triggered on desktop breakpoints
-    // when the declaritive option is false. However in mobile the declaritive
-    // option is overriden because the SelectPanel is displayed full screen in
-    // that case the onChange event only gets triggered upon clicking save/apply.
-
-    // 2️⃣ Equally when the modal option is turned on then the onChange event is only
-    // triggered on clicking save since modals are always declaritive.
-
     useEffect(() => {
         onChange({ selected: selectedItems })
     }, [selectedItems, onChange])
