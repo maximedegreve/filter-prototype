@@ -81,7 +81,7 @@ function SelectPanel({
 
     useEffect(() => {
         onChange({ selected: selectedItems })
-    }, [selectedItems])
+    }, [selectedItems, onChange])
 
     const onSelect = ({
         item,
@@ -102,64 +102,69 @@ function SelectPanel({
     }
 
     return (
-        <TemporaryDialog
-            modal={modal}
-            size={size}
-            ariaLabelledby={title}
-            ariaDescribedby={description}
-        >
-            <Header
-                title={title}
-                onSearchValueChange={onSearchValueChange}
-                onSearchValueClear={onSearchValueClear}
-                searchValue={searchValue}
-                description={description}
-                searchPlaceholder={searchPlaceholder}
-                subtleLoading={items.length > 0 && isLoading}
+        <>
+            <TemporaryDialog
                 modal={modal}
-                onKeyDown={() => alert('test')}
-                onClickBack={onClickBack}
-                showClearIcon={selectedItems.length > 0}
-                onClickClear={() => setSelectedItems([])}
-                bordered={
-                    items.length === 0 || !!(items.length > 0 && !message)
-                }
-            />
-
-            {items.length === 0 && isLoading && (
-                <Loading message={loadingMessage} />
-            )}
-            {items.length === 0 && !isLoading && !message && (
-                <Empty title={empty.title} description={empty.description} />
-            )}
-            {!(items.length === 0 && isLoading) && message && (
-                <Message
-                    title={message.title}
-                    description={message.description}
-                    level={message.level}
-                    isSubtle={items.length > 0}
-                />
-            )}
-            {items.length > 0 && (
-                <List
-                    items={items}
-                    selectedItems={selectedItems}
-                    type={type}
-                    onSelect={onSelect}
-                />
-            )}
-            <Footer
                 size={size}
-                type={type}
-                selectedItems={selectedItems}
-                declaritive={declaritive}
-                declaritiveIsLoading={declaritiveIsLoading}
-                onClickConfirm={() => alert('clicked confirm')}
-                onClickCancel={() => alert('clicked cancel')}
-                modal={modal}
-                extraAction={extraAction}
-            />
-        </TemporaryDialog>
+                ariaLabelledby={title}
+                ariaDescribedby={description}
+            >
+                <Header
+                    title={title}
+                    onSearchValueChange={onSearchValueChange}
+                    onSearchValueClear={onSearchValueClear}
+                    searchValue={searchValue}
+                    description={description}
+                    searchPlaceholder={searchPlaceholder}
+                    subtleLoading={items.length > 0 && isLoading}
+                    modal={modal}
+                    onKeyDown={() => alert('test')}
+                    onClickBack={onClickBack}
+                    showClearIcon={selectedItems.length > 0}
+                    onClickClear={() => setSelectedItems([])}
+                    bordered={
+                        items.length === 0 || !!(items.length > 0 && !message)
+                    }
+                />
+
+                {items.length === 0 && isLoading && (
+                    <Loading message={loadingMessage} />
+                )}
+                {items.length === 0 && !isLoading && !message && (
+                    <Empty
+                        title={empty.title}
+                        description={empty.description}
+                    />
+                )}
+                {!(items.length === 0 && isLoading) && message && (
+                    <Message
+                        title={message.title}
+                        description={message.description}
+                        level={message.level}
+                        isSubtle={items.length > 0}
+                    />
+                )}
+                {items.length > 0 && (
+                    <List
+                        items={items}
+                        selectedItems={selectedItems}
+                        type={type}
+                        onSelect={onSelect}
+                    />
+                )}
+                <Footer
+                    size={size}
+                    type={type}
+                    selectedItems={selectedItems}
+                    declaritive={declaritive}
+                    declaritiveIsLoading={declaritiveIsLoading}
+                    onClickConfirm={() => alert('clicked confirm')}
+                    onClickCancel={() => alert('clicked cancel')}
+                    modal={modal}
+                    extraAction={extraAction}
+                />
+            </TemporaryDialog>
+        </>
     )
 }
 
