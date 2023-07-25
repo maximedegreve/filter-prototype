@@ -19,7 +19,11 @@ function ResponsiveButton({
     onClick?: () => void | undefined
 }) {
     return (
-        <Box sx={{ position: 'relative' }}>
+        <Box
+            sx={{
+                position: 'relative',
+            }}
+        >
             {isLoading && (
                 <Box
                     sx={{
@@ -42,6 +46,7 @@ function ResponsiveButton({
                 </Box>
             )}
             <Button
+                block
                 size="medium"
                 variant={variant}
                 sx={{
@@ -58,6 +63,7 @@ function ResponsiveButton({
             <Button
                 size="small"
                 variant={variant}
+                block
                 sx={{
                     visibility: isLoading ? 'hidden' : 'visible',
                     display: alwaysMedium
