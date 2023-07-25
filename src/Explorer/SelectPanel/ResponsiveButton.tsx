@@ -4,6 +4,9 @@ import { Button, Box, Spinner } from '@primer/react'
 // 🐛 Waiting for a Primer fix to remove this file
 // https://github.com/github/primer/issues/2408
 
+// ⭐️ Waiting for a Primer update to support loading states
+// https://github.com/github/primer/issues/775
+
 function ResponsiveButton({
     children,
     variant,
