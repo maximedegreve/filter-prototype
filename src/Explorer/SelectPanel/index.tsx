@@ -80,15 +80,19 @@ function SelectPanel({
         item: Item
         selected: boolean
     }) => {
-        const selectedItemsWithout = selectedItems.filter(
-            (selectedItem) => selectedItem.id !== item.id
-        )
-        let newSelectedItems = [...selectedItemsWithout]
+        if (type === SelectionVariant.Multiple) {
+            const selectedItemsWithout = selectedItems.filter(
+                (selectedItem) => selectedItem.id !== item.id
+            )
+            let newSelectedItems = [...selectedItemsWithout]
 
-        if (selected) {
-            newSelectedItems.push(item)
+            if (selected) {
+                newSelectedItems.push(item)
+            }
+            setSelectedItems(newSelectedItems)
+        } else {
+            setSelectedItems([item])
         }
-        setSelectedItems(newSelectedItems)
     }
 
     return (
