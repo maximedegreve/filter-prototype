@@ -53,7 +53,7 @@ function Footer({
                         : ['grid', 'grid', 'none', 'none'],
                 gridTemplateColumns:
                     showSaveCancel && extraAction
-                        ? 'min-content auto'
+                        ? 'max-content auto'
                         : [
                               extraAction ? 'min-content auto' : '1fr',
                               extraAction ? 'min-content auto' : '1fr',
