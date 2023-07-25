@@ -1,11 +1,11 @@
-import { ActionList, sx } from '@primer/react'
+import { ActionList } from '@primer/react'
 import { Item as ItemType } from './types'
 
 type ItemDataType = {
     item: ItemType
     selected: boolean
     onSelect?: (() => void) | undefined
-    isRadio: boolean
+    isRadio: boolean | unknown
 }
 
 // 🐛 Implementing radio buttons manually as we're waiting for a Primer fix.

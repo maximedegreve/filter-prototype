@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Box, ActionList } from '@primer/react'
+import { Box, ActionList, useResponsiveValue } from '@primer/react'
 import ActionListItem from './ActionListItem'
 import { SelectionVariant, Item } from './types'
 
@@ -51,6 +51,12 @@ function List({
     const useRadioIcons =
         (type === SelectionVariant.Single && declaritive) ||
         (type === SelectionVariant.Single && modal)
+
+    const useRadioIconsResponsive = useResponsiveValue(
+        { regular: useRadioIcons, narrow: type === SelectionVariant.Single },
+        useRadioIcons
+    )
+
     return (
         <Box sx={{ flex: 1, overflowY: 'scroll' }}>
             <ActionList
@@ -60,7 +66,7 @@ function List({
             >
                 {selectedItemsGroup.map((item) => (
                     <ActionListItem
-                        isRadio={useRadioIcons}
+                        isRadio={useRadioIconsResponsive}
                         item={item}
                         key={item.id}
                         selected={isSelected(item.id)}
@@ -71,7 +77,7 @@ function List({
                 ))}
                 {unSelectedItemsGroup.map((item) => (
                     <ActionListItem
-                        isRadio={useRadioIcons}
+                        isRadio={useRadioIconsResponsive}
                         item={item}
                         key={item.id}
                         selected={isSelected(item.id)}
