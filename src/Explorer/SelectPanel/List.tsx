@@ -7,10 +7,14 @@ function List({
     items,
     selectedItems,
     onSelect,
+    declaritive,
+    modal,
     type,
 }: {
     items: Item[]
     selectedItems: Item[]
+    declaritive: boolean
+    modal: boolean
     onSelect: ({ item, selected }: { item: Item; selected: boolean }) => void
     type: SelectionVariant
 }) {
@@ -44,6 +48,9 @@ function List({
     let hasBlockDescriptions =
         items?.filter((item) => item.descriptionVariant === 'block').length > 0
 
+    const useRadioIcons =
+        (type === SelectionVariant.Single && declaritive) ||
+        (type === SelectionVariant.Single && modal)
     return (
         <Box sx={{ flex: 1, overflowY: 'scroll' }}>
             <ActionList
@@ -53,6 +60,7 @@ function List({
             >
                 {selectedItemsGroup.map((item) => (
                     <ActionListItem
+                        isRadio={useRadioIcons}
                         item={item}
                         key={item.id}
                         selected={isSelected(item.id)}
@@ -63,6 +71,7 @@ function List({
                 ))}
                 {unSelectedItemsGroup.map((item) => (
                     <ActionListItem
+                        isRadio={useRadioIcons}
                         item={item}
                         key={item.id}
                         selected={isSelected(item.id)}

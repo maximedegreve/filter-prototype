@@ -103,24 +103,8 @@ function Footer({
             <Box
                 sx={{
                     display: showSaveCancel
-                        ? 'none'
-                        : ['inline', 'inline', 'none', 'none'],
-                    textAlign: 'right',
-                }}
-            >
-                <ResponsiveButton
-                    variant="primary"
-                    alwaysMedium={alwaysMedium}
-                    onClick={onClickConfirm}
-                    isLoading={declaritiveIsLoading}
-                >
-                    Done
-                    {totalSelection > 0 && isMultiple && ` (${totalSelection})`}
-                </ResponsiveButton>
-            </Box>
-            <Box
-                sx={{
-                    display: showSaveCancel ? 'block' : 'none',
+                        ? 'block'
+                        : ['block', 'block', 'none', 'none'],
                     textAlign: 'right',
                 }}
             >

@@ -140,6 +140,8 @@ function SelectPanel({
                 )}
                 {items.length > 0 && (
                     <List
+                        declaritive={declaritive}
+                        modal={modal}
                         items={items}
                         selectedItems={selectedItems}
                         type={type}
