@@ -41,6 +41,7 @@ function Header({
             onKeyDown()
         }
     }
+    const searchEnabled = onSearchValueChange && onSearchValueClear
     return (
         <Box
             role="header"
@@ -82,7 +83,6 @@ function Header({
                         justifyContent: 'center',
                         fontSize: 1,
                         position: 'relative',
-                        fontWeight: 'semibold',
                         width: '100%',
                         minWidth: 0,
                     }}
@@ -94,6 +94,7 @@ function Header({
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
+                            fontWeight: 'bold',
                             pt: description && 1,
                         }}
                     >
@@ -102,6 +103,7 @@ function Header({
                     {description && (
                         <Text
                             sx={{
+                                pb: searchEnabled ? 0 : 1,
                                 fontSize: 0,
                                 color: 'fg.muted',
                                 display: 'block',
@@ -136,8 +138,8 @@ function Header({
                     </Tooltip>
                 </Box>
             </Box>
-            {onSearchValueChange && onSearchValueClear && (
-                <Box sx={{ width: '100%', px: 2, pb: '12px' }}>
+            {searchEnabled && (
+                <Box sx={{ width: '100%', px: 2, pb: 2 }}>
                     <TextInput
                         leadingVisual={!subtleLoading && SearchIcon}
                         loaderPosition={subtleLoading ? 'leading' : undefined}

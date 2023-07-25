@@ -1,8 +1,8 @@
-import { Box } from '@primer/react'
+import { Box, Text } from '@primer/react'
 import { AlertIcon } from '@primer/octicons-react'
 import { Message, MessageLevel } from '../types'
 
-function SubtleMessage({ title, level }: Message) {
+function SubtleMessage({ title, description, level }: Message) {
     const iconSize = 16
     return (
         <Box
@@ -42,7 +42,10 @@ function SubtleMessage({ title, level }: Message) {
             <Box sx={{ display: 'grid', pt: '1px' }}>
                 <AlertIcon size={iconSize} />
             </Box>
-            <Box>{title}</Box>
+            <Box>
+                {title}
+                {description && <>. {description}</>}
+            </Box>
         </Box>
     )
 }

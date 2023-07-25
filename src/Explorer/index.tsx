@@ -32,6 +32,7 @@ function Explorer() {
         modal,
         declaritive,
         back_button,
+        search_enabled,
         loading_enabled,
         loading_title,
         message_enabled,
@@ -51,6 +52,7 @@ function Explorer() {
         description: '',
         modal: false,
         noItems: false,
+        search_enabled: true,
         size: {
             options: {
                 small: DialogSize.Small,
@@ -82,7 +84,7 @@ function Explorer() {
             {
                 message_title: `We couldn't load the authors`,
                 message_description:
-                    'Try again or if the problem persists contact support',
+                    'Try again or if the problem persists contact support.',
                 message_enabled: false,
                 message_level: {
                     options: {
@@ -125,6 +127,8 @@ function Explorer() {
     const onClickExtraAction = () => alert('click extra action')
     const onClickCheckbox = (event: React.ChangeEvent<HTMLInputElement>) =>
         alert(`clicked checkbox ${event}`)
+    const onSearchValueChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+        setSearchValue(e.target.value)
 
     const message: Message = {
         title: message_title,
@@ -191,7 +195,9 @@ function Explorer() {
                 initialSelectedItems={defaultSelectedItems}
                 items={noItems ? [] : filteredItems}
                 onClickBack={back_button ? onClickBack : undefined}
-                onSearchValueChange={(e) => setSearchValue(e.target.value)}
+                onSearchValueChange={
+                    search_enabled ? onSearchValueChange : undefined
+                }
                 onSearchValueClear={() => setSearchValue('')}
                 searchValue={searchValue}
                 loadingMessage={loading_title}
