@@ -9,7 +9,7 @@ type ItemDataType = {
 }
 
 // 🐛 Implementing radio buttons manually as we're waiting for a Primer fix.
-// Using :has right now which isn't supported by Firefox. It also doesn't work in light mode.
+// Using css class now to hack this which is bad. It also doesn't work in light mode.
 // NEEDS AN ISSUE
 
 const radioSxOn = {
