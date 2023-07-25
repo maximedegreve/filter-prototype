@@ -31,6 +31,7 @@ function Explorer() {
         selection_type,
         modal,
         declaritive,
+        declaritive_loading,
         back_button,
         search_enabled,
         loading_enabled,
@@ -65,6 +66,11 @@ function Explorer() {
         declaritive: {
             value: true,
             render: (get) => get('modal') === false,
+        },
+        declaritive_loading: {
+            value: false,
+            render: (get) =>
+                get('declaritive') === true || get('modal') === true,
         },
         back_button: false,
         selection_type: {
@@ -123,6 +129,7 @@ function Explorer() {
         ),
     })
 
+    const onChange = () => console.log('onChange')
     const onClickBack = () => alert('click back')
     const onClickExtraAction = () => alert('click extra action')
     const onClickCheckbox = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -185,11 +192,13 @@ function Explorer() {
                 type={selection_type}
                 modal={modal}
                 declaritive={declaritive}
+                declaritiveIsLoading={declaritive_loading}
                 message={message_enabled ? message : undefined}
                 empty={{
                     title: empty_title,
                     description: empty_description,
                 }}
+                onChange={onChange}
                 extraAction={extra_action_enabled ? action : undefined}
                 size={size}
                 initialSelectedItems={defaultSelectedItems}

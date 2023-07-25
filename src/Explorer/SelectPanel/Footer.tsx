@@ -13,6 +13,7 @@ import ResponsiveButton from './ResponsiveButton'
 
 function Footer({
     declaritive,
+    declaritiveIsLoading,
     modal,
     extraAction,
     onClickConfirm,
@@ -22,6 +23,7 @@ function Footer({
     type,
 }: {
     declaritive: boolean
+    declaritiveIsLoading: boolean
     modal: boolean
     extraAction:
         | ExtraActionButton
@@ -79,6 +81,7 @@ function Footer({
             {extraAction?.type === ExtraActionType.Button && (
                 <ResponsiveButton
                     alwaysMedium={alwaysMedium}
+                    isLoading={false}
                     variant="default"
                     onClick={extraAction.onClick}
                 >
@@ -90,6 +93,7 @@ function Footer({
                 <ResponsiveButton
                     alwaysMedium={alwaysMedium}
                     variant="invisible"
+                    isLoading={false}
                     onClick={extraAction.onClick}
                 >
                     {extraAction.text}
@@ -108,6 +112,7 @@ function Footer({
                     variant="primary"
                     alwaysMedium={alwaysMedium}
                     onClick={onClickConfirm}
+                    isLoading={declaritiveIsLoading}
                 >
                     Done
                     {totalSelection > 0 && isMultiple && ` (${totalSelection})`}
@@ -129,10 +134,12 @@ function Footer({
                     <ResponsiveButton
                         alwaysMedium={alwaysMedium}
                         onClick={onClickCancel}
+                        isLoading={false}
                     >
                         Cancel
                     </ResponsiveButton>
                     <ResponsiveButton
+                        isLoading={declaritiveIsLoading}
                         alwaysMedium={alwaysMedium}
                         variant="primary"
                         onClick={onClickConfirm}
