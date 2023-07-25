@@ -1,4 +1,4 @@
-import { Box, Text } from '@primer/react'
+import { Box } from '@primer/react'
 import { AlertIcon } from '@primer/octicons-react'
 import { Message, MessageLevel } from '../types'
 
