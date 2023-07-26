@@ -67,20 +67,10 @@ function SelectPanel({
         | ExtraActionCheckbox
         | undefined
 }) {
-    const initialSelected =
+    const selectedItems =
         variant.type === SelectionVariant.Multiple
             ? variant.selected
             : [variant.selected]
-    const [selectedItems, setSelectedItems] = useState<Item[]>(initialSelected)
-
-    useEffect(() => {
-        if (variant.type === SelectionVariant.Multiple) {
-            variant.onChange({ selected: selectedItems })
-        }
-        if (variant.type === SelectionVariant.Single) {
-            variant.onChange({ selected: selectedItems[0] })
-        }
-    }, [selectedItems, variant])
 
     const onSelect = ({
         item,
@@ -98,9 +88,9 @@ function SelectPanel({
             if (selected) {
                 newSelectedItems.push(item)
             }
-            setSelectedItems(newSelectedItems)
+            variant.onChange({ selected: newSelectedItems })
         } else {
-            setSelectedItems([item])
+            variant.onChange({ selected: item })
         }
     }
 
@@ -161,8 +151,15 @@ function SelectPanel({
                     modal={modal}
                     onKeyDown={() => alert('test')}
                     onClickBack={onClickBack}
-                    showClearIcon={selectedItems.length > 0}
-                    onClickClear={() => setSelectedItems([])}
+                    showClearIcon={
+                        variant.type === SelectionVariant.Multiple &&
+                        selectedItems.length > 0
+                    }
+                    onClickClear={() => {
+                        if (variant.type === SelectionVariant.Multiple) {
+                            variant.onChange({ selected: [] })
+                        }
+                    }}
                     bordered={
                         items.length === 0 || !!(items.length > 0 && !message)
                     }

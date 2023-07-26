@@ -10,6 +10,7 @@ import {
     ExtraActionType,
     Message,
     MessageLevel,
+    Item,
     ExtraActionButton,
     ExtraActionLink,
     ExtraActionCheckbox,
@@ -19,6 +20,8 @@ import { defaultSelectedItems, defaultItems } from './data'
 
 function Explorer() {
     const [searchValue, setSearchValue] = useState('')
+    const [selectedItems, setSelectedItems] = useState(defaultSelectedItems)
+
     const filteredItems = searchValue
         ? defaultItems.filter((item) =>
               item.text.toLowerCase().includes(searchValue.toLowerCase())
@@ -130,8 +133,10 @@ function Explorer() {
             { collapsed: true }
         ),
     })
-
-    const onChange = () => console.log('onChange')
+    const onChangeSingle = ({ selected }: { selected: Item }) =>
+        setSelectedItems([selected])
+    const onChangeMultiple = ({ selected }: { selected: Item[] }) =>
+        setSelectedItems(selected)
     const onClickBack = () => alert('click back')
     const onClickExtraAction = () => alert('click extra action')
     const onClickCheckbox = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -195,13 +200,13 @@ function Explorer() {
                     selection_type === SelectionVariant.Single
                         ? {
                               type: SelectionVariant.Single,
-                              selected: defaultSelectedItems[0],
-                              onChange: onChange,
+                              selected: selectedItems[0],
+                              onChange: onChangeSingle,
                           }
                         : {
                               type: SelectionVariant.Multiple,
-                              selected: defaultSelectedItems,
-                              onChange: onChange,
+                              selected: selectedItems,
+                              onChange: onChangeMultiple,
                           }
                 }
                 modal={modal}
