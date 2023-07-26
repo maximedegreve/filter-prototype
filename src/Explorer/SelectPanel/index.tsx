@@ -33,7 +33,7 @@ function SelectPanel({
     message,
     empty,
     items,
-    size,
+    size = DialogSize.Small,
     confirmation = 'Save',
     loadingMessage,
     isLoading,
@@ -47,7 +47,7 @@ function SelectPanel({
     modal: boolean
     variant: SelectionMultipleVariant | SelectionSingleVariant
     items: Item[]
-    size: DialogSize
+    size?: DialogSize
     searchPlaceholder?: string
     declaritive: boolean
     declaritiveIsLoading: boolean
