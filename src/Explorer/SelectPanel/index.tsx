@@ -28,7 +28,6 @@ function SelectPanel({
     description,
     modal = false,
     onSearchValueChange,
-    onSearchValueClear,
     searchValue,
     searchPlaceholder = 'Search',
     message,
@@ -59,8 +58,7 @@ function SelectPanel({
     isLoading: boolean
     searchValue?: string
     onClickBack?: () => void
-    onSearchValueChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
-    onSearchValueClear?: () => void
+    onSearchValueChange?: (value: string) => void
     extraAction?:
         | ExtraActionButton
         | ExtraActionLink
@@ -142,8 +140,13 @@ function SelectPanel({
             >
                 <Header
                     title={title}
-                    onSearchValueChange={onSearchValueChange}
-                    onSearchValueClear={onSearchValueClear}
+                    onSearchValueChange={(e) =>
+                        onSearchValueChange &&
+                        onSearchValueChange(e.target.value)
+                    }
+                    onSearchValueClear={() =>
+                        onSearchValueChange && onSearchValueChange('')
+                    }
                     searchValue={searchValue}
                     description={description}
                     searchPlaceholder={searchPlaceholder}

@@ -141,8 +141,7 @@ function Explorer() {
     const onClickExtraAction = () => alert('click extra action')
     const onClickCheckbox = (event: React.ChangeEvent<HTMLInputElement>) =>
         alert(`clicked checkbox ${event}`)
-    const onSearchValueChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-        setSearchValue(e.target.value)
+    const onSearchValueChange = (value: string) => setSearchValue(value)
 
     const message: Message = {
         title: message_title,
@@ -225,7 +224,6 @@ function Explorer() {
                     search_enabled ? onSearchValueChange : undefined
                 }
                 confirmation={confirmation}
-                onSearchValueClear={() => setSearchValue('')}
                 searchValue={searchValue}
                 loadingMessage={loading_title}
                 isLoading={loading_enabled}
