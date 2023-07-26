@@ -64,9 +64,11 @@ function Footer({
                               '1fr',
                               '1fr',
                           ],
-                py: 3,
-                pl: 3,
-                pr: 3,
+                p:
+                    !showSaveCancel &&
+                    extraAction?.type === ExtraActionType.Link
+                        ? [3, 3, 2, 2]
+                        : 3,
             }}
         >
             {extraAction?.type === ExtraActionType.Checkbox && (
