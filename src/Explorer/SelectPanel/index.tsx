@@ -36,10 +36,10 @@ function SelectPanel({
     size = DialogSize.Small,
     confirmation = 'Save',
     loadingMessage,
-    isLoading,
+    isLoading = false,
     onClickBack,
     extraAction,
-    declaritive,
+    declaritive = true,
     declaritiveIsLoading = false,
 }: {
     title: string
@@ -50,12 +50,12 @@ function SelectPanel({
     size?: DialogSize
     searchPlaceholder?: string
     declaritive: boolean
-    declaritiveIsLoading: boolean
+    declaritiveIsLoading?: boolean
     message?: MessageType
     empty: EmptyType
     confirmation?: string
     loadingMessage: string
-    isLoading: boolean
+    isLoading?: boolean
     searchValue?: string
     onClickBack?: () => void
     onSearchValueChange?: (value: string) => void
