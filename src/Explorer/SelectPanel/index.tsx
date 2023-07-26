@@ -97,6 +97,12 @@ function SelectPanel({
 
     // Validation
 
+    if (type === SelectionVariant.Single && selectedItems.length > 1) {
+        console.error(
+            '🚨 SelectPanel: Single selections can only have one selected item at a time.'
+        )
+    }
+
     if (endsWithAny(['?', '.', '!'], loadingMessage)) {
         console.error(
             '🚨 SelectPanel: loadingMessage should not include a period, exclamation or question mark at the end of the sentence.'

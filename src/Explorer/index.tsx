@@ -90,7 +90,7 @@ function Explorer() {
             {
                 message_title: `We couldn't load the authors`,
                 message_description:
-                    'Try again or if the problem persists contact support.',
+                    'Try again or if the problem persists contact support',
                 message_enabled: false,
                 message_level: {
                     options: {
