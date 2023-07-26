@@ -189,7 +189,19 @@ function Explorer() {
             <SelectPanel
                 title={title}
                 description={description}
-                type={selection_type}
+                variant={
+                    selection_type === SelectionVariant.Single
+                        ? {
+                              type: SelectionVariant.Single,
+                              selected: defaultSelectedItems[0],
+                              onChange: onChange,
+                          }
+                        : {
+                              type: SelectionVariant.Multiple,
+                              selected: defaultSelectedItems,
+                              onChange: onChange,
+                          }
+                }
                 modal={modal}
                 declaritive={declaritive}
                 declaritiveIsLoading={declaritive_loading}
@@ -198,10 +210,8 @@ function Explorer() {
                     title: empty_title,
                     description: empty_description,
                 }}
-                onChange={onChange}
                 extraAction={extra_action_enabled ? action : undefined}
                 size={size}
-                initialSelectedItems={defaultSelectedItems}
                 items={noItems ? [] : filteredItems}
                 onClickBack={back_button ? onClickBack : undefined}
                 onSearchValueChange={

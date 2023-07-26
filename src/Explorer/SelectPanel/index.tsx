@@ -11,6 +11,8 @@ import TemporaryDialog from './TemporaryDialog'
 
 import {
     SelectionVariant,
+    SelectionMultipleVariant,
+    SelectionSingleVariant,
     Item,
     DialogSize,
     ExtraActionButton,
@@ -21,7 +23,7 @@ import {
 } from './types'
 
 function SelectPanel({
-    type,
+    variant,
     title,
     description,
     modal = false,
@@ -33,10 +35,8 @@ function SelectPanel({
     empty,
     items,
     size,
-    initialSelectedItems,
     loadingMessage,
     isLoading,
-    onChange,
     onClickBack,
     extraAction,
     declaritive,
@@ -45,9 +45,8 @@ function SelectPanel({
     title: string
     description?: string
     modal: boolean
-    type: SelectionVariant
+    variant: SelectionMultipleVariant | SelectionSingleVariant
     items: Item[]
-    initialSelectedItems: Item[]
     size: DialogSize
     searchPlaceholder?: string
     declaritive: boolean
@@ -57,7 +56,6 @@ function SelectPanel({
     loadingMessage: string
     isLoading: boolean
     searchValue?: string
-    onChange: ({ selected }: { selected: Item[] }) => void
     onClickBack?: () => void
     onSearchValueChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
     onSearchValueClear?: () => void
@@ -67,11 +65,20 @@ function SelectPanel({
         | ExtraActionCheckbox
         | undefined
 }) {
-    const [selectedItems, setSelectedItems] = useState(initialSelectedItems)
+    const initialSelected =
+        variant.type === SelectionVariant.Multiple
+            ? variant.selected
+            : [variant.selected]
+    const [selectedItems, setSelectedItems] = useState<Item[]>(initialSelected)
 
     useEffect(() => {
-        onChange({ selected: selectedItems })
-    }, [selectedItems, onChange])
+        if (variant.type === SelectionVariant.Multiple) {
+            variant.onChange({ selected: selectedItems })
+        }
+        if (variant.type === SelectionVariant.Single) {
+            variant.onChange({ selected: selectedItems[0] })
+        }
+    }, [selectedItems, variant])
 
     const onSelect = ({
         item,
@@ -80,7 +87,7 @@ function SelectPanel({
         item: Item
         selected: boolean
     }) => {
-        if (type === SelectionVariant.Multiple) {
+        if (variant.type === SelectionVariant.Multiple) {
             const selectedItemsWithout = selectedItems.filter(
                 (selectedItem) => selectedItem.id !== item.id
             )
@@ -96,12 +103,6 @@ function SelectPanel({
     }
 
     // Validation
-
-    if (type === SelectionVariant.Single && selectedItems.length > 1) {
-        console.error(
-            '🚨 SelectPanel: Single selections can only have one selected item at a time.'
-        )
-    }
 
     if (endsWithAny(['?', '.', '!'], loadingMessage)) {
         console.error(
@@ -188,13 +189,13 @@ function SelectPanel({
                         modal={modal}
                         items={items}
                         selectedItems={selectedItems}
-                        type={type}
+                        type={variant.type}
                         onSelect={onSelect}
                     />
                 )}
                 <Footer
                     size={size}
-                    type={type}
+                    type={variant.type}
                     selectedItems={selectedItems}
                     declaritive={declaritive}
                     declaritiveIsLoading={declaritiveIsLoading}

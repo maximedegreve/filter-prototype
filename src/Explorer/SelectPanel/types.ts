@@ -10,6 +10,18 @@ export enum SelectionVariant {
     Multiple = 'multiple',
 }
 
+export type SelectionMultipleVariant = {
+    type: SelectionVariant.Multiple
+    selected: Item[]
+    onChange: ({ selected }: { selected: Item[] }) => void
+}
+
+export type SelectionSingleVariant = {
+    type: SelectionVariant.Single
+    selected: Item
+    onChange: ({ selected }: { selected: Item }) => void
+}
+
 export enum DialogSize {
     Small = 'small',
     Medium = 'medium',
