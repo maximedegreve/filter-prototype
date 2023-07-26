@@ -35,6 +35,7 @@ function SelectPanel({
     empty,
     items,
     size,
+    confirmation = 'Save',
     loadingMessage,
     isLoading,
     onClickBack,
@@ -53,6 +54,7 @@ function SelectPanel({
     declaritiveIsLoading: boolean
     message?: MessageType
     empty: EmptyType
+    confirmation?: string
     loadingMessage: string
     isLoading: boolean
     searchValue?: string
@@ -198,6 +200,7 @@ function SelectPanel({
                     type={variant.type}
                     selectedItems={selectedItems}
                     declaritive={declaritive}
+                    confirmation={confirmation}
                     declaritiveIsLoading={declaritiveIsLoading}
                     onClickConfirm={() => alert('clicked confirm')}
                     onClickCancel={() => alert('clicked cancel')}

@@ -42,6 +42,7 @@ function Explorer() {
         message_level,
         empty_title,
         noItems,
+        confirmation,
         empty_description,
         extra_action_title,
         extra_action_enabled,
@@ -51,6 +52,7 @@ function Explorer() {
     } = useControls({
         title: 'Select authors',
         description: '',
+        confirmation: 'Save',
         modal: false,
         noItems: false,
         search_enabled: true,
@@ -217,6 +219,7 @@ function Explorer() {
                 onSearchValueChange={
                     search_enabled ? onSearchValueChange : undefined
                 }
+                confirmation={confirmation}
                 onSearchValueClear={() => setSearchValue('')}
                 searchValue={searchValue}
                 loadingMessage={loading_title}

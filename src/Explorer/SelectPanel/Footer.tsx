@@ -15,6 +15,7 @@ function Footer({
     declaritive,
     declaritiveIsLoading,
     modal,
+    confirmation,
     extraAction,
     onClickConfirm,
     onClickCancel,
@@ -25,6 +26,7 @@ function Footer({
     declaritive: boolean
     declaritiveIsLoading: boolean
     modal: boolean
+    confirmation: string
     extraAction:
         | ExtraActionButton
         | ExtraActionLink
@@ -128,7 +130,7 @@ function Footer({
                         variant="primary"
                         onClick={onClickConfirm}
                     >
-                        Save
+                        {confirmation}
                         {totalSelection > 0 &&
                             isMultiple &&
                             ` (${totalSelection})`}
