@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 
 import Header from './Header'
 import Footer from './Footer'
@@ -95,6 +95,44 @@ function SelectPanel({
         }
     }
 
+    // Validation
+
+    if (endsWithAny(['?', '.', '!'], loadingMessage)) {
+        console.error(
+            '🚨 SelectPanel: loadingMessage should not include a period, exclamation or question mark at the end of the sentence.'
+        )
+    }
+
+    if (message?.title && endsWithAny(['?', '.', '!'], message?.title)) {
+        console.error(
+            '🚨 SelectPanel: message.title should not include a period, exclamation or question mark at the end of the sentence.'
+        )
+    }
+
+    if (
+        message?.description &&
+        endsWithAny(['?', '.', '!'], lastCharInReactNode(message?.description))
+    ) {
+        console.error(
+            '🚨 SelectPanel: The message.description should not include a period, exclamation or question mark at the end of the sentence.'
+        )
+    }
+
+    if (empty?.title && endsWithAny(['?', '.', '!'], empty?.title)) {
+        console.error(
+            '🚨 SelectPanel: The empty.title should not include a period, exclamation or question mark at the end of the sentence.'
+        )
+    }
+
+    if (
+        empty?.description &&
+        endsWithAny(['?', '.', '!'], lastCharInReactNode(empty?.description))
+    ) {
+        console.error(
+            '🚨 SelectPanel: The empty.description should not include a period, exclamation or question mark at the end of the sentence.'
+        )
+    }
+
     return (
         <>
             <TemporaryDialog
@@ -162,6 +200,19 @@ function SelectPanel({
             </TemporaryDialog>
         </>
     )
+}
+
+function lastCharInReactNode(reactNode: ReactNode) {
+    const nodeAsString = String(reactNode)
+    const lastCharacter = nodeAsString.charAt(nodeAsString.length - 1)
+    return lastCharacter
+}
+
+function endsWithAny(suffixes: string[], string: string) {
+    for (let suffix of suffixes) {
+        if (string.endsWith(suffix)) return true
+    }
+    return false
 }
 
 export default SelectPanel

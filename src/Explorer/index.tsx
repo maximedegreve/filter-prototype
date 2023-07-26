@@ -104,7 +104,7 @@ function Explorer() {
         loading: folder(
             {
                 loading_enabled: false,
-                loading_title: 'Fetching users...',
+                loading_title: 'Fetching authors',
             },
             { collapsed: true }
         ),

@@ -20,7 +20,7 @@ function Loading({ message }: { message: string }) {
                 <Spinner />
             </Box>
             <Text sx={{ textAlign: 'center', fontSize: 0, color: 'fg.muted' }}>
-                {message}
+                {message}...
             </Text>
         </Box>
     )

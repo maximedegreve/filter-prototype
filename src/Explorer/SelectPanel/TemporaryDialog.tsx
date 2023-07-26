@@ -2,6 +2,10 @@ import { ReactNode } from 'react'
 import { Box } from '@primer/react'
 import { DialogSize } from './types'
 
+// 🐛 Primer's dialog or overlay component has currently no way to properly adapt to mobile screens
+// Issue: https://github.com/github/primer/issues/2413
+// Issue: https://github.com/github/primer/issues/2414
+
 function TemporaryDialog({
     children,
     modal,

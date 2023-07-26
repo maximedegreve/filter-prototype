@@ -44,7 +44,7 @@ function SubtleMessage({ title, description, level }: Message) {
             </Box>
             <Box>
                 {title}
-                {description && <>. {description}</>}
+                {description && <>. {description}.</>}
             </Box>
         </Box>
     )
