@@ -140,12 +140,15 @@ function SelectPanel({
             >
                 <Header
                     title={title}
-                    onSearchValueChange={(e) =>
-                        onSearchValueChange &&
-                        onSearchValueChange(e.target.value)
+                    onSearchValueChange={
+                        onSearchValueChange
+                            ? (e) => onSearchValueChange(e.target.value)
+                            : undefined
                     }
-                    onSearchValueClear={() =>
-                        onSearchValueChange && onSearchValueChange('')
+                    onSearchValueClear={
+                        onSearchValueChange
+                            ? () => onSearchValueChange('')
+                            : undefined
                     }
                     searchValue={searchValue}
                     description={description}
