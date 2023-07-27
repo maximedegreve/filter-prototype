@@ -39,6 +39,12 @@ export type Item = {
     trailingVisual?: ReactNode
 }
 
+export enum CheckboxValue {
+    Checked = 'checked',
+    Unchecked = 'unchecked',
+    Indeterminate = 'indeterminate',
+}
+
 export enum ExtraActionType {
     Checkbox = 'checkbox',
     Link = 'link',

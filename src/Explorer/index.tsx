@@ -49,6 +49,7 @@ function Explorer() {
         empty_description,
         extra_action_title,
         extra_action_enabled,
+        search_placeholder,
         extra_action_type,
         extra_action_checked,
         size,
@@ -59,6 +60,7 @@ function Explorer() {
         modal: false,
         noItems: false,
         search_enabled: true,
+        search_placeholder: 'Search',
         size: {
             options: {
                 small: DialogSize.Small,
@@ -220,6 +222,7 @@ function Explorer() {
                 size={size}
                 items={noItems ? [] : filteredItems}
                 onClickBack={back_button ? onClickBack : undefined}
+                searchPlaceholder={search_placeholder}
                 onSearchValueChange={
                     search_enabled ? onSearchValueChange : undefined
                 }

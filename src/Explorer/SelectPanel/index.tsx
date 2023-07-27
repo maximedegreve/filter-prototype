@@ -8,6 +8,7 @@ import Message from './Message'
 import Empty from './Empty'
 
 import TemporaryDialog from './TemporaryDialog'
+import ToggleSelection from './ToggleSelection'
 
 import {
     SelectionVariant,
@@ -18,6 +19,7 @@ import {
     ExtraActionButton,
     ExtraActionLink,
     ExtraActionCheckbox,
+    CheckboxValue,
     Message as MessageType,
     Empty as EmptyType,
 } from './types'
@@ -130,6 +132,9 @@ function SelectPanel({
         )
     }
 
+    const showSelectAll =
+        variant.type === SelectionVariant.Multiple && !onSearchValueChange
+
     return (
         <>
             <TemporaryDialog
@@ -159,7 +164,8 @@ function SelectPanel({
                     onClickBack={onClickBack}
                     showClearIcon={
                         variant.type === SelectionVariant.Multiple &&
-                        selectedItems.length > 0
+                        selectedItems.length > 0 &&
+                        !showSelectAll
                     }
                     onClickClear={() => {
                         if (variant.type === SelectionVariant.Multiple) {
@@ -186,6 +192,20 @@ function SelectPanel({
                         description={message.description}
                         level={message.level}
                         isSubtle={items.length > 0}
+                    />
+                )}
+                {showSelectAll && items.length > 0 && (
+                    <ToggleSelection
+                        items={items}
+                        selectedItems={selectedItems}
+                        onChange={(e) => {
+                            if (e.target.checked) {
+                                variant.onChange({ selected: items })
+                            } else {
+                                variant.onChange({ selected: [] })
+                            }
+                        }}
+                        value={CheckboxValue.Checked}
                     />
                 )}
                 {items.length > 0 && (
