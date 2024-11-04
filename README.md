@@ -1,3 +1,5 @@
+# [Open demo ↗](https://comfy-lamington-a4610e.netlify.app/explorer)
+
 # Primer React Template 🐱⚛️
 
 The quickest way to test out or prototype something in [Primer React](https://primer.style/react/) without having to set up a new project.
